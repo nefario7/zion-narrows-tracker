@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zion Narrows Status</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+    <header>
+        <h1>Zion Narrows Status</h1>
+        <p class="subtitle">North Fork Virgin River — Real-time conditions</p>
+    </header>
+
+    <main id="app">
+        <div class="loading">Loading status data...</div>
+    </main>
+
+    <footer>
+        <p>Data from <a href="https://waterdata.usgs.gov/monitoring-location/09405500/" target="_blank">USGS</a>,
+           <a href="https://www.nps.gov/zion/" target="_blank">NPS</a>, and
+           <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a>.
+        </p>
+        <p id="last-updated"></p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
