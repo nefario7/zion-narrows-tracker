@@ -219,33 +219,6 @@ main {
     margin-left: 0.3rem;
 }
 
-/* Status stats row */
-.status-stats {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 0.75rem;
-    padding-top: 0.6rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
-    position: relative;
-}
-
-.status-stat {
-    text-align: center;
-}
-
-.status-stat-value {
-    font-size: 1rem;
-    font-weight: 700;
-}
-
-.status-stat-label {
-    font-size: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    opacity: 0.5;
-    font-weight: 600;
-}
 
 /* Cards */
 .card {

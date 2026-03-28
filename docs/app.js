@@ -72,12 +72,6 @@ function formatTimestamp(iso) {
 
 function renderStatus(data) {
     const cfs = data.river.currentCfs != null ? data.river.currentCfs : 0;
-    const gaugeHeight = data.river.gaugeHeight != null ? data.river.gaugeHeight.toFixed(2) : "—";
-    const trend = data.river.trend || "stable";
-    const trendArrow = TREND_ARROWS[trend] || "→";
-    const trendLabel = TREND_LABELS[trend] || "Stable";
-    const temp = data.weather && data.weather.currentTemp != null
-        ? Math.round(data.weather.currentTemp) + "°F" : "—";
 
     // Gauge marker position: 0–150+ CFS mapped to 0–100%
     const markerPct = Math.min(cfs / 150 * 100, 100);
@@ -99,20 +93,6 @@ function renderStatus(data) {
                 <div class="status-gauge-value">
                     <span class="status-gauge-cfs">${Math.round(cfs)} CFS</span>
                     <span class="status-gauge-desc">${data.statusReason.split("—").slice(1).join("—").trim() || data.statusReason}</span>
-                </div>
-            </div>
-            <div class="status-stats">
-                <div class="status-stat">
-                    <div class="status-stat-value">${gaugeHeight} ft</div>
-                    <div class="status-stat-label">Gauge Height</div>
-                </div>
-                <div class="status-stat">
-                    <div class="status-stat-value">${trendArrow} ${trendLabel}</div>
-                    <div class="status-stat-label">Trend</div>
-                </div>
-                <div class="status-stat">
-                    <div class="status-stat-value">${temp}</div>
-                    <div class="status-stat-label">Temperature</div>
                 </div>
             </div>
         </div>
