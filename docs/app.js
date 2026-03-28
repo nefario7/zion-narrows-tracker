@@ -178,20 +178,45 @@ function renderAlerts(alerts) {
     `;
 }
 
+function renderFlowGuide() {
+    const levels = [
+        { color: "#22c55e", range: "< 50 CFS", label: "Great", desc: "Ideal conditions. Easy rock-hopping, calm water, clear visibility." },
+        { color: "#86efac", range: "50 \u2013 80 CFS", label: "Good", desc: "Comfortable wading. Knee-deep in spots, manageable current." },
+        { color: "#eab308", range: "80 \u2013 120 CFS", label: "Fair", desc: "Waist-deep sections, moderate current. Use a walking stick." },
+        { color: "#f97316", range: "120 \u2013 150 CFS", label: "Poor", desc: "Strong current, chest-deep water possible. Experience required." },
+        { color: "#ef4444", range: "\u2265 150 CFS", label: "Closed", desc: "NPS closes the Narrows. Swift water, extremely dangerous." },
+    ];
+
+    const rows = levels.map(l => `
+        <div class="flow-guide-row">
+            <div class="flow-guide-swatch" style="background:${l.color}"></div>
+            <div class="flow-guide-info">
+                <div class="flow-guide-header">
+                    <span class="flow-guide-label" style="color:${l.color}">${l.label}</span>
+                    <span class="flow-guide-range">${l.range}</span>
+                </div>
+                <div class="flow-guide-desc">${l.desc}</div>
+            </div>
+        </div>
+    `).join("");
+
+    return `
+        <div class="card flow-guide-card">
+            <h2>Flow Guide &mdash; What the Numbers Mean</h2>
+            ${rows}
+            <div class="flow-guide-note">
+                Flow is measured at the USGS North Fork Virgin River gauge near Springdale.
+                The Narrows is closed when flow reaches <strong>150 CFS</strong> or during flash flood warnings.
+            </div>
+        </div>
+    `;
+}
+
 function renderChart(history, forecast, historical) {
     const title = forecast && forecast.length ? "Flow History & 10-Day Forecast" : "7-Day Flow History";
     const context = historical && historical.seasonalContext
         ? `<div class="seasonal-context">${historical.seasonalContext}</div>`
         : "";
-
-    const legendHtml = `
-        <div class="threshold-legend">
-            <div class="threshold-item"><div class="threshold-swatch" style="background:#22c55e"></div> &lt;50 Open</div>
-            <div class="threshold-item"><div class="threshold-swatch" style="background:#eab308"></div> 50-100 Caution</div>
-            <div class="threshold-item"><div class="threshold-swatch" style="background:#f97316"></div> 100-150 Dangerous</div>
-            <div class="threshold-item"><div class="threshold-swatch" style="background:#ef4444"></div> &ge;150 Closed</div>
-        </div>
-    `;
 
     return `
         <div class="card">
@@ -199,7 +224,6 @@ function renderChart(history, forecast, historical) {
             <div class="chart-container">
                 <canvas id="flow-chart"></canvas>
             </div>
-            ${legendHtml}
             ${context}
         </div>
     `;
@@ -358,6 +382,7 @@ async function init() {
             renderStatus(data),
             renderHikeForecast(data.hikeForecast),
             renderRiver(data.river),
+            renderFlowGuide(),
             renderWeather(data.weather),
             renderChart(data.river.history, forecast, historical),
             renderAlerts(data.alerts),
