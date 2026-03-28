@@ -508,6 +508,100 @@ footer a:hover {
     color: #475569;
 }
 
+/* Closure Risk Card */
+.closure-risk-card {
+    text-align: center;
+}
+
+.risk-summary {
+    margin-bottom: 1.5rem;
+}
+
+.risk-headline {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.risk-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+}
+
+.risk-subtitle {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 0.25rem;
+}
+
+.risk-chart {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0 1rem;
+    align-items: flex-end;
+    height: 140px;
+}
+
+.risk-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+}
+
+.risk-bar-container {
+    width: 100%;
+    max-width: 28px;
+    height: 80px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.risk-bar {
+    width: 100%;
+    border-radius: 3px 3px 0 0;
+    min-height: 2px;
+    transition: height 0.3s ease;
+}
+
+.risk-pct {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-top: 0.25rem;
+}
+
+.risk-day-name {
+    font-size: 0.65rem;
+    color: #94a3b8;
+    margin-top: 0.15rem;
+}
+
+.risk-day-date {
+    font-size: 0.6rem;
+    color: #64748b;
+}
+
+.risk-model-label {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.risk-model-desc {
+    font-size: 0.7rem;
+    color: #64748b;
+    margin-top: 0.25rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Responsive */
 @media (max-width: 400px) {
     .river-stats {

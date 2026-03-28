@@ -54,6 +54,55 @@ function renderStatus(data) {
     `;
 }
 
+function renderClosureRisk(closureRisk) {
+    if (!closureRisk || !closureRisk.daily) return "";
+
+    const summary = closureRisk.summary || {};
+    const maxProb = summary.next10DayMax || 0;
+    const label = summary.label || "Unknown";
+
+    const labelColors = {
+        "Low": "#22c55e",
+        "Moderate": "#eab308",
+        "High": "#f97316",
+        "Very High": "#ef4444",
+    };
+    const color = labelColors[label] || "#64748b";
+
+    const barsHtml = closureRisk.daily.map(day => {
+        const d = new Date(day.date + "T00:00:00");
+        const dayName = d.toLocaleDateString("en-US", { weekday: "short" });
+        const dateStr = formatShortDate(day.date);
+        const hist = day.historical != null ? day.historical : 0;
+        const barColor = hist < 15 ? "#22c55e" : hist < 40 ? "#eab308" : hist < 65 ? "#f97316" : "#ef4444";
+
+        return `
+            <div class="risk-day">
+                <div class="risk-bar-container">
+                    <div class="risk-bar" style="height:${Math.max(hist, 2)}%;background:${barColor}"></div>
+                </div>
+                <div class="risk-pct">${day.historical != null ? Math.round(hist) + "%" : "—"}</div>
+                <div class="risk-day-name">${dayName}</div>
+                <div class="risk-day-date">${dateStr}</div>
+            </div>
+        `;
+    }).join("");
+
+    return `
+        <div class="card closure-risk-card">
+            <h2>10-Day Closure Risk</h2>
+            <div class="risk-summary">
+                <div class="risk-headline" style="color:${color}">${Math.round(maxProb)}%</div>
+                <div class="risk-label" style="color:${color}">${label} Risk</div>
+                <div class="risk-subtitle">Peak probability over next 10 days</div>
+            </div>
+            <div class="risk-chart">${barsHtml}</div>
+            <div class="risk-model-label">Based on Historical Patterns</div>
+            <div class="risk-model-desc">10-year frequency of CFS &ge; 150 on each calendar date, adjusted for current conditions</div>
+        </div>
+    `;
+}
+
 function renderHikeForecast(hikeForecast) {
     if (!hikeForecast || !hikeForecast.length) return "";
 
@@ -478,6 +527,7 @@ async function init() {
 
         app.innerHTML = [
             renderStatus(data),
+            renderClosureRisk(data.closureRisk),
             renderHikeForecast(data.hikeForecast),
             renderRiver(data.river),
             renderFlowGuide(),
