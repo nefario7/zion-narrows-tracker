@@ -90,15 +90,19 @@ main {
     background: radial-gradient(circle at 30% 50%, white, transparent 70%);
 }
 
-.status-card.open {
+.status-card.great {
     background: linear-gradient(135deg, #16a34a, #22c55e);
     color: #fff;
 }
-.status-card.caution {
+.status-card.good {
+    background: linear-gradient(135deg, #16a34a, #86efac);
+    color: #1c1917;
+}
+.status-card.fair {
     background: linear-gradient(135deg, #ca8a04, #eab308);
     color: #1c1917;
 }
-.status-card.dangerous {
+.status-card.poor {
     background: linear-gradient(135deg, #ea580c, #f97316);
     color: #fff;
 }

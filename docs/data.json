@@ -1,6 +1,6 @@
 {
-  "status": "caution",
-  "statusReason": "River flow is 71 CFS \u2014 Moderate conditions \u2014 use caution",
+  "status": "good",
+  "statusReason": "River flow is 71 CFS \u2014 Comfortable wading \u2014 knee-deep in spots",
   "lastUpdated": "2026-03-28T17:47:31.257624+00:00",
   "river": {
     "currentCfs": 70.7,

@@ -327,9 +327,10 @@ function renderChart(history, forecast, historical) {
 }
 
 function getStatusForCfs(cfs) {
-    if (cfs < 50) return { label: "Open", color: "#22c55e" };
-    if (cfs < 100) return { label: "Caution", color: "#eab308" };
-    if (cfs < 150) return { label: "Dangerous", color: "#f97316" };
+    if (cfs < 50) return { label: "Great", color: "#22c55e" };
+    if (cfs < 80) return { label: "Good", color: "#86efac" };
+    if (cfs < 120) return { label: "Fair", color: "#eab308" };
+    if (cfs < 150) return { label: "Poor", color: "#f97316" };
     return { label: "Closed", color: "#ef4444" };
 }
 
@@ -340,8 +341,9 @@ const thresholdBandsPlugin = {
         const { ctx, chartArea: { left, right, top, bottom }, scales: { y } } = chart;
         const bands = [
             { min: 0, max: 50, color: "rgba(34, 197, 94, 0.06)" },
-            { min: 50, max: 100, color: "rgba(234, 179, 8, 0.06)" },
-            { min: 100, max: 150, color: "rgba(249, 115, 22, 0.06)" },
+            { min: 50, max: 80, color: "rgba(134, 239, 172, 0.06)" },
+            { min: 80, max: 120, color: "rgba(234, 179, 8, 0.06)" },
+            { min: 120, max: 150, color: "rgba(249, 115, 22, 0.06)" },
             { min: 150, max: Infinity, color: "rgba(239, 68, 68, 0.06)" },
         ];
         ctx.save();
