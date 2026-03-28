@@ -15,13 +15,17 @@ body {
 /* Background image */
 .bg-image {
     position: fixed;
-    inset: 0;
+    inset: -20px;
     z-index: -2;
-    background-image: url('zion-narrows.jpg');
-    background-size: cover;
-    background-position: center;
+    overflow: hidden;
+}
+
+.bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     filter: blur(6px) brightness(0.3) sepia(0.3);
-    transform: scale(1.1);
 }
 
 .bg-overlay {
@@ -158,6 +162,8 @@ main {
     border-radius: 14px;
     padding: 1.25rem;
     margin-bottom: 0.75rem;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .card h2 {
@@ -793,6 +799,7 @@ footer a:hover {
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
+        min-width: 0;
     }
 
     .desktop-col > .card {
