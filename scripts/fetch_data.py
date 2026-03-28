@@ -25,7 +25,7 @@ OPEN_METEO_URL = (
     "?latitude=37.2982&longitude=-112.9789"
     "&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max"
     "&current=temperature_2m,weather_code"
-    "&temperature_unit=fahrenheit&timezone=America/Denver&forecast_days=4"
+    "&temperature_unit=fahrenheit&timezone=America/Denver&forecast_days=11"
 )
 
 OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "..", "docs", "data.json")
@@ -148,6 +148,7 @@ def cfs_status(cfs):
     return "closed"
 
 
+
 def fetch_flow_forecast():
     """Fetch flow forecast from NOAA NWPS and aggregate to daily averages."""
     print("Fetching NOAA flow forecast...")
@@ -182,6 +183,70 @@ def fetch_flow_forecast():
     except (KeyError, IndexError, ValueError, TypeError) as e:
         print(f"Warning: Failed to parse NOAA forecast: {e}", file=sys.stderr)
         return []
+
+
+def compute_hike_forecast(flow_forecast, weather_extended):
+    """Combine flow forecast and weather to rate each day for hiking."""
+    flow_by_date = {f["date"]: f["predictedCfs"] for f in flow_forecast}
+    weather_by_date = {w["date"]: w for w in weather_extended}
+
+    all_dates = sorted(set(list(flow_by_date.keys()) + list(weather_by_date.keys())))[:10]
+    result = []
+
+    for date in all_dates:
+        cfs = flow_by_date.get(date)
+        weather = weather_by_date.get(date, {})
+        precip = weather.get("precipChance")
+        high = weather.get("high")
+        low = weather.get("low")
+
+        # Rate flow
+        if cfs is None:
+            flow_rating = "good"
+        elif cfs >= 150:
+            flow_rating = "closed"
+        elif cfs >= 100:
+            flow_rating = "poor"
+        elif cfs >= 50:
+            flow_rating = "fair"
+        elif cfs >= 0:
+            flow_rating = "great"
+        else:
+            flow_rating = "good"
+
+        # Rate weather
+        if precip is None:
+            weather_rating = "good"
+        elif precip > 60:
+            weather_rating = "poor"
+        elif precip >= 40:
+            weather_rating = "fair"
+        elif precip >= 20:
+            weather_rating = "good"
+        else:
+            weather_rating = "great"
+
+        # Combine: upgrade "great" flow + moderate precip to "good"
+        ratings_order = ["great", "good", "fair", "poor", "closed"]
+        combined = ratings_order[max(ratings_order.index(flow_rating), ratings_order.index(weather_rating))]
+
+        # Special case: low CFS + low precip = great even if one was "good"
+        if cfs is not None and cfs < 50 and precip is not None and precip < 20:
+            combined = "great"
+        elif cfs is not None and cfs < 80 and precip is not None and precip < 20 and combined == "fair":
+            combined = "good"
+
+        result.append({
+            "date": date,
+            "rating": combined,
+            "predictedCfs": round(cfs, 1) if cfs is not None else None,
+            "high": round(high) if high is not None else None,
+            "low": round(low) if low is not None else None,
+            "precipChance": round(precip) if precip is not None else None,
+        })
+
+    return result
+
 
 
 def fetch_nps_alerts():
@@ -220,7 +285,7 @@ def fetch_weather():
     precip_chance = daily.get("precipitation_probability_max", [])
     precip_sum = daily.get("precipitation_sum", [])
 
-    # Skip today (index 0), show next 3 days
+    # Skip today (index 0), show next 3 days for main forecast
     for i in range(1, min(4, len(dates))):
         forecast.append({
             "date": dates[i],
@@ -230,10 +295,21 @@ def fetch_weather():
             "precipSum": precip_sum[i] if i < len(precip_sum) else None,
         })
 
+    # Extended 10-day forecast for hike scoring
+    extended = []
+    for i in range(1, min(11, len(dates))):
+        extended.append({
+            "date": dates[i],
+            "high": highs[i] if i < len(highs) else None,
+            "low": lows[i] if i < len(lows) else None,
+            "precipChance": precip_chance[i] if i < len(precip_chance) else None,
+        })
+
     return {
         "currentTemp": current.get("temperature_2m"),
         "weatherCode": current.get("weather_code"),
         "forecast": forecast,
+        "extendedForecast": extended,
     }
 
 
@@ -253,6 +329,7 @@ def main():
     weather = fetch_weather()
 
     flow_forecast = fetch_flow_forecast()
+    hike_forecast = compute_hike_forecast(flow_forecast, weather.get("extendedForecast", []))
 
     trend = compute_trend(history)
     status, status_reason = compute_status(cfs, alerts)
@@ -270,6 +347,7 @@ def main():
         "weather": weather,
         "alerts": alerts,
         "forecast": {"daily": flow_forecast},
+        "hikeForecast": hike_forecast,
     }
 
     output_path = os.path.abspath(OUTPUT_PATH)

@@ -85,6 +85,54 @@ main {
     margin-bottom: 0.75rem;
 }
 
+/* Hike forecast */
+.hike-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+.hike-day {
+    min-width: 68px;
+    text-align: center;
+    padding: 0.5rem;
+    background: #fafaf9;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.hike-day-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1c1917;
+}
+
+.hike-day-date {
+    font-size: 0.65rem;
+    color: #78716c;
+}
+
+.hike-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin: 0.4rem auto;
+}
+
+.hike-cfs {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1c1917;
+}
+
+.hike-temp {
+    font-size: 0.7rem;
+    color: #78716c;
+}
+
 /* River stats */
 .river-stats {
     display: flex;
