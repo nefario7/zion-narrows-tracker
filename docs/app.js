@@ -97,18 +97,21 @@ function renderClosureRisk(closureRisk) {
     }).join("");
 
     const hasLogistic = closureRisk.daily.some(d => d.logistic != null);
+    const hasGbm = closureRisk.daily.some(d => d.gbm != null);
 
     const modelRows = closureRisk.daily.map(day => {
         const d = new Date(day.date + "T00:00:00");
         const dateStr = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
         const hist = day.historical != null ? `<span style="color:${riskColor(day.historical)}">${Math.round(day.historical)}%</span>` : "—";
         const logi = day.logistic != null ? `<span style="color:${riskColor(day.logistic)}">${Math.round(day.logistic)}%</span>` : "—";
+        const gbm = day.gbm != null ? `<span style="color:${riskColor(day.gbm)}">${Math.round(day.gbm)}%</span>` : "—";
         const ens = day.ensemble != null ? `<span style="color:${riskColor(day.ensemble)}"><strong>${Math.round(day.ensemble)}%</strong></span>` : "—";
 
         return `<tr>
             <td>${dateStr}</td>
             <td>${hist}</td>
             ${hasLogistic ? `<td>${logi}</td>` : ""}
+            ${hasGbm ? `<td>${gbm}</td>` : ""}
             <td>${ens}</td>
         </tr>`;
     }).join("");
@@ -130,15 +133,14 @@ function renderClosureRisk(closureRisk) {
                             <th>Date</th>
                             <th>Historical</th>
                             ${hasLogistic ? '<th>Statistical</th>' : ''}
+                            ${hasGbm ? '<th>ML Model</th>' : ''}
                             <th>Ensemble</th>
                         </tr>
                     </thead>
                     <tbody>${modelRows}</tbody>
                 </table>
                 <div class="risk-model-desc">
-                    <strong>Historical:</strong> 10-year calendar frequency of CFS &ge; 150, adjusted for current conditions<br>
-                    ${hasLogistic ? '<strong>Statistical:</strong> Logistic regression trained on current CFS, trend, season, precipitation<br>' : ''}
-                    <strong>Ensemble:</strong> ${hasLogistic ? 'Weighted average (40% historical, 60% statistical)' : 'Historical model only (additional models coming soon)'}
+                    Historical: 10-year calendar frequency &bull; Statistical: Logistic regression &bull; ML Model: Gradient boosted &bull; Ensemble: Weighted blend (20/30/50%)
                 </div>
             </details>
         </div>
