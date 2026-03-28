@@ -12,6 +12,8 @@ from datetime import datetime, timedelta, timezone
 import numpy as np
 import requests
 from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
 USGS_SITE = "09405500"
 USGS_CURRENT_URL = (
@@ -318,10 +320,10 @@ def compute_closure_risk_historical(current_cfs, historical):
     }
 
 
-def compute_closure_risk_logistic(current_cfs, historical, flow_forecast, weather):
+def compute_closure_risk_logistic(current_cfs, historical):
     """Compute 10-day closure probability using logistic regression.
 
-    Features: current CFS, 24h CFS trend, day-of-year, precipitation forecast, days-ahead.
+    Features: current CFS, CFS trend, day-of-year, days-ahead.
     Trains on 10-year historical daily data where label = 1 if CFS >= 150.
     """
     if not historical or "rawByDay" not in historical:
@@ -331,33 +333,38 @@ def compute_closure_risk_logistic(current_cfs, historical, flow_forecast, weathe
     stats_by_day = {s["monthDay"]: s for s in historical.get("dailyStats", [])}
 
     # Build training data from historical records
+    # Features: prev_day_median_cfs, cfs_trend, day_of_year
+    # We simulate multi-day-ahead by using observations N days apart
     X_train = []
     y_train = []
 
     sorted_days = sorted(raw_by_day.keys())
     for i, md in enumerate(sorted_days):
         values = raw_by_day[md]
-        prev_md = sorted_days[i - 1] if i > 0 else sorted_days[-1]
-        prev2_md = sorted_days[i - 2] if i > 1 else sorted_days[-2]
-
-        prev_stats = stats_by_day.get(prev_md)
-        prev2_stats = stats_by_day.get(prev2_md)
         curr_stats = stats_by_day.get(md)
-
-        if not prev_stats or not curr_stats:
+        if not curr_stats:
             continue
-
-        prev_median = prev_stats["medianCfs"]
-        trend = prev_stats["medianCfs"] - prev2_stats["medianCfs"] if prev2_stats else 0
 
         try:
             doy = datetime.strptime(f"2024-{md}", "%Y-%m-%d").timetuple().tm_yday
         except ValueError:
             continue
 
-        for val in values:
-            X_train.append([prev_median, trend, doy, 0, 0])
-            y_train.append(1 if val >= CLOSURE_THRESHOLD else 0)
+        # For each lookback distance (simulating days_ahead), use stats from N days prior
+        for days_back in range(1, 11):
+            prior_idx = (i - days_back) % len(sorted_days)
+            prior2_idx = (i - days_back - 1) % len(sorted_days)
+            prior_stats = stats_by_day.get(sorted_days[prior_idx])
+            prior2_stats = stats_by_day.get(sorted_days[prior2_idx])
+            if not prior_stats:
+                continue
+
+            prior_cfs = prior_stats["medianCfs"]
+            trend = prior_stats["medianCfs"] - prior2_stats["medianCfs"] if prior2_stats else 0
+
+            for val in values:
+                X_train.append([prior_cfs, trend, doy, days_back])
+                y_train.append(1 if val >= CLOSURE_THRESHOLD else 0)
 
     if len(X_train) < 20 or sum(y_train) < 2:
         return None
@@ -365,13 +372,14 @@ def compute_closure_risk_logistic(current_cfs, historical, flow_forecast, weathe
     X_train = np.array(X_train)
     y_train = np.array(y_train)
 
-    model = LogisticRegression(max_iter=1000, class_weight="balanced")
-    model.fit(X_train, y_train)
-
-    # Build forecast lookup
-    forecast_by_date = {f["date"]: f for f in (flow_forecast or [])}
-    weather_extended = weather.get("extendedForecast", []) if weather else []
-    weather_by_date = {w["date"]: w for w in weather_extended}
+    import warnings
+    model = make_pipeline(
+        StandardScaler(),
+        LogisticRegression(max_iter=1000, class_weight="balanced"),
+    )
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", RuntimeWarning)
+        model.fit(X_train, y_train)
 
     now = datetime.now()
     today_md = f"{now.month:02d}-{now.day:02d}"
@@ -389,10 +397,7 @@ def compute_closure_risk_logistic(current_cfs, historical, flow_forecast, weathe
         future_date = future.strftime("%Y-%m-%d")
         doy = future.timetuple().tm_yday
 
-        weather_day = weather_by_date.get(future_date, {})
-        precip = weather_day.get("precipChance", 0) or 0
-
-        X_pred = np.array([[current_cfs or 0, trend_24h, doy, precip, days_ahead]])
+        X_pred = np.array([[current_cfs or 0, trend_24h, doy, days_ahead]])
         prob = model.predict_proba(X_pred)[0][1] * 100
 
         daily_risk.append({
@@ -560,7 +565,7 @@ def main():
     hike_forecast = compute_hike_forecast(flow_forecast, weather.get("extendedForecast", []))
     historical = fetch_historical_stats()
     closure_risk = compute_closure_risk_historical(cfs, historical)
-    logistic_risk = compute_closure_risk_logistic(cfs, historical, flow_forecast, weather)
+    logistic_risk = compute_closure_risk_logistic(cfs, historical)
 
     trend = compute_trend(history)
     status, status_reason = compute_status(cfs, alerts)
