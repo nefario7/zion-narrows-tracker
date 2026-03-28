@@ -326,11 +326,20 @@ def fetch_nps_alerts():
         return []
     alerts = []
     for alert in data.get("data", []):
+        last_indexed = alert.get("lastIndexedDate", "")
+        date_str = ""
+        if last_indexed:
+            try:
+                dt = datetime.strptime(last_indexed.split(".")[0], "%Y-%m-%d %H:%M:%S")
+                date_str = dt.strftime("%b %d, %Y")
+            except (ValueError, IndexError):
+                date_str = last_indexed[:10] if len(last_indexed) >= 10 else ""
         alerts.append({
             "title": alert.get("title", ""),
             "description": alert.get("description", ""),
             "category": alert.get("category", ""),
             "url": alert.get("url", ""),
+            "date": date_str,
         })
     return alerts
 
