@@ -32,6 +32,40 @@ function renderStatus(data) {
     `;
 }
 
+const RATING_COLORS = {
+    great: "#22c55e", good: "#86efac", fair: "#eab308", poor: "#f97316", closed: "#ef4444",
+};
+
+function renderHikeForecast(hikeForecast) {
+    if (!hikeForecast || !hikeForecast.length) return "";
+
+    const cardsHtml = hikeForecast.map(day => {
+        const d = new Date(day.date + "T00:00:00");
+        const dayName = d.toLocaleDateString("en-US", { weekday: "short" });
+        const dateStr = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        const color = RATING_COLORS[day.rating] || "#78716c";
+        const cfs = day.predictedCfs != null ? Math.round(day.predictedCfs) + "" : "—";
+        const temp = day.high != null ? Math.round(day.high) + "\u00b0" : "";
+
+        return `
+            <div class="hike-day">
+                <div class="hike-day-name">${dayName}</div>
+                <div class="hike-day-date">${dateStr}</div>
+                <div class="hike-dot" style="background:${color}"></div>
+                <div class="hike-cfs">${cfs}</div>
+                <div class="hike-temp">${temp}</div>
+            </div>
+        `;
+    }).join("");
+
+    return `
+        <div class="card hike-forecast">
+            <h2>Best Days to Hike</h2>
+            <div class="hike-scroll">${cardsHtml}</div>
+        </div>
+    `;
+}
+
 function renderRiver(river) {
     const cfs = river.currentCfs != null ? river.currentCfs.toFixed(1) : "N/A";
     const height = river.gaugeHeight != null ? river.gaugeHeight.toFixed(2) + " ft" : "N/A";
@@ -219,6 +253,7 @@ async function init() {
 
         app.innerHTML = [
             renderStatus(data),
+            renderHikeForecast(data.hikeForecast),
             renderRiver(data.river),
             renderWeather(data.weather),
             renderAlerts(data.alerts),
