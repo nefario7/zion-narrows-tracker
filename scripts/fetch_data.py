@@ -4,6 +4,7 @@
 import json
 import os
 import sys
+from collections import defaultdict
 from datetime import datetime, timezone
 
 import requests
@@ -18,6 +19,7 @@ USGS_HISTORY_URL = (
     f"?sites={USGS_SITE}&parameterCd=00060&period=P7D&format=json"
 )
 NPS_ALERTS_URL = "https://developer.nps.gov/api/v1/alerts?parkCode=zion"
+NOAA_NWPS_URL = f"https://api.water.noaa.gov/nwps/v1/gauges/{USGS_SITE}/stageflow"
 OPEN_METEO_URL = (
     "https://api.open-meteo.com/v1/forecast"
     "?latitude=37.2982&longitude=-112.9789"
@@ -138,6 +140,50 @@ def compute_status(cfs, alerts):
     return "closed", f"River flow is {cfs:.0f} CFS — Narrows closed"
 
 
+def cfs_status(cfs):
+    """Return status string for a given CFS value."""
+    for threshold, status, _ in THRESHOLDS:
+        if cfs < threshold:
+            return status
+    return "closed"
+
+
+def fetch_flow_forecast():
+    """Fetch flow forecast from NOAA NWPS and aggregate to daily averages."""
+    print("Fetching NOAA flow forecast...")
+    data = fetch_json(NOAA_NWPS_URL, timeout=60)
+    if not data or "forecast" not in data:
+        return []
+    try:
+        forecast_data = data["forecast"]["data"]
+        units = data["forecast"].get("secondaryUnits", "kcfs")
+        multiplier = 1000.0 if units == "kcfs" else 1.0
+
+        # Group by date and average
+        daily = defaultdict(list)
+        now = datetime.now(timezone.utc)
+        for point in forecast_data:
+            ts = datetime.fromisoformat(point["validTime"].replace("Z", "+00:00"))
+            if ts <= now:
+                continue
+            date_str = ts.strftime("%Y-%m-%d")
+            cfs = point["secondary"] * multiplier
+            daily[date_str].append(cfs)
+
+        result = []
+        for date_str in sorted(daily.keys())[:10]:
+            avg_cfs = sum(daily[date_str]) / len(daily[date_str])
+            result.append({
+                "date": date_str,
+                "predictedCfs": round(avg_cfs, 1),
+                "status": cfs_status(avg_cfs),
+            })
+        return result
+    except (KeyError, IndexError, ValueError, TypeError) as e:
+        print(f"Warning: Failed to parse NOAA forecast: {e}", file=sys.stderr)
+        return []
+
+
 def fetch_nps_alerts():
     """Fetch NPS alerts for Zion."""
     api_key = os.environ.get("NPS_API_KEY", "")
@@ -206,6 +252,8 @@ def main():
     print("Fetching weather data...")
     weather = fetch_weather()
 
+    flow_forecast = fetch_flow_forecast()
+
     trend = compute_trend(history)
     status, status_reason = compute_status(cfs, alerts)
 
@@ -221,6 +269,7 @@ def main():
         },
         "weather": weather,
         "alerts": alerts,
+        "forecast": {"daily": flow_forecast},
     }
 
     output_path = os.path.abspath(OUTPUT_PATH)

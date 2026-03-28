@@ -105,10 +105,11 @@ function renderAlerts(alerts) {
     `;
 }
 
-function renderChart(history) {
+function renderChart(history, forecast) {
+    const title = forecast && forecast.length ? "Flow History & Forecast" : "7-Day Flow History";
     return `
         <div class="card">
-            <h2>7-Day Flow History</h2>
+            <h2>${title}</h2>
             <div class="chart-container">
                 <canvas id="flow-chart"></canvas>
             </div>
@@ -116,45 +117,83 @@ function renderChart(history) {
     `;
 }
 
-function createChart(history) {
+function createChart(history, forecast) {
     const ctx = document.getElementById("flow-chart");
     if (!ctx || !history.length) return;
 
-    const labels = history.map(h => {
+    const historyLabels = history.map(h => {
         const d = new Date(h.timestamp);
         return d.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/Denver" });
     });
-    const values = history.map(h => h.cfs);
+    const historyValues = history.map(h => h.cfs);
+
+    const forecastLabels = (forecast || []).map(f => formatDate(f.date));
+    const forecastValues = (forecast || []).map(f => f.predictedCfs);
+
+    const allLabels = [...historyLabels, ...forecastLabels];
+    const actualData = [...historyValues, ...new Array(forecastLabels.length).fill(null)];
+    const forecastData = [...new Array(historyLabels.length - 1).fill(null), historyValues[historyValues.length - 1], ...forecastValues];
+    const thresholdData = allLabels.map(() => 150);
+
+    const datasets = [{
+        label: "Actual",
+        data: actualData,
+        borderColor: "#0ea5e9",
+        backgroundColor: "rgba(14, 165, 233, 0.1)",
+        fill: true,
+        tension: 0.3,
+        pointRadius: 0,
+        borderWidth: 2,
+    }];
+
+    if (forecast && forecast.length) {
+        datasets.push({
+            label: "Forecast",
+            data: forecastData,
+            borderColor: "#0ea5e9",
+            borderDash: [5, 5],
+            backgroundColor: "rgba(14, 165, 233, 0.05)",
+            fill: true,
+            tension: 0.3,
+            pointRadius: 0,
+            borderWidth: 2,
+        });
+        datasets.push({
+            label: "Closure Threshold",
+            data: thresholdData,
+            borderColor: "#ef4444",
+            borderDash: [10, 5],
+            borderWidth: 1,
+            pointRadius: 0,
+            fill: false,
+        });
+    }
 
     new Chart(ctx, {
         type: "line",
-        data: {
-            labels,
-            datasets: [{
-                label: "Flow (CFS)",
-                data: values,
-                borderColor: "#0ea5e9",
-                backgroundColor: "rgba(14, 165, 233, 0.1)",
-                fill: true,
-                tension: 0.3,
-                pointRadius: 0,
-                borderWidth: 2,
-            }],
-        },
+        data: { labels: allLabels, datasets },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { display: false },
+                legend: {
+                    display: forecast && forecast.length > 0,
+                    labels: {
+                        usePointStyle: true,
+                        boxWidth: 8,
+                        font: { size: 11 },
+                        filter: item => item.text !== "Closure Threshold",
+                    },
+                },
                 tooltip: {
                     callbacks: {
-                        label: ctx => `${ctx.parsed.y.toFixed(1)} CFS`,
+                        label: ctx => ctx.parsed.y != null ? `${ctx.parsed.y.toFixed(1)} CFS` : "",
                     },
                 },
             },
             scales: {
                 x: {
-                    ticks: { maxTicksLimit: 7, font: { size: 11 } },
+                    ticks: { maxTicksLimit: 8, font: { size: 11 } },
                     grid: { display: false },
                 },
                 y: {
@@ -176,15 +215,17 @@ async function init() {
         if (!resp.ok) throw new Error("Failed to load data");
         const data = await resp.json();
 
+        const forecast = data.forecast ? data.forecast.daily : [];
+
         app.innerHTML = [
             renderStatus(data),
             renderRiver(data.river),
             renderWeather(data.weather),
             renderAlerts(data.alerts),
-            renderChart(data.river.history),
+            renderChart(data.river.history, forecast),
         ].join("");
 
-        createChart(data.river.history);
+        createChart(data.river.history, forecast);
 
         if (data.lastUpdated) {
             lastUpdatedEl.textContent = "Last updated: " + formatTimestamp(data.lastUpdated);
