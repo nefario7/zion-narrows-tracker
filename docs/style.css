@@ -234,6 +234,14 @@ main {
     height: 200px;
 }
 
+.seasonal-context {
+    font-size: 0.8rem;
+    color: #78716c;
+    text-align: center;
+    margin-top: 0.75rem;
+    font-style: italic;
+}
+
 /* Footer */
 footer {
     max-width: 600px;

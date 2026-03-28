@@ -139,19 +139,23 @@ function renderAlerts(alerts) {
     `;
 }
 
-function renderChart(history, forecast) {
+function renderChart(history, forecast, historical) {
     const title = forecast && forecast.length ? "Flow History & Forecast" : "7-Day Flow History";
+    const context = historical && historical.seasonalContext
+        ? `<div class="seasonal-context">${historical.seasonalContext}</div>`
+        : "";
     return `
         <div class="card">
             <h2>${title}</h2>
             <div class="chart-container">
                 <canvas id="flow-chart"></canvas>
             </div>
+            ${context}
         </div>
     `;
 }
 
-function createChart(history, forecast) {
+function createChart(history, forecast, historical) {
     const ctx = document.getElementById("flow-chart");
     if (!ctx || !history.length) return;
 
@@ -203,6 +207,41 @@ function createChart(history, forecast) {
         });
     }
 
+    // Add historical band if available
+    if (historical && historical.dailyStats && historical.dailyStats.length) {
+        const statsByDay = {};
+        historical.dailyStats.forEach(s => { statsByDay[s.monthDay] = s; });
+
+        const p75Data = history.map(h => {
+            const d = new Date(h.timestamp);
+            const md = `${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+            const s = statsByDay[md];
+            return s ? s.p75Cfs : null;
+        });
+        const p25Data = history.map(h => {
+            const d = new Date(h.timestamp);
+            const md = `${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+            const s = statsByDay[md];
+            return s ? s.p25Cfs : null;
+        });
+
+        datasets.push({
+            label: "Typical range (p75)",
+            data: p75Data,
+            borderWidth: 0,
+            pointRadius: 0,
+            fill: false,
+        });
+        datasets.push({
+            label: "Typical range (p25)",
+            data: p25Data,
+            borderWidth: 0,
+            pointRadius: 0,
+            fill: "-1",
+            backgroundColor: "rgba(147, 197, 253, 0.2)",
+        });
+    }
+
     new Chart(ctx, {
         type: "line",
         data: { labels: allLabels, datasets },
@@ -211,12 +250,19 @@ function createChart(history, forecast) {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: forecast && forecast.length > 0,
+                    display: (forecast && forecast.length > 0) || (historical && historical.dailyStats && historical.dailyStats.length > 0),
                     labels: {
                         usePointStyle: true,
                         boxWidth: 8,
                         font: { size: 11 },
-                        filter: item => item.text !== "Closure Threshold",
+                        filter: item => item.text !== "Closure Threshold" && item.text !== "Typical range (p75)",
+                        generateLabels: chart => {
+                            const original = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                            return original.map(l => {
+                                if (l.text === "Typical range (p25)") l.text = "Typical range";
+                                return l;
+                            });
+                        },
                     },
                 },
                 tooltip: {
@@ -250,6 +296,7 @@ async function init() {
         const data = await resp.json();
 
         const forecast = data.forecast ? data.forecast.daily : [];
+        const historical = data.historical || null;
 
         app.innerHTML = [
             renderStatus(data),
@@ -257,10 +304,10 @@ async function init() {
             renderRiver(data.river),
             renderWeather(data.weather),
             renderAlerts(data.alerts),
-            renderChart(data.river.history, forecast),
+            renderChart(data.river.history, forecast, historical),
         ].join("");
 
-        createChart(data.river.history, forecast);
+        createChart(data.river.history, forecast, historical);
 
         if (data.lastUpdated) {
             lastUpdatedEl.textContent = "Last updated: " + formatTimestamp(data.lastUpdated);
