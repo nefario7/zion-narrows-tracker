@@ -89,41 +89,17 @@ main {
 
 /* Status badge */
 .status-card {
+    background: rgba(48, 40, 35, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(196, 149, 106, 0.1);
     border-radius: 16px;
     padding: 1.75rem 1.5rem;
     text-align: center;
     margin-bottom: 0.75rem;
     position: relative;
     overflow: hidden;
-}
-
-.status-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0.15;
-    background: radial-gradient(circle at 30% 50%, white, transparent 70%);
-}
-
-.status-card.great {
-    background: linear-gradient(135deg, #16a34a, #22c55e);
-    color: #fff;
-}
-.status-card.good {
-    background: linear-gradient(135deg, #16a34a, #86efac);
-    color: #1c1917;
-}
-.status-card.fair {
-    background: linear-gradient(135deg, #ca8a04, #eab308);
-    color: #1c1917;
-}
-.status-card.poor {
-    background: linear-gradient(135deg, #ea580c, #f97316);
-    color: #fff;
-}
-.status-card.closed {
-    background: linear-gradient(135deg, #dc2626, #ef4444);
-    color: #fff;
+    color: #ede0d4;
 }
 
 .status-label {
@@ -132,8 +108,25 @@ main {
     text-transform: uppercase;
     letter-spacing: 0.06em;
     position: relative;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
 }
+
+.status-label::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-card.great .status-label::before { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+.status-card.good .status-label::before { background: #86efac; box-shadow: 0 0 8px #86efac; }
+.status-card.fair .status-label::before { background: #eab308; box-shadow: 0 0 8px #eab308; }
+.status-card.poor .status-label::before { background: #f97316; box-shadow: 0 0 8px #f97316; }
+.status-card.closed .status-label::before { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
 
 /* Status gauge bar */
 .status-gauge {
@@ -191,15 +184,10 @@ main {
     top: -3px;
     width: 4px;
     height: 14px;
-    background: currentColor;
+    background: #ede0d4;
     border-radius: 2px;
     transform: translateX(-50%);
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
-}
-
-.status-card.caution .status-gauge-marker,
-.status-card.open .status-gauge-marker {
-    background: #1c1917;
 }
 
 .status-gauge-value {
@@ -604,35 +592,10 @@ footer a:hover {
 }
 
 /* Animations */
-@keyframes glowPulse-open {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.1); }
-    50% { box-shadow: 0 0 20px 0 rgba(34, 197, 94, 0.3); }
-}
-
-@keyframes glowPulse-caution {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.1); }
-    50% { box-shadow: 0 0 20px 0 rgba(234, 179, 8, 0.3); }
-}
-
-@keyframes glowPulse-dangerous {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.1); }
-    50% { box-shadow: 0 0 20px 0 rgba(249, 115, 22, 0.3); }
-}
-
-@keyframes glowPulse-closed {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.1); }
-    50% { box-shadow: 0 0 20px 0 rgba(239, 68, 68, 0.3); }
-}
-
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-4px); }
 }
-
-.status-card.open { animation: glowPulse-open 3s ease-in-out infinite; }
-.status-card.caution { animation: glowPulse-caution 3s ease-in-out infinite; }
-.status-card.dangerous { animation: glowPulse-dangerous 3s ease-in-out infinite; }
-.status-card.closed { animation: glowPulse-closed 3s ease-in-out infinite; }
 
 .trend-arrow {
     display: inline-block;
@@ -862,8 +825,6 @@ footer a:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .status-card.open, .status-card.caution,
-    .status-card.dangerous, .status-card.closed,
     .trend-arrow {
         animation: none;
     }
