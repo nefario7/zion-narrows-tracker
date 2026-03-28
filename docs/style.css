@@ -376,6 +376,73 @@ main {
     padding: 0.5rem 0;
 }
 
+/* Flow Guide */
+.flow-guide-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+}
+
+.flow-guide-row:last-of-type {
+    border-bottom: none;
+}
+
+.flow-guide-swatch {
+    width: 6px;
+    min-height: 32px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.flow-guide-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.flow-guide-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.flow-guide-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.flow-guide-range {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.flow-guide-desc {
+    font-size: 0.72rem;
+    color: #64748b;
+    margin-top: 0.1rem;
+    line-height: 1.4;
+}
+
+.flow-guide-note {
+    margin-top: 0.75rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    font-size: 0.68rem;
+    color: #475569;
+    line-height: 1.5;
+}
+
+.flow-guide-note strong {
+    color: #ef4444;
+    font-weight: 700;
+}
+
 /* Chart */
 .chart-container {
     position: relative;
@@ -388,30 +455,6 @@ main {
     text-align: center;
     margin-top: 0.75rem;
     font-style: italic;
-}
-
-/* Threshold legend below chart */
-.threshold-legend {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 0.75rem;
-    flex-wrap: wrap;
-}
-
-.threshold-item {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.65rem;
-    color: #64748b;
-    font-weight: 500;
-}
-
-.threshold-swatch {
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
 }
 
 .seasonal-context {
