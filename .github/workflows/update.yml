@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
     steps:
       - uses: actions/checkout@v4
 
@@ -26,18 +25,9 @@ jobs:
         env:
           NPS_API_KEY: ${{ secrets.NPS_API_KEY }}
 
-      - name: Create PR with updated data
-        id: create-pr
-        uses: peter-evans/create-pull-request@v7
-        with:
-          commit-message: "Update Narrows status data"
-          title: "Update Narrows status data"
-          body: "Automated data update from GitHub Actions"
-          branch: auto-update-data
-          delete-branch: true
-
-      - name: Enable auto-merge
-        if: steps.create-pr.outputs.pull-request-number
-        run: gh pr merge ${{ steps.create-pr.outputs.pull-request-number }} --auto --squash
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data.json
+          git diff --staged --quiet || git commit -m "Update Narrows status data" && git push
