@@ -11,6 +11,7 @@ from datetime import datetime, timedelta, timezone
 
 import numpy as np
 import requests
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
@@ -408,6 +409,117 @@ def compute_closure_risk_logistic(current_cfs, historical):
     return daily_risk
 
 
+def compute_closure_risk_gbm(current_cfs, historical):
+    """Compute 10-day closure probability using gradient boosted model.
+
+    Features: current CFS, 7-day trend slope, sin/cos day-of-year (seasonality),
+    rolling 3-day and 7-day CFS averages, days-ahead.
+    """
+    if not historical or "rawByDay" not in historical:
+        return None
+
+    raw_by_day = historical["rawByDay"]
+    stats_by_day = {s["monthDay"]: s for s in historical.get("dailyStats", [])}
+    sorted_days = sorted(raw_by_day.keys())
+
+    if len(sorted_days) < 8:
+        return None
+
+    # Precompute median CFS array for rolling calculations
+    median_by_idx = []
+    for md in sorted_days:
+        s = stats_by_day.get(md)
+        median_by_idx.append(s["medianCfs"] if s else 0)
+
+    X_train = []
+    y_train = []
+
+    for i, md in enumerate(sorted_days):
+        values = raw_by_day[md]
+        curr_stats = stats_by_day.get(md)
+        if not curr_stats:
+            continue
+
+        try:
+            doy = datetime.strptime(f"2024-{md}", "%Y-%m-%d").timetuple().tm_yday
+        except ValueError:
+            continue
+
+        doy_sin = np.sin(2 * np.pi * doy / 365)
+        doy_cos = np.cos(2 * np.pi * doy / 365)
+
+        for days_back in range(1, 11):
+            prior_idx = (i - days_back) % len(sorted_days)
+            prior_cfs = median_by_idx[prior_idx]
+
+            # Rolling 3-day average
+            avg_3 = np.mean([median_by_idx[(prior_idx - j) % len(sorted_days)] for j in range(3)])
+            # Rolling 7-day average
+            avg_7 = np.mean([median_by_idx[(prior_idx - j) % len(sorted_days)] for j in range(7)])
+            # 7-day trend slope (linear fit)
+            week_vals = [median_by_idx[(prior_idx - j) % len(sorted_days)] for j in range(7)]
+            week_vals.reverse()
+            slope = np.polyfit(range(7), week_vals, 1)[0] if len(week_vals) == 7 else 0
+
+            for val in values:
+                X_train.append([prior_cfs, slope, doy_sin, doy_cos, avg_3, avg_7, days_back])
+                y_train.append(1 if val >= CLOSURE_THRESHOLD else 0)
+
+    if len(X_train) < 20 or sum(y_train) < 2:
+        return None
+
+    X_train = np.array(X_train)
+    y_train = np.array(y_train)
+
+    import warnings
+    model = make_pipeline(
+        StandardScaler(),
+        GradientBoostingClassifier(
+            n_estimators=100,
+            max_depth=3,
+            learning_rate=0.1,
+            random_state=42,
+        ),
+    )
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        model.fit(X_train, y_train)
+
+    # Build prediction features for next 10 days
+    now = datetime.now()
+    today_md = f"{now.month:02d}-{now.day:02d}"
+
+    if today_md in sorted_days:
+        today_idx = sorted_days.index(today_md)
+    else:
+        today_idx = len(sorted_days) - 1
+
+    # Current rolling averages
+    avg_3_now = np.mean([median_by_idx[(today_idx - j) % len(sorted_days)] for j in range(3)])
+    avg_7_now = np.mean([median_by_idx[(today_idx - j) % len(sorted_days)] for j in range(7)])
+    week_now = [median_by_idx[(today_idx - j) % len(sorted_days)] for j in range(7)]
+    week_now.reverse()
+    slope_now = np.polyfit(range(7), week_now, 1)[0]
+
+    daily_risk = []
+    for days_ahead in range(1, 11):
+        future = now + timedelta(days=days_ahead)
+        future_date = future.strftime("%Y-%m-%d")
+        doy = future.timetuple().tm_yday
+        doy_sin = np.sin(2 * np.pi * doy / 365)
+        doy_cos = np.cos(2 * np.pi * doy / 365)
+
+        X_pred = np.array([[current_cfs or 0, slope_now, doy_sin, doy_cos, avg_3_now, avg_7_now, days_ahead]])
+        prob = model.predict_proba(X_pred)[0][1] * 100
+
+        daily_risk.append({
+            "date": future_date,
+            "gbm": round(prob, 1),
+        })
+
+    return daily_risk
+
+
 def fetch_historical_stats():
     """Fetch 10 years of daily flow data and compute seasonal statistics."""
     print("Fetching USGS historical data...")
@@ -566,6 +678,7 @@ def main():
     historical = fetch_historical_stats()
     closure_risk = compute_closure_risk_historical(cfs, historical)
     logistic_risk = compute_closure_risk_logistic(cfs, historical)
+    gbm_risk = compute_closure_risk_gbm(cfs, historical)
 
     trend = compute_trend(history)
     status, status_reason = compute_status(cfs, alerts)
@@ -588,18 +701,35 @@ def main():
     if historical:
         result["historical"] = {k: v for k, v in historical.items() if k != "rawByDay"}
     # Merge model predictions into unified closureRisk
-    if closure_risk and logistic_risk:
-        logistic_by_date = {d["date"]: d["logistic"] for d in logistic_risk}
+    if closure_risk:
+        logistic_by_date = {d["date"]: d["logistic"] for d in logistic_risk} if logistic_risk else {}
+        gbm_by_date = {d["date"]: d["gbm"] for d in gbm_risk} if gbm_risk else {}
+
         for day in closure_risk["daily"]:
             day["logistic"] = logistic_by_date.get(day["date"])
+            day["gbm"] = gbm_by_date.get(day["date"])
+
             hist = day.get("historical")
             logi = day.get("logistic")
-            if hist is not None and logi is not None:
-                day["ensemble"] = round(0.4 * hist + 0.6 * logi, 1)
-            elif hist is not None:
-                day["ensemble"] = hist
-            elif logi is not None:
-                day["ensemble"] = logi
+            gbm = day.get("gbm")
+
+            # Ensemble: weighted average of available models
+            # Full weights: 20% historical, 30% logistic, 50% GBM
+            weights = []
+            values = []
+            if hist is not None:
+                weights.append(0.2)
+                values.append(hist)
+            if logi is not None:
+                weights.append(0.3)
+                values.append(logi)
+            if gbm is not None:
+                weights.append(0.5)
+                values.append(gbm)
+
+            if weights:
+                total_weight = sum(weights)
+                day["ensemble"] = round(sum(w * v for w, v in zip(weights, values)) / total_weight, 1)
             else:
                 day["ensemble"] = None
 
@@ -614,10 +744,6 @@ def main():
         else:
             label = "Very High"
         closure_risk["summary"] = {"next10DayMax": round(max_prob, 1), "label": label}
-    elif closure_risk:
-        for day in closure_risk["daily"]:
-            day["logistic"] = None
-            day["ensemble"] = day.get("historical")
 
     if closure_risk:
         result["closureRisk"] = closure_risk
