@@ -5,23 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zion Narrows Status</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 </head>
 <body>
     <header>
-        <h1>Zion Narrows Status</h1>
-        <p class="subtitle">North Fork Virgin River — Real-time conditions</p>
+        <div class="header-content">
+            <div class="header-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 20 7 8l4 6 3-8 4 6 3-4"/>
+                    <path d="M3 20h18" opacity="0.5"/>
+                </svg>
+            </div>
+            <h1>Zion Narrows</h1>
+            <p class="subtitle">North Fork Virgin River &mdash; Live Conditions</p>
+        </div>
     </header>
 
     <main id="app">
-        <div class="loading">Loading status data...</div>
+        <div class="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading status data&hellip;</p>
+        </div>
     </main>
 
     <footer>
-        <p>Data from <a href="https://waterdata.usgs.gov/monitoring-location/09405500/" target="_blank">USGS</a>,
-           <a href="https://www.nps.gov/zion/" target="_blank">NPS</a>, and
-           <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a>.
-        </p>
+        <div class="footer-sources">
+            Data from
+            <a href="https://waterdata.usgs.gov/monitoring-location/09405500/" target="_blank">USGS</a> &middot;
+            <a href="https://www.nps.gov/zion/" target="_blank">NPS</a> &middot;
+            <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a> &middot;
+            <a href="https://api.water.noaa.gov/nwps/v1" target="_blank">NOAA</a>
+        </div>
         <p id="last-updated"></p>
     </footer>
 
