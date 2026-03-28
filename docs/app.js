@@ -51,14 +51,14 @@ function animateValue(element, target, decimals, duration = 800) {
 }
 
 function initParallax() {
-    const bgImage = document.querySelector('.bg-image');
-    if (!bgImage || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const bgImg = document.querySelector('.bg-image img');
+    if (!bgImg || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
             requestAnimationFrame(() => {
                 const scrollY = window.scrollY;
-                bgImage.style.transform = `scale(1.1) translateY(${scrollY * 0.3}px)`;
+                bgImg.style.transform = `translateY(${scrollY * 0.3}px)`;
                 ticking = false;
             });
             ticking = true;
