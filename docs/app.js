@@ -69,23 +69,48 @@ function renderClosureRisk(closureRisk) {
     };
     const color = labelColors[label] || "#64748b";
 
+    function riskColor(val) {
+        if (val == null) return "#64748b";
+        if (val < 15) return "#22c55e";
+        if (val < 40) return "#eab308";
+        if (val < 65) return "#f97316";
+        return "#ef4444";
+    }
+
     const barsHtml = closureRisk.daily.map(day => {
         const d = new Date(day.date + "T00:00:00");
         const dayName = d.toLocaleDateString("en-US", { weekday: "short" });
         const dateStr = formatShortDate(day.date);
-        const hist = day.historical != null ? day.historical : 0;
-        const barColor = hist < 15 ? "#22c55e" : hist < 40 ? "#eab308" : hist < 65 ? "#f97316" : "#ef4444";
+        const ens = day.ensemble != null ? day.ensemble : (day.historical != null ? day.historical : 0);
+        const barColor = riskColor(day.ensemble != null ? day.ensemble : day.historical);
 
         return `
             <div class="risk-day">
                 <div class="risk-bar-container">
-                    <div class="risk-bar" style="height:${Math.max(hist, 2)}%;background:${barColor}"></div>
+                    <div class="risk-bar" style="height:${Math.max(ens, 2)}%;background:${barColor}"></div>
                 </div>
-                <div class="risk-pct">${day.historical != null ? Math.round(hist) + "%" : "—"}</div>
+                <div class="risk-pct">${ens > 0 ? Math.round(ens) + "%" : "—"}</div>
                 <div class="risk-day-name">${dayName}</div>
                 <div class="risk-day-date">${dateStr}</div>
             </div>
         `;
+    }).join("");
+
+    const hasLogistic = closureRisk.daily.some(d => d.logistic != null);
+
+    const modelRows = closureRisk.daily.map(day => {
+        const d = new Date(day.date + "T00:00:00");
+        const dateStr = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        const hist = day.historical != null ? `<span style="color:${riskColor(day.historical)}">${Math.round(day.historical)}%</span>` : "—";
+        const logi = day.logistic != null ? `<span style="color:${riskColor(day.logistic)}">${Math.round(day.logistic)}%</span>` : "—";
+        const ens = day.ensemble != null ? `<span style="color:${riskColor(day.ensemble)}"><strong>${Math.round(day.ensemble)}%</strong></span>` : "—";
+
+        return `<tr>
+            <td>${dateStr}</td>
+            <td>${hist}</td>
+            ${hasLogistic ? `<td>${logi}</td>` : ""}
+            <td>${ens}</td>
+        </tr>`;
     }).join("");
 
     return `
@@ -94,11 +119,28 @@ function renderClosureRisk(closureRisk) {
             <div class="risk-summary">
                 <div class="risk-headline" style="color:${color}">${Math.round(maxProb)}%</div>
                 <div class="risk-label" style="color:${color}">${label} Risk</div>
-                <div class="risk-subtitle">Peak probability over next 10 days</div>
+                <div class="risk-subtitle">Peak ensemble probability over next 10 days</div>
             </div>
             <div class="risk-chart">${barsHtml}</div>
-            <div class="risk-model-label">Based on Historical Patterns</div>
-            <div class="risk-model-desc">10-year frequency of CFS &ge; 150 on each calendar date, adjusted for current conditions</div>
+            <details class="risk-details">
+                <summary class="risk-details-toggle">Model Breakdown</summary>
+                <table class="risk-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Historical</th>
+                            ${hasLogistic ? '<th>Statistical</th>' : ''}
+                            <th>Ensemble</th>
+                        </tr>
+                    </thead>
+                    <tbody>${modelRows}</tbody>
+                </table>
+                <div class="risk-model-desc">
+                    <strong>Historical:</strong> 10-year calendar frequency of CFS &ge; 150, adjusted for current conditions<br>
+                    ${hasLogistic ? '<strong>Statistical:</strong> Logistic regression trained on current CFS, trend, season, precipitation<br>' : ''}
+                    <strong>Ensemble:</strong> ${hasLogistic ? 'Weighted average (40% historical, 60% statistical)' : 'Historical model only (additional models coming soon)'}
+                </div>
+            </details>
         </div>
     `;
 }
