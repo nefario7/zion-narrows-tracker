@@ -50,21 +50,6 @@ function animateValue(element, target, decimals, duration = 800) {
     });
 }
 
-function initParallax() {
-    const bgImg = document.querySelector('.bg-image img');
-    if (!bgImg || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                const scrollY = window.scrollY;
-                bgImg.style.transform = `translateY(${scrollY * 0.3}px)`;
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
-}
 
 function formatDate(dateStr) {
     const d = new Date(dateStr + "T00:00:00");
@@ -666,8 +651,6 @@ async function init() {
             });
         });
 
-        // Initialize parallax
-        initParallax();
 
         if (data.lastUpdated) {
             lastUpdatedEl.textContent = "Last updated: " + formatTimestamp(data.lastUpdated);
