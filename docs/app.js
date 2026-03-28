@@ -26,6 +26,39 @@ const RATING_LABELS = {
     great: "Great", good: "Good", fair: "Fair", poor: "Poor", closed: "Closed",
 };
 
+function animateValue(element, target, decimals, duration = 800) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        element.textContent = target.toFixed(decimals);
+        return;
+    }
+    const start = performance.now();
+    function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = target * eased;
+        element.textContent = current.toFixed(decimals);
+        if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+}
+
+function initParallax() {
+    const bgImage = document.querySelector('.bg-image');
+    if (!bgImage || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const scrollY = window.scrollY;
+                bgImage.style.transform = `scale(1.1) translateY(${scrollY * 0.3}px)`;
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+}
+
 function formatDate(dateStr) {
     const d = new Date(dateStr + "T00:00:00");
     return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
@@ -154,7 +187,7 @@ function renderHikeForecast(hikeForecast) {
         const d = new Date(day.date + "T00:00:00");
         const dayName = d.toLocaleDateString("en-US", { weekday: "short" });
         const dateStr = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-        const color = RATING_COLORS[day.rating] || "#64748b";
+        const color = RATING_COLORS[day.rating] || "#8b7355";
         const label = RATING_LABELS[day.rating] || day.rating;
         const cfs = day.predictedCfs != null ? Math.round(day.predictedCfs) + " cfs" : "\u2014";
         const temp = day.high != null && day.low != null
@@ -196,15 +229,15 @@ function renderRiver(river) {
             <h2>River Conditions</h2>
             <div class="river-stats">
                 <div class="stat">
-                    <div class="stat-value">${cfs}</div>
+                    <div class="stat-value" data-animate="${river.currentCfs}" data-decimals="1">${cfs}</div>
                     <div class="stat-label">Flow (CFS)</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value">${height}<span class="stat-unit"> ft</span></div>
+                    <div class="stat-value" data-animate="${river.gaugeHeight}" data-decimals="2">${height}<span class="stat-unit"> ft</span></div>
                     <div class="stat-label">Gauge Height</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value ${trendClass}">${arrow} ${trendLabel}</div>
+                    <div class="stat-value ${trendClass}"><span class="trend-arrow">${arrow}</span> ${trendLabel}</div>
                     <div class="stat-label">Trend</div>
                 </div>
             </div>
@@ -231,7 +264,7 @@ function renderWeather(weather) {
             <div class="weather-current">
                 ${icon ? `<span class="weather-icon">${icon}</span>` : ""}
                 <div>
-                    <div class="weather-temp">${temp}</div>
+                    <div class="weather-temp" data-animate="${weather.currentTemp != null ? Math.round(weather.currentTemp) : ''}" data-decimals="0" data-suffix="\u00b0F">${temp}</div>
                     <div class="weather-desc">${desc}</div>
                 </div>
             </div>
@@ -340,11 +373,11 @@ const thresholdBandsPlugin = {
     beforeDraw(chart) {
         const { ctx, chartArea: { left, right, top, bottom }, scales: { y } } = chart;
         const bands = [
-            { min: 0, max: 50, color: "rgba(34, 197, 94, 0.06)" },
-            { min: 50, max: 80, color: "rgba(134, 239, 172, 0.06)" },
-            { min: 80, max: 120, color: "rgba(234, 179, 8, 0.06)" },
-            { min: 120, max: 150, color: "rgba(249, 115, 22, 0.06)" },
-            { min: 150, max: Infinity, color: "rgba(239, 68, 68, 0.06)" },
+            { min: 0, max: 50, color: "rgba(34, 197, 94, 0.04)" },
+            { min: 50, max: 80, color: "rgba(134, 239, 172, 0.04)" },
+            { min: 80, max: 120, color: "rgba(234, 179, 8, 0.04)" },
+            { min: 120, max: 150, color: "rgba(249, 115, 22, 0.04)" },
+            { min: 150, max: Infinity, color: "rgba(239, 68, 68, 0.04)" },
         ];
         ctx.save();
         bands.forEach(band => {
@@ -370,7 +403,7 @@ const nowLinePlugin = {
         ctx.save();
         ctx.beginPath();
         ctx.setLineDash([4, 4]);
-        ctx.strokeStyle = "rgba(148, 163, 184, 0.35)";
+        ctx.strokeStyle = "rgba(196, 149, 106, 0.5)";
         ctx.lineWidth = 1;
         ctx.moveTo(xPos, top);
         ctx.lineTo(xPos, bottom);
@@ -378,7 +411,7 @@ const nowLinePlugin = {
         // "Now" label
         ctx.setLineDash([]);
         ctx.font = "600 10px Inter, sans-serif";
-        ctx.fillStyle = "#94a3b8";
+        ctx.fillStyle = "#c4956a";
         ctx.textAlign = "center";
         ctx.fillText("Now", xPos, top - 4);
         ctx.restore();
@@ -407,13 +440,13 @@ function createChart(history, forecast, historical) {
     const datasets = [{
         label: "Actual Flow",
         data: actualData,
-        borderColor: "#38bdf8",
-        backgroundColor: "rgba(56, 189, 248, 0.08)",
+        borderColor: "#c4956a",
+        backgroundColor: "rgba(196, 149, 106, 0.15)",
         fill: true,
         tension: 0.3,
         pointRadius: 0,
         pointHoverRadius: 4,
-        pointHoverBackgroundColor: "#38bdf8",
+        pointHoverBackgroundColor: "#c4956a",
         borderWidth: 2.5,
     }];
 
@@ -421,14 +454,14 @@ function createChart(history, forecast, historical) {
         datasets.push({
             label: "Forecast",
             data: forecastData,
-            borderColor: "#fbbf24",
+            borderColor: "#d4a574",
             borderDash: [6, 4],
-            backgroundColor: "rgba(251, 191, 36, 0.06)",
+            backgroundColor: "rgba(212, 165, 116, 0.08)",
             fill: true,
             tension: 0.3,
             pointRadius: 0,
             pointHoverRadius: 4,
-            pointHoverBackgroundColor: "#fbbf24",
+            pointHoverBackgroundColor: "#d4a574",
             borderWidth: 2,
         });
         datasets.push({
@@ -470,7 +503,7 @@ function createChart(history, forecast, historical) {
         datasets.push({
             label: "Typical range (p75)",
             data: p75Data,
-            borderColor: "rgba(148, 163, 184, 0.15)",
+            borderColor: "rgba(139, 115, 85, 0.2)",
             borderWidth: 1,
             borderDash: [3, 3],
             pointRadius: 0,
@@ -480,13 +513,13 @@ function createChart(history, forecast, historical) {
         datasets.push({
             label: "Typical range (p25)",
             data: p25Data,
-            borderColor: "rgba(148, 163, 184, 0.15)",
+            borderColor: "rgba(139, 115, 85, 0.2)",
             borderWidth: 1,
             borderDash: [3, 3],
             pointRadius: 0,
             pointHoverRadius: 0,
             fill: "-1",
-            backgroundColor: "rgba(148, 163, 184, 0.08)",
+            backgroundColor: "rgba(139, 112, 64, 0.1)",
         });
     }
 
@@ -497,13 +530,17 @@ function createChart(history, forecast, historical) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            animation: {
+                duration: 1200,
+                easing: "easeOutQuart",
+            },
             layout: { padding: { top: 16 } },
             interaction: { mode: "index", intersect: false },
             plugins: {
                 legend: {
                     display: true,
                     labels: {
-                        color: "#94a3b8",
+                        color: "#8b7355",
                         usePointStyle: true,
                         pointStyle: "line",
                         boxWidth: 20,
@@ -519,11 +556,11 @@ function createChart(history, forecast, historical) {
                     },
                 },
                 tooltip: {
-                    backgroundColor: "rgba(15, 23, 42, 0.95)",
-                    borderColor: "rgba(148, 163, 184, 0.2)",
+                    backgroundColor: "rgba(28, 25, 23, 0.95)",
+                    borderColor: "rgba(196, 149, 106, 0.2)",
                     borderWidth: 1,
-                    titleColor: "#e2e8f0",
-                    bodyColor: "#94a3b8",
+                    titleColor: "#ede0d4",
+                    bodyColor: "#c4956a",
                     padding: 10,
                     callbacks: {
                         label: item => {
@@ -540,17 +577,17 @@ function createChart(history, forecast, historical) {
             },
             scales: {
                 x: {
-                    ticks: { maxTicksLimit: 10, font: { size: 10 }, color: "#64748b", maxRotation: 45 },
+                    ticks: { maxTicksLimit: 10, font: { size: 10 }, color: "#8b7355", maxRotation: 45 },
                     grid: { display: false },
                 },
                 y: {
                     beginAtZero: true,
                     ticks: {
                         font: { size: 11 },
-                        color: "#64748b",
+                        color: "#8b7355",
                         callback: val => val + " CFS",
                     },
-                    grid: { color: "rgba(148, 163, 184, 0.06)" },
+                    grid: { color: "rgba(139, 115, 85, 0.15)" },
                 },
             },
         },
@@ -574,15 +611,50 @@ async function init() {
         app.innerHTML = [
             renderStatus(data),
             renderClosureRisk(data.closureRisk),
-            renderHikeForecast(data.hikeForecast),
-            renderRiver(data.river),
-            renderFlowGuide(),
-            renderWeather(data.weather),
-            renderChart(data.river.history, forecast, historical),
-            renderAlerts(data.alerts),
+            `<div class="tablet-row">${renderRiver(data.river)}${renderWeather(data.weather)}</div>`,
+            `<div class="desktop-grid">`,
+                `<div class="desktop-col">`,
+                    renderChart(data.river.history, forecast, historical),
+                    renderFlowGuide(),
+                `</div>`,
+                `<div class="desktop-col">`,
+                    renderHikeForecast(data.hikeForecast),
+                    renderAlerts(data.alerts),
+                `</div>`,
+            `</div>`,
         ].join("");
 
         createChart(data.river.history, forecast, historical);
+
+        // Stagger card entry animations
+        const cards = app.querySelectorAll('.card, .status-card');
+        cards.forEach((card, i) => {
+            card.style.animationDelay = `${i * 50}ms`;
+        });
+
+        // Animate number counters
+        app.querySelectorAll('[data-animate]').forEach(el => {
+            const target = parseFloat(el.dataset.animate);
+            if (isNaN(target)) return;
+            const decimals = parseInt(el.dataset.decimals) || 0;
+            const suffix = el.dataset.suffix || '';
+            const unit = el.querySelector('.stat-unit');
+            animateValue(el, target, decimals);
+            if (suffix) {
+                setTimeout(() => {
+                    el.textContent = el.textContent + suffix;
+                }, 850);
+            }
+            if (unit) {
+                setTimeout(() => {
+                    const val = target.toFixed(decimals);
+                    el.innerHTML = val + '<span class="stat-unit"> ft</span>';
+                }, 850);
+            }
+        });
+
+        // Initialize parallax
+        initParallax();
 
         if (data.lastUpdated) {
             lastUpdatedEl.textContent = "Last updated: " + formatTimestamp(data.lastUpdated);
@@ -590,7 +662,7 @@ async function init() {
     } catch (err) {
         app.innerHTML = `<div class="card" style="text-align:center;color:#ef4444">
             <p>Unable to load status data.</p>
-            <p style="font-size:0.8rem;color:#64748b;margin-top:0.5rem">${err.message}</p>
+            <p style="font-size:0.8rem;color:#8b7355;margin-top:0.5rem">${err.message}</p>
         </div>`;
     }
 }
