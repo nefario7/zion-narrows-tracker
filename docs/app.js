@@ -1,4 +1,5 @@
 const TREND_ARROWS = { rising: "\u2191", falling: "\u2193", stable: "\u2192" };
+const TREND_LABELS = { rising: "Rising", falling: "Falling", stable: "Stable" };
 const TREND_CLASSES = { rising: "trend-rising", falling: "trend-falling", stable: "trend-stable" };
 const WEATHER_DESCRIPTIONS = {
     0: "Clear sky", 1: "Mostly clear", 2: "Partly cloudy", 3: "Overcast",
@@ -8,10 +9,31 @@ const WEATHER_DESCRIPTIONS = {
     85: "Snow showers", 86: "Heavy snow showers", 95: "Thunderstorm",
     96: "Thunderstorm w/ hail", 99: "Thunderstorm w/ heavy hail",
 };
+const WEATHER_ICONS = {
+    0: "\u2600\ufe0f", 1: "\ud83c\udf24\ufe0f", 2: "\u26c5", 3: "\u2601\ufe0f",
+    45: "\ud83c\udf2b\ufe0f", 48: "\ud83c\udf2b\ufe0f",
+    51: "\ud83c\udf27\ufe0f", 53: "\ud83c\udf27\ufe0f", 55: "\ud83c\udf27\ufe0f",
+    61: "\ud83c\udf26\ufe0f", 63: "\ud83c\udf27\ufe0f", 65: "\ud83c\udf27\ufe0f",
+    71: "\ud83c\udf28\ufe0f", 73: "\u2744\ufe0f", 75: "\u2744\ufe0f",
+    80: "\ud83c\udf26\ufe0f", 81: "\ud83c\udf27\ufe0f", 82: "\ud83c\udf27\ufe0f",
+    85: "\ud83c\udf28\ufe0f", 86: "\ud83c\udf28\ufe0f",
+    95: "\u26c8\ufe0f", 96: "\u26c8\ufe0f", 99: "\u26c8\ufe0f",
+};
+const RATING_COLORS = {
+    great: "#22c55e", good: "#86efac", fair: "#eab308", poor: "#f97316", closed: "#ef4444",
+};
+const RATING_LABELS = {
+    great: "Great", good: "Good", fair: "Fair", poor: "Poor", closed: "Closed",
+};
 
 function formatDate(dateStr) {
     const d = new Date(dateStr + "T00:00:00");
     return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+}
+
+function formatShortDate(dateStr) {
+    const d = new Date(dateStr + "T00:00:00");
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
 function formatTimestamp(iso) {
@@ -20,7 +42,7 @@ function formatTimestamp(iso) {
         timeZone: "America/Denver",
         weekday: "short", month: "short", day: "numeric",
         hour: "numeric", minute: "2-digit",
-    });
+    }) + " MT";
 }
 
 function renderStatus(data) {
@@ -32,10 +54,6 @@ function renderStatus(data) {
     `;
 }
 
-const RATING_COLORS = {
-    great: "#22c55e", good: "#86efac", fair: "#eab308", poor: "#f97316", closed: "#ef4444",
-};
-
 function renderHikeForecast(hikeForecast) {
     if (!hikeForecast || !hikeForecast.length) return "";
 
@@ -43,17 +61,24 @@ function renderHikeForecast(hikeForecast) {
         const d = new Date(day.date + "T00:00:00");
         const dayName = d.toLocaleDateString("en-US", { weekday: "short" });
         const dateStr = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-        const color = RATING_COLORS[day.rating] || "#78716c";
-        const cfs = day.predictedCfs != null ? Math.round(day.predictedCfs) + "" : "—";
-        const temp = day.high != null ? Math.round(day.high) + "\u00b0" : "";
+        const color = RATING_COLORS[day.rating] || "#64748b";
+        const label = RATING_LABELS[day.rating] || day.rating;
+        const cfs = day.predictedCfs != null ? Math.round(day.predictedCfs) + " cfs" : "\u2014";
+        const temp = day.high != null && day.low != null
+            ? `${Math.round(day.high)}\u00b0/${Math.round(day.low)}\u00b0`
+            : day.high != null ? `${Math.round(day.high)}\u00b0` : "";
+        const precip = day.precipChance != null && day.precipChance > 0
+            ? `${day.precipChance}% rain` : "";
 
         return `
             <div class="hike-day">
                 <div class="hike-day-name">${dayName}</div>
                 <div class="hike-day-date">${dateStr}</div>
-                <div class="hike-dot" style="background:${color}"></div>
+                <div class="hike-dot" style="background:${color};color:${color}"></div>
+                <div class="hike-rating" style="color:${color}">${label}</div>
                 <div class="hike-cfs">${cfs}</div>
                 <div class="hike-temp">${temp}</div>
+                ${precip ? `<div class="hike-precip">${precip}</div>` : ""}
             </div>
         `;
     }).join("");
@@ -68,8 +93,9 @@ function renderHikeForecast(hikeForecast) {
 
 function renderRiver(river) {
     const cfs = river.currentCfs != null ? river.currentCfs.toFixed(1) : "N/A";
-    const height = river.gaugeHeight != null ? river.gaugeHeight.toFixed(2) + " ft" : "N/A";
+    const height = river.gaugeHeight != null ? river.gaugeHeight.toFixed(2) : "N/A";
     const arrow = TREND_ARROWS[river.trend] || "\u2192";
+    const trendLabel = TREND_LABELS[river.trend] || "Stable";
     const trendClass = TREND_CLASSES[river.trend] || "";
 
     return `
@@ -81,11 +107,11 @@ function renderRiver(river) {
                     <div class="stat-label">Flow (CFS)</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value">${height}</div>
+                    <div class="stat-value">${height}<span class="stat-unit"> ft</span></div>
                     <div class="stat-label">Gauge Height</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value ${trendClass}">${arrow}</div>
+                    <div class="stat-value ${trendClass}">${arrow} ${trendLabel}</div>
                     <div class="stat-label">Trend</div>
                 </div>
             </div>
@@ -96,19 +122,26 @@ function renderRiver(river) {
 function renderWeather(weather) {
     const temp = weather.currentTemp != null ? Math.round(weather.currentTemp) + "\u00b0F" : "N/A";
     const desc = WEATHER_DESCRIPTIONS[weather.weatherCode] || "";
+    const icon = WEATHER_ICONS[weather.weatherCode] || "";
 
     const forecastHtml = weather.forecast.map(day => `
         <div class="forecast-day">
-            <div class="forecast-date">${formatDate(day.date)}</div>
-            <div class="forecast-temps">${Math.round(day.high)}\u00b0 / ${Math.round(day.low)}\u00b0</div>
-            <div class="forecast-precip">${day.precipChance != null ? day.precipChance + "% rain" : ""}</div>
+            <div class="forecast-date">${formatShortDate(day.date)}</div>
+            <div class="forecast-temps">${Math.round(day.high)}\u00b0 <span class="low">/ ${Math.round(day.low)}\u00b0</span></div>
+            <div class="forecast-precip">${day.precipChance != null && day.precipChance > 0 ? day.precipChance + "% rain" : "\u2014"}</div>
         </div>
     `).join("");
 
     return `
         <div class="card">
             <h2>Weather</h2>
-            <div class="current-temp">${temp} <span style="font-size:0.875rem;font-weight:400;color:#78716c">${desc}</span></div>
+            <div class="weather-current">
+                ${icon ? `<span class="weather-icon">${icon}</span>` : ""}
+                <div>
+                    <div class="weather-temp">${temp}</div>
+                    <div class="weather-desc">${desc}</div>
+                </div>
+            </div>
             <div class="forecast-grid">${forecastHtml}</div>
         </div>
     `;
@@ -124,32 +157,49 @@ function renderAlerts(alerts) {
         `;
     }
 
-    const alertsHtml = alerts.map(a => `
-        <div class="alert-item">
-            <div class="alert-title">${a.title}</div>
-            <div class="alert-desc">${a.description}</div>
-        </div>
-    `).join("");
+    const alertsHtml = alerts.map(a => {
+        const cat = (a.category || "").toLowerCase();
+        const cssClass = cat === "information" ? "info" : cat === "caution" ? "caution-alert" : "";
+        const link = a.url ? `<a class="alert-link" href="${a.url}" target="_blank">More info &rarr;</a>` : "";
+        return `
+            <div class="alert-item ${cssClass}">
+                <div class="alert-title">${a.title}</div>
+                <div class="alert-desc">${a.description}</div>
+                ${link}
+            </div>
+        `;
+    }).join("");
 
     return `
         <div class="card">
-            <h2>NPS Alerts</h2>
+            <h2>NPS Alerts (${alerts.length})</h2>
             ${alertsHtml}
         </div>
     `;
 }
 
 function renderChart(history, forecast, historical) {
-    const title = forecast && forecast.length ? "Flow History & Forecast" : "7-Day Flow History";
+    const title = forecast && forecast.length ? "Flow History & 10-Day Forecast" : "7-Day Flow History";
     const context = historical && historical.seasonalContext
         ? `<div class="seasonal-context">${historical.seasonalContext}</div>`
         : "";
+
+    const legendHtml = `
+        <div class="threshold-legend">
+            <div class="threshold-item"><div class="threshold-swatch" style="background:#22c55e"></div> &lt;50 Open</div>
+            <div class="threshold-item"><div class="threshold-swatch" style="background:#eab308"></div> 50-100 Caution</div>
+            <div class="threshold-item"><div class="threshold-swatch" style="background:#f97316"></div> 100-150 Dangerous</div>
+            <div class="threshold-item"><div class="threshold-swatch" style="background:#ef4444"></div> &ge;150 Closed</div>
+        </div>
+    `;
+
     return `
         <div class="card">
             <h2>${title}</h2>
             <div class="chart-container">
                 <canvas id="flow-chart"></canvas>
             </div>
+            ${legendHtml}
             ${context}
         </div>
     `;
@@ -165,7 +215,7 @@ function createChart(history, forecast, historical) {
     });
     const historyValues = history.map(h => h.cfs);
 
-    const forecastLabels = (forecast || []).map(f => formatDate(f.date));
+    const forecastLabels = (forecast || []).map(f => formatShortDate(f.date));
     const forecastValues = (forecast || []).map(f => f.predictedCfs);
 
     const allLabels = [...historyLabels, ...forecastLabels];
@@ -176,8 +226,8 @@ function createChart(history, forecast, historical) {
     const datasets = [{
         label: "Actual",
         data: actualData,
-        borderColor: "#0ea5e9",
-        backgroundColor: "rgba(14, 165, 233, 0.1)",
+        borderColor: "#38bdf8",
+        backgroundColor: "rgba(56, 189, 248, 0.1)",
         fill: true,
         tension: 0.3,
         pointRadius: 0,
@@ -188,9 +238,9 @@ function createChart(history, forecast, historical) {
         datasets.push({
             label: "Forecast",
             data: forecastData,
-            borderColor: "#0ea5e9",
+            borderColor: "#38bdf8",
             borderDash: [5, 5],
-            backgroundColor: "rgba(14, 165, 233, 0.05)",
+            backgroundColor: "rgba(56, 189, 248, 0.05)",
             fill: true,
             tension: 0.3,
             pointRadius: 0,
@@ -238,7 +288,7 @@ function createChart(history, forecast, historical) {
             borderWidth: 0,
             pointRadius: 0,
             fill: "-1",
-            backgroundColor: "rgba(147, 197, 253, 0.2)",
+            backgroundColor: "rgba(148, 163, 184, 0.12)",
         });
     }
 
@@ -252,6 +302,7 @@ function createChart(history, forecast, historical) {
                 legend: {
                     display: (forecast && forecast.length > 0) || (historical && historical.dailyStats && historical.dailyStats.length > 0),
                     labels: {
+                        color: "#94a3b8",
                         usePointStyle: true,
                         boxWidth: 8,
                         font: { size: 11 },
@@ -266,6 +317,11 @@ function createChart(history, forecast, historical) {
                     },
                 },
                 tooltip: {
+                    backgroundColor: "#1e293b",
+                    borderColor: "rgba(148, 163, 184, 0.2)",
+                    borderWidth: 1,
+                    titleColor: "#e2e8f0",
+                    bodyColor: "#94a3b8",
                     callbacks: {
                         label: ctx => ctx.parsed.y != null ? `${ctx.parsed.y.toFixed(1)} CFS` : "",
                     },
@@ -273,13 +329,13 @@ function createChart(history, forecast, historical) {
             },
             scales: {
                 x: {
-                    ticks: { maxTicksLimit: 8, font: { size: 11 } },
+                    ticks: { maxTicksLimit: 8, font: { size: 11 }, color: "#64748b" },
                     grid: { display: false },
                 },
                 y: {
                     beginAtZero: true,
-                    ticks: { font: { size: 11 } },
-                    grid: { color: "rgba(0,0,0,0.05)" },
+                    ticks: { font: { size: 11 }, color: "#64748b" },
+                    grid: { color: "rgba(148, 163, 184, 0.08)" },
                 },
             },
         },
@@ -303,8 +359,8 @@ async function init() {
             renderHikeForecast(data.hikeForecast),
             renderRiver(data.river),
             renderWeather(data.weather),
-            renderAlerts(data.alerts),
             renderChart(data.river.history, forecast, historical),
+            renderAlerts(data.alerts),
         ].join("");
 
         createChart(data.river.history, forecast, historical);
@@ -315,7 +371,7 @@ async function init() {
     } catch (err) {
         app.innerHTML = `<div class="card" style="text-align:center;color:#ef4444">
             <p>Unable to load status data.</p>
-            <p style="font-size:0.8rem;color:#78716c;margin-top:0.5rem">${err.message}</p>
+            <p style="font-size:0.8rem;color:#64748b;margin-top:0.5rem">${err.message}</p>
         </div>`;
     }
 }
