@@ -7,7 +7,7 @@ import os
 import statistics
 import sys
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 import requests
 
@@ -251,6 +251,71 @@ def compute_hike_forecast(flow_forecast, weather_extended):
     return result
 
 
+CLOSURE_THRESHOLD = 150
+
+
+def compute_closure_risk_historical(current_cfs, historical):
+    """Compute 10-day closure probability using historical frequency.
+
+    For each of the next 10 calendar days, calculates what % of years had CFS >= 150
+    on that date. Adjusts by how current CFS compares to today's historical median.
+    """
+    if not historical or "rawByDay" not in historical:
+        return None
+
+    raw_by_day = historical["rawByDay"]
+    stats_by_day = {s["monthDay"]: s for s in historical.get("dailyStats", [])}
+
+    now = datetime.now()
+    today_md = f"{now.month:02d}-{now.day:02d}"
+
+    # Condition adjustment: current_cfs / today's historical median
+    today_stats = stats_by_day.get(today_md)
+    if today_stats and current_cfs is not None and today_stats["medianCfs"] > 0:
+        adjustment = current_cfs / today_stats["medianCfs"]
+        adjustment = max(0.5, min(adjustment, 2.0))
+    else:
+        adjustment = 1.0
+
+    daily_risk = []
+    for days_ahead in range(1, 11):
+        future = now + timedelta(days=days_ahead)
+        future_md = f"{future.month:02d}-{future.day:02d}"
+
+        values = raw_by_day.get(future_md, [])
+        if not values:
+            daily_risk.append({
+                "date": future.strftime("%Y-%m-%d"),
+                "historical": None,
+            })
+            continue
+
+        base_rate = sum(1 for v in values if v >= CLOSURE_THRESHOLD) / len(values)
+        adjusted = max(0.0, min(base_rate * adjustment, 1.0))
+
+        daily_risk.append({
+            "date": future.strftime("%Y-%m-%d"),
+            "historical": round(adjusted * 100, 1),
+        })
+
+    valid_probs = [d["historical"] for d in daily_risk if d["historical"] is not None]
+    max_prob = max(valid_probs) if valid_probs else 0
+
+    if max_prob < 15:
+        label = "Low"
+    elif max_prob < 40:
+        label = "Moderate"
+    elif max_prob < 65:
+        label = "High"
+    else:
+        label = "Very High"
+
+    return {
+        "summary": {"next10DayMax": max_prob, "label": label},
+        "daily": daily_risk,
+    }
+
+
 def fetch_historical_stats():
     """Fetch 10 years of daily flow data and compute seasonal statistics."""
     print("Fetching USGS historical data...")
@@ -312,6 +377,7 @@ def fetch_historical_stats():
     return {
         "seasonalContext": context,
         "dailyStats": daily_stats,
+        "rawByDay": {k: v for k, v in all_values.items()},
     }
 
 
@@ -406,6 +472,7 @@ def main():
     flow_forecast = fetch_flow_forecast()
     hike_forecast = compute_hike_forecast(flow_forecast, weather.get("extendedForecast", []))
     historical = fetch_historical_stats()
+    closure_risk = compute_closure_risk_historical(cfs, historical)
 
     trend = compute_trend(history)
     status, status_reason = compute_status(cfs, alerts)
@@ -426,7 +493,10 @@ def main():
         "hikeForecast": hike_forecast,
     }
     if historical:
+        historical.pop("rawByDay", None)
         result["historical"] = historical
+    if closure_risk:
+        result["closureRisk"] = closure_risk
 
     output_path = os.path.abspath(OUTPUT_PATH)
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -434,6 +504,8 @@ def main():
         json.dump(result, f, indent=2)
 
     print(f"Status: {status} — {status_reason}")
+    if closure_risk:
+        print(f"Closure risk (next 10 days max): {closure_risk['summary']['next10DayMax']}% — {closure_risk['summary']['label']}")
     print(f"Data written to {output_path}")
 
 
