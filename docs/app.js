@@ -27,20 +27,27 @@ const RATING_LABELS = {
 };
 
 function animateValue(element, target, decimals, duration = 800) {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        element.textContent = target.toFixed(decimals);
-        return;
-    }
-    const start = performance.now();
-    function update(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = target * eased;
-        element.textContent = current.toFixed(decimals);
-        if (progress < 1) requestAnimationFrame(update);
-    }
-    requestAnimationFrame(update);
+    return new Promise(resolve => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            element.textContent = target.toFixed(decimals);
+            resolve();
+            return;
+        }
+        const start = performance.now();
+        function update(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = target * eased;
+            element.textContent = current.toFixed(decimals);
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                resolve();
+            }
+        }
+        requestAnimationFrame(update);
+    });
 }
 
 function initParallax() {
@@ -624,7 +631,17 @@ async function init() {
             `</div>`,
         ].join("");
 
-        createChart(data.river.history, forecast, historical);
+        // Defer chart creation until canvas scrolls into view
+        const chartCanvas = document.getElementById("flow-chart");
+        if (chartCanvas) {
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    createChart(data.river.history, forecast, historical);
+                    observer.disconnect();
+                }
+            }, { threshold: 0.1 });
+            observer.observe(chartCanvas);
+        }
 
         // Stagger card entry animations
         const cards = app.querySelectorAll('.card, .status-card');
@@ -639,18 +656,14 @@ async function init() {
             const decimals = parseInt(el.dataset.decimals) || 0;
             const suffix = el.dataset.suffix || '';
             const unit = el.querySelector('.stat-unit');
-            animateValue(el, target, decimals);
-            if (suffix) {
-                setTimeout(() => {
+            animateValue(el, target, decimals).then(() => {
+                if (suffix) {
                     el.textContent = el.textContent + suffix;
-                }, 850);
-            }
-            if (unit) {
-                setTimeout(() => {
-                    const val = target.toFixed(decimals);
-                    el.innerHTML = val + '<span class="stat-unit"> ft</span>';
-                }, 850);
-            }
+                }
+                if (unit) {
+                    el.innerHTML = target.toFixed(decimals) + '<span class="stat-unit"> ft</span>';
+                }
+            });
         });
 
         // Initialize parallax
