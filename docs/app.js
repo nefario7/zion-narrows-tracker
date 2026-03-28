@@ -160,12 +160,16 @@ function renderAlerts(alerts) {
     const alertsHtml = alerts.map(a => {
         const cat = (a.category || "").toLowerCase();
         const cssClass = cat === "information" ? "info" : cat === "caution" ? "caution-alert" : "";
-        const link = a.url ? `<a class="alert-link" href="${a.url}" target="_blank">More info &rarr;</a>` : "";
+        const date = a.date ? `<span class="alert-date">${a.date}</span>` : "";
+        const source = a.url ? `<a class="alert-source" href="${a.url}" target="_blank">NPS.gov &rarr;</a>` : "";
         return `
             <div class="alert-item ${cssClass}">
-                <div class="alert-title">${a.title}</div>
+                <div class="alert-header">
+                    <div class="alert-title">${a.title}</div>
+                    ${date}
+                </div>
                 <div class="alert-desc">${a.description}</div>
-                ${link}
+                ${source}
             </div>
         `;
     }).join("");

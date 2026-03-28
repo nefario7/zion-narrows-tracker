@@ -343,10 +343,24 @@ main {
     margin-bottom: 0;
 }
 
+.alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
 .alert-title {
     font-weight: 600;
     font-size: 0.85rem;
     color: #e2e8f0;
+}
+
+.alert-date {
+    font-size: 0.7rem;
+    color: #64748b;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .alert-desc {
@@ -356,7 +370,7 @@ main {
     line-height: 1.4;
 }
 
-.alert-link {
+.alert-source {
     display: inline-block;
     font-size: 0.7rem;
     color: #38bdf8;
@@ -365,7 +379,7 @@ main {
     font-weight: 500;
 }
 
-.alert-link:hover {
+.alert-source:hover {
     text-decoration: underline;
 }
 
