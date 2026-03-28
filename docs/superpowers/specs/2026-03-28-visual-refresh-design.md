@@ -10,7 +10,8 @@ No new dependencies. No changes to data fetching, data structure, or backend log
 
 - `docs/style.css` — Full palette swap, new background elements, responsive breakpoints, animation keyframes
 - `docs/app.js` — Animated number counters, parallax scroll listener, chart color updates, staggered card rendering
-- `docs/index.html` — Add inline SVG canyon wall elements, update any hardcoded color references
+- `docs/index.html` — Add background image container element, update any hardcoded color references
+- `docs/zion-narrows.jpg` — Background photograph of the Narrows (new file)
 
 ## 1. Color Palette
 
@@ -29,17 +30,20 @@ No new dependencies. No changes to data fetching, data structure, or backend log
 
 ## 2. Canyon Background
 
-### Slot Canyon Walls
+### Photo Background
 
-Two inline SVG elements positioned fixed on the left and right edges of the viewport. Each wall consists of two overlapping paths with irregular, organic edges to simulate rock faces.
+A real photograph of the Zion Narrows (`zion-narrows.jpg`) used as a fixed, full-viewport background with CSS filters to darken and blur it into an atmospheric backdrop.
 
-- Left wall: `width: 14%` of viewport, `opacity: 0.25`, fills `#3d2317` and `#5a3a25`
-- Right wall: mirrors the left with different path shapes
-- A faint radial gradient light strip at top center simulates light entering the slot from above: `rgba(196,149,106,0.06)`
+Implementation:
+- A `div.bg-image` element with `position: fixed; inset: 0; z-index: -1`
+- Background image via `background-image: url('zion-narrows.jpg')`, `background-size: cover`, `background-position: center`
+- CSS filters: `blur(8px)`, `brightness(0.15)`, `sepia(0.3)` — makes the image very dark and warm-toned
+- A dark overlay on top: `background: rgba(18,10,6,0.6)` to deepen the effect and ensure text contrast
+- `transform: scale(1.1)` to prevent blur edge artifacts
 
 ### Parallax
 
-A scroll listener (throttled via `requestAnimationFrame`) translates the canyon wall SVGs at `0.3x` the scroll speed (`translateY`). This creates subtle depth as the user scrolls.
+A scroll listener (throttled via `requestAnimationFrame`) translates the background image element at `0.3x` the scroll speed (`translateY`). This creates subtle depth as the user scrolls.
 
 The listener must be lightweight — only a `transform` update, no layout triggers.
 
@@ -113,11 +117,9 @@ No changes from current layout. Single column stack. Hike forecast scrolls horiz
   - Right column: weather, best days to hike, NPS alerts
 - Canyon walls more prominent at wider viewports (more visible edge space)
 
-### Canyon Walls Responsive Behavior
+### Background Image Responsive Behavior
 
-- Mobile: walls are `width: 8%`, very subtle
-- Tablet: walls are `width: 12%`
-- Desktop: walls are `width: 14%`
+The background photo is fixed and covers all viewports. No responsive changes needed — `background-size: cover` handles all sizes. Blur and brightness filters remain constant.
 
 ## 5. Chart Recoloring
 
@@ -148,6 +150,6 @@ Threshold background bands keep their hue meaning (green/amber/orange/red zones)
 
 - No changes to data fetching or `fetch_data.py`
 - No changes to `data.json` structure
-- No new external dependencies or images
+- No new external dependencies (one new image file: the background photo)
 - No changes to status determination logic
 - No changes to GitHub Actions workflow
