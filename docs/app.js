@@ -628,12 +628,6 @@ async function init() {
             observer.observe(chartCanvas);
         }
 
-        // Stagger card entry animations
-        const cards = app.querySelectorAll('.card, .status-card');
-        cards.forEach((card, i) => {
-            card.style.animationDelay = `${i * 50}ms`;
-        });
-
         // Animate number counters
         app.querySelectorAll('[data-animate]').forEach(el => {
             const target = parseFloat(el.dataset.animate);

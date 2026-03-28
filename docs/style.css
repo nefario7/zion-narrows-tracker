@@ -6,42 +6,25 @@
 
 body {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #120a06;
+    background: #120a06 url('zion-narrows.jpg') center / cover no-repeat fixed;
     color: #ede0d4;
     line-height: 1.5;
     min-height: 100vh;
 }
 
-/* Background image */
-.bg-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -2;
-    overflow: hidden;
-}
-
-.bg-image img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: blur(6px) brightness(0.3) sepia(0.3);
-    transform: scale(1.05);
-}
-
-.bg-overlay {
+body::before {
+    content: "";
     position: fixed;
     inset: 0;
-    z-index: -1;
-    background: rgba(18, 10, 6, 0.6);
+    z-index: 0;
+    background: rgba(18, 10, 6, 0.75);
+    pointer-events: none;
 }
 
 /* Header */
 header {
+    position: relative;
+    z-index: 1;
     background: linear-gradient(135deg, rgba(28, 25, 23, 0.8) 0%, rgba(18, 10, 6, 0.8) 100%);
     border-bottom: 1px solid rgba(196, 149, 106, 0.1);
     padding: 1.5rem 1rem 1.25rem;
@@ -76,6 +59,8 @@ header h1 {
 
 /* Main */
 main {
+    position: relative;
+    z-index: 1;
     max-width: 640px;
     margin: 0 auto;
     padding: 0.75rem;
@@ -512,6 +497,8 @@ main {
 
 /* Footer */
 footer {
+    position: relative;
+    z-index: 1;
     max-width: 640px;
     margin: 0 auto;
     padding: 1.5rem 1rem 2rem;
@@ -540,17 +527,6 @@ footer a:hover {
 }
 
 /* Animations */
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 @keyframes glowPulse-open {
     0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.1); }
     50% { box-shadow: 0 0 20px 0 rgba(34, 197, 94, 0.3); }
@@ -576,14 +552,10 @@ footer a:hover {
     50% { transform: translateY(-4px); }
 }
 
-.card, .status-card {
-    animation: fadeUp 400ms ease-out both;
-}
-
-.status-card.open { animation: fadeUp 400ms ease-out both, glowPulse-open 3s ease-in-out infinite; }
-.status-card.caution { animation: fadeUp 400ms ease-out both, glowPulse-caution 3s ease-in-out infinite; }
-.status-card.dangerous { animation: fadeUp 400ms ease-out both, glowPulse-dangerous 3s ease-in-out infinite; }
-.status-card.closed { animation: fadeUp 400ms ease-out both, glowPulse-closed 3s ease-in-out infinite; }
+.status-card.open { animation: glowPulse-open 3s ease-in-out infinite; }
+.status-card.caution { animation: glowPulse-caution 3s ease-in-out infinite; }
+.status-card.dangerous { animation: glowPulse-dangerous 3s ease-in-out infinite; }
+.status-card.closed { animation: glowPulse-closed 3s ease-in-out infinite; }
 
 .trend-arrow {
     display: inline-block;
@@ -813,7 +785,6 @@ footer a:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .card, .status-card,
     .status-card.open, .status-card.caution,
     .status-card.dangerous, .status-card.closed,
     .trend-arrow {
