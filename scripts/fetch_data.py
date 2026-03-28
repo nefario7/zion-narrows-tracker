@@ -38,11 +38,12 @@ OPEN_METEO_URL = (
 
 OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "..", "docs", "data.json")
 
-# CFS thresholds for Narrows status
+# CFS thresholds for Narrows status (matches Flow Guide on dashboard)
 THRESHOLDS = [
-    (50, "open", "Easy hiking conditions"),
-    (100, "caution", "Moderate conditions — use caution"),
-    (150, "dangerous", "Difficult and dangerous conditions"),
+    (50, "great", "Ideal conditions — easy rock-hopping, calm water"),
+    (80, "good", "Comfortable wading — knee-deep in spots"),
+    (120, "fair", "Waist-deep sections, moderate current — use a walking stick"),
+    (150, "poor", "Strong current, chest-deep water possible — experience required"),
     (float("inf"), "closed", "River flow too high — Narrows closed"),
 ]
 
@@ -139,7 +140,7 @@ def compute_status(cfs, alerts):
                 return "closed", "Officially closed by NPS — " + alert.get("title", "")
 
     if cfs is None:
-        return "caution", "Unable to retrieve river flow data"
+        return "fair", "Unable to retrieve river flow data — check conditions before hiking"
 
     for threshold, status, reason in THRESHOLDS:
         if cfs < threshold:
@@ -208,15 +209,17 @@ def compute_hike_forecast(flow_forecast, weather_extended):
         high = weather.get("high")
         low = weather.get("low")
 
-        # Rate flow
+        # Rate flow (matches Flow Guide thresholds)
         if cfs is None:
             flow_rating = "good"
         elif cfs >= 150:
             flow_rating = "closed"
-        elif cfs >= 100:
+        elif cfs >= 120:
             flow_rating = "poor"
-        elif cfs >= 50:
+        elif cfs >= 80:
             flow_rating = "fair"
+        elif cfs >= 50:
+            flow_rating = "good"
         elif cfs >= 0:
             flow_rating = "great"
         else:
