@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Fetch Zion Narrows status data from USGS, NPS, and Open-Meteo APIs."""
 
+import calendar
 import json
 import os
+import statistics
 import sys
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -20,6 +22,7 @@ USGS_HISTORY_URL = (
 )
 NPS_ALERTS_URL = "https://developer.nps.gov/api/v1/alerts?parkCode=zion"
 NOAA_NWPS_URL = f"https://api.water.noaa.gov/nwps/v1/gauges/{USGS_SITE}/stageflow"
+USGS_DAILY_API_URL = "https://api.waterdata.usgs.gov/ogcapi/v0/collections/daily/items"
 OPEN_METEO_URL = (
     "https://api.open-meteo.com/v1/forecast"
     "?latitude=37.2982&longitude=-112.9789"
@@ -248,6 +251,69 @@ def compute_hike_forecast(flow_forecast, weather_extended):
     return result
 
 
+def fetch_historical_stats():
+    """Fetch 10 years of daily flow data and compute seasonal statistics."""
+    print("Fetching USGS historical data...")
+    now = datetime.now()
+    current_month = now.month
+    next_month = current_month + 1 if current_month < 12 else 1
+
+    all_values = defaultdict(list)
+    for year in range(now.year - 10, now.year + 1):
+        for month in [current_month, next_month]:
+            query_year = year if month >= current_month else year
+            last_day = calendar.monthrange(query_year, month)[1]
+            url = (
+                f"{USGS_DAILY_API_URL}?monitoring_location_id=USGS-{USGS_SITE}"
+                f"&parameter_code=00060&statistic_id=00003"
+                f"&datetime={query_year}-{month:02d}-01/{query_year}-{month:02d}-{last_day:02d}"
+                f"&limit=100"
+            )
+            data = fetch_json(url)
+            if not data:
+                continue
+            for feature in data.get("features", []):
+                props = feature.get("properties", {})
+                date_str = props.get("time", "")
+                try:
+                    val = float(props["value"])
+                    month_day = date_str[5:]  # MM-DD
+                    all_values[month_day].append(val)
+                except (ValueError, KeyError):
+                    continue
+
+    if not all_values:
+        return None
+
+    daily_stats = []
+    for month_day in sorted(all_values.keys()):
+        vals = sorted(all_values[month_day])
+        if len(vals) < 3:
+            continue
+        n = len(vals)
+        daily_stats.append({
+            "monthDay": month_day,
+            "medianCfs": round(statistics.median(vals), 1),
+            "p25Cfs": round(vals[n // 4], 1),
+            "p75Cfs": round(vals[3 * n // 4], 1),
+        })
+
+    # Generate seasonal context for next month
+    next_month_name = calendar.month_name[next_month]
+    next_month_stats = [s for s in daily_stats if s["monthDay"].startswith(f"{next_month:02d}")]
+    if next_month_stats:
+        medians = [s["medianCfs"] for s in next_month_stats]
+        low = round(min(medians))
+        high = round(max(medians))
+        context = f"{next_month_name} typically sees {low}-{high} CFS due to spring snowmelt"
+    else:
+        context = ""
+
+    return {
+        "seasonalContext": context,
+        "dailyStats": daily_stats,
+    }
+
 
 def fetch_nps_alerts():
     """Fetch NPS alerts for Zion."""
@@ -330,6 +396,7 @@ def main():
 
     flow_forecast = fetch_flow_forecast()
     hike_forecast = compute_hike_forecast(flow_forecast, weather.get("extendedForecast", []))
+    historical = fetch_historical_stats()
 
     trend = compute_trend(history)
     status, status_reason = compute_status(cfs, alerts)
@@ -349,6 +416,8 @@ def main():
         "forecast": {"daily": flow_forecast},
         "hikeForecast": hike_forecast,
     }
+    if historical:
+        result["historical"] = historical
 
     output_path = os.path.abspath(OUTPUT_PATH)
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
