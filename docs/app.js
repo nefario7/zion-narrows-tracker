@@ -233,13 +233,70 @@ function renderChart(history, forecast, historical) {
     `;
 }
 
+function getStatusForCfs(cfs) {
+    if (cfs < 50) return { label: "Open", color: "#22c55e" };
+    if (cfs < 100) return { label: "Caution", color: "#eab308" };
+    if (cfs < 150) return { label: "Dangerous", color: "#f97316" };
+    return { label: "Closed", color: "#ef4444" };
+}
+
+// Chart.js plugin: draw colored threshold bands on background
+const thresholdBandsPlugin = {
+    id: "thresholdBands",
+    beforeDraw(chart) {
+        const { ctx, chartArea: { left, right, top, bottom }, scales: { y } } = chart;
+        const bands = [
+            { min: 0, max: 50, color: "rgba(34, 197, 94, 0.06)" },
+            { min: 50, max: 100, color: "rgba(234, 179, 8, 0.06)" },
+            { min: 100, max: 150, color: "rgba(249, 115, 22, 0.06)" },
+            { min: 150, max: Infinity, color: "rgba(239, 68, 68, 0.06)" },
+        ];
+        ctx.save();
+        bands.forEach(band => {
+            const yMax = y.getPixelForValue(band.min);
+            const yMin = y.getPixelForValue(Math.min(band.max, y.max));
+            if (yMin > bottom || yMax < top) return;
+            ctx.fillStyle = band.color;
+            ctx.fillRect(left, Math.max(yMin, top), right - left, Math.min(yMax, bottom) - Math.max(yMin, top));
+        });
+        ctx.restore();
+    }
+};
+
+// Chart.js plugin: draw a "Now" vertical divider line
+const nowLinePlugin = {
+    id: "nowLine",
+    afterDraw(chart) {
+        const nowIndex = chart.config._nowIndex;
+        if (nowIndex == null) return;
+        const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
+        const xPos = x.getPixelForValue(nowIndex);
+        if (xPos < x.left || xPos > x.right) return;
+        ctx.save();
+        ctx.beginPath();
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = "rgba(148, 163, 184, 0.35)";
+        ctx.lineWidth = 1;
+        ctx.moveTo(xPos, top);
+        ctx.lineTo(xPos, bottom);
+        ctx.stroke();
+        // "Now" label
+        ctx.setLineDash([]);
+        ctx.font = "600 10px Inter, sans-serif";
+        ctx.fillStyle = "#94a3b8";
+        ctx.textAlign = "center";
+        ctx.fillText("Now", xPos, top - 4);
+        ctx.restore();
+    }
+};
+
 function createChart(history, forecast, historical) {
     const ctx = document.getElementById("flow-chart");
     if (!ctx || !history.length) return;
 
     const historyLabels = history.map(h => {
         const d = new Date(h.timestamp);
-        return d.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/Denver" });
+        return d.toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "numeric", timeZone: "America/Denver" });
     });
     const historyValues = history.map(h => h.cfs);
 
@@ -250,124 +307,161 @@ function createChart(history, forecast, historical) {
     const actualData = [...historyValues, ...new Array(forecastLabels.length).fill(null)];
     const forecastData = [...new Array(historyLabels.length - 1).fill(null), historyValues[historyValues.length - 1], ...forecastValues];
     const thresholdData = allLabels.map(() => 150);
+    const nowIndex = historyLabels.length - 1;
 
     const datasets = [{
-        label: "Actual",
+        label: "Actual Flow",
         data: actualData,
         borderColor: "#38bdf8",
-        backgroundColor: "rgba(56, 189, 248, 0.1)",
+        backgroundColor: "rgba(56, 189, 248, 0.08)",
         fill: true,
         tension: 0.3,
         pointRadius: 0,
-        borderWidth: 2,
+        pointHoverRadius: 4,
+        pointHoverBackgroundColor: "#38bdf8",
+        borderWidth: 2.5,
     }];
 
     if (forecast && forecast.length) {
         datasets.push({
             label: "Forecast",
             data: forecastData,
-            borderColor: "#38bdf8",
-            borderDash: [5, 5],
-            backgroundColor: "rgba(56, 189, 248, 0.05)",
+            borderColor: "#fbbf24",
+            borderDash: [6, 4],
+            backgroundColor: "rgba(251, 191, 36, 0.06)",
             fill: true,
             tension: 0.3,
             pointRadius: 0,
+            pointHoverRadius: 4,
+            pointHoverBackgroundColor: "#fbbf24",
             borderWidth: 2,
         });
         datasets.push({
             label: "Closure Threshold",
             data: thresholdData,
-            borderColor: "#ef4444",
+            borderColor: "rgba(239, 68, 68, 0.5)",
             borderDash: [10, 5],
             borderWidth: 1,
             pointRadius: 0,
+            pointHoverRadius: 0,
             fill: false,
         });
     }
 
-    // Add historical band if available
+    // Add historical band if available — cover both history and forecast dates
     if (historical && historical.dailyStats && historical.dailyStats.length) {
         const statsByDay = {};
         historical.dailyStats.forEach(s => { statsByDay[s.monthDay] = s; });
 
-        const p75Data = history.map(h => {
-            const d = new Date(h.timestamp);
-            const md = `${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-            const s = statsByDay[md];
+        const getMd = (dateStr) => {
+            const d = new Date(dateStr);
+            return `${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+        };
+
+        const allDates = [
+            ...history.map(h => h.timestamp),
+            ...(forecast || []).map(f => f.date + "T12:00:00"),
+        ];
+
+        const p75Data = allDates.map(dt => {
+            const s = statsByDay[getMd(dt)];
             return s ? s.p75Cfs : null;
         });
-        const p25Data = history.map(h => {
-            const d = new Date(h.timestamp);
-            const md = `${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-            const s = statsByDay[md];
+        const p25Data = allDates.map(dt => {
+            const s = statsByDay[getMd(dt)];
             return s ? s.p25Cfs : null;
         });
 
         datasets.push({
             label: "Typical range (p75)",
             data: p75Data,
-            borderWidth: 0,
+            borderColor: "rgba(148, 163, 184, 0.15)",
+            borderWidth: 1,
+            borderDash: [3, 3],
             pointRadius: 0,
+            pointHoverRadius: 0,
             fill: false,
         });
         datasets.push({
             label: "Typical range (p25)",
             data: p25Data,
-            borderWidth: 0,
+            borderColor: "rgba(148, 163, 184, 0.15)",
+            borderWidth: 1,
+            borderDash: [3, 3],
             pointRadius: 0,
+            pointHoverRadius: 0,
             fill: "-1",
-            backgroundColor: "rgba(148, 163, 184, 0.12)",
+            backgroundColor: "rgba(148, 163, 184, 0.08)",
         });
     }
 
-    new Chart(ctx, {
+    const config = {
         type: "line",
         data: { labels: allLabels, datasets },
+        plugins: [thresholdBandsPlugin, nowLinePlugin],
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: { padding: { top: 16 } },
+            interaction: { mode: "index", intersect: false },
             plugins: {
                 legend: {
-                    display: (forecast && forecast.length > 0) || (historical && historical.dailyStats && historical.dailyStats.length > 0),
+                    display: true,
                     labels: {
                         color: "#94a3b8",
                         usePointStyle: true,
-                        boxWidth: 8,
+                        pointStyle: "line",
+                        boxWidth: 20,
                         font: { size: 11 },
                         filter: item => item.text !== "Closure Threshold" && item.text !== "Typical range (p75)",
                         generateLabels: chart => {
                             const original = Chart.defaults.plugins.legend.labels.generateLabels(chart);
                             return original.map(l => {
-                                if (l.text === "Typical range (p25)") l.text = "Typical range";
+                                if (l.text === "Typical range (p25)") l.text = "Typical range (10yr)";
                                 return l;
                             });
                         },
                     },
                 },
                 tooltip: {
-                    backgroundColor: "#1e293b",
+                    backgroundColor: "rgba(15, 23, 42, 0.95)",
                     borderColor: "rgba(148, 163, 184, 0.2)",
                     borderWidth: 1,
                     titleColor: "#e2e8f0",
                     bodyColor: "#94a3b8",
+                    padding: 10,
                     callbacks: {
-                        label: ctx => ctx.parsed.y != null ? `${ctx.parsed.y.toFixed(1)} CFS` : "",
+                        label: item => {
+                            if (item.parsed.y == null) return "";
+                            const val = item.parsed.y.toFixed(1);
+                            const name = item.dataset.label;
+                            if (name.startsWith("Typical")) return `${name}: ${val} CFS`;
+                            if (name === "Closure Threshold") return "";
+                            const status = getStatusForCfs(item.parsed.y);
+                            return `${name}: ${val} CFS (${status.label})`;
+                        },
                     },
                 },
             },
             scales: {
                 x: {
-                    ticks: { maxTicksLimit: 8, font: { size: 11 }, color: "#64748b" },
+                    ticks: { maxTicksLimit: 10, font: { size: 10 }, color: "#64748b", maxRotation: 45 },
                     grid: { display: false },
                 },
                 y: {
                     beginAtZero: true,
-                    ticks: { font: { size: 11 }, color: "#64748b" },
-                    grid: { color: "rgba(148, 163, 184, 0.08)" },
+                    ticks: {
+                        font: { size: 11 },
+                        color: "#64748b",
+                        callback: val => val + " CFS",
+                    },
+                    grid: { color: "rgba(148, 163, 184, 0.06)" },
                 },
             },
         },
-    });
+    };
+    config._nowIndex = nowIndex;
+    new Chart(ctx, config);
 }
 
 async function init() {
