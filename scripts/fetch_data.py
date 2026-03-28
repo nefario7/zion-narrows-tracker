@@ -342,7 +342,7 @@ def fetch_historical_stats():
                 date_str = props.get("time", "")
                 try:
                     val = float(props["value"])
-                    month_day = date_str[5:]  # MM-DD
+                    month_day = date_str[5:10]  # MM-DD
                     all_values[month_day].append(val)
                 except (ValueError, KeyError):
                     continue
@@ -493,8 +493,7 @@ def main():
         "hikeForecast": hike_forecast,
     }
     if historical:
-        historical.pop("rawByDay", None)
-        result["historical"] = historical
+        result["historical"] = {k: v for k, v in historical.items() if k != "rawByDay"}
     if closure_risk:
         result["closureRisk"] = closure_risk
 
