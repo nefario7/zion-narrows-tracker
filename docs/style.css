@@ -602,6 +602,55 @@ footer a:hover {
     margin-right: auto;
 }
 
+/* Risk model breakdown */
+.risk-details {
+    margin-top: 1rem;
+}
+
+.risk-details-toggle {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    cursor: pointer;
+    user-select: none;
+}
+
+.risk-details-toggle:hover {
+    color: #e2e8f0;
+}
+
+.risk-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+}
+
+.risk-table th {
+    color: #94a3b8;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid #334155;
+}
+
+.risk-table td {
+    text-align: center;
+    padding: 0.35rem 0.5rem;
+    color: #e2e8f0;
+    border-bottom: 1px solid #1e293b;
+}
+
+.risk-table td:first-child,
+.risk-table th:first-child {
+    text-align: left;
+}
+
+.risk-details .risk-model-desc {
+    margin-top: 0.75rem;
+    text-align: left;
+    line-height: 1.6;
+}
+
 /* Responsive */
 @media (max-width: 400px) {
     .river-stats {
