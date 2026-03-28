@@ -145,7 +145,7 @@ main {
 
 /* Cards */
 .card {
-    background: rgba(28, 25, 23, 0.75);
+    background: rgba(48, 40, 35, 0.55);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(196, 149, 106, 0.1);
