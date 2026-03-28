@@ -71,10 +71,50 @@ function formatTimestamp(iso) {
 }
 
 function renderStatus(data) {
+    const cfs = data.river.currentCfs != null ? data.river.currentCfs : 0;
+    const gaugeHeight = data.river.gaugeHeight != null ? data.river.gaugeHeight.toFixed(2) : "—";
+    const trend = data.river.trend || "stable";
+    const trendArrow = TREND_ARROWS[trend] || "→";
+    const trendLabel = TREND_LABELS[trend] || "Stable";
+    const temp = data.weather && data.weather.currentTemp != null
+        ? Math.round(data.weather.currentTemp) + "°F" : "—";
+
+    // Gauge marker position: 0–150+ CFS mapped to 0–100%
+    const markerPct = Math.min(cfs / 150 * 100, 100);
+
     return `
         <div class="status-card ${data.status}">
             <div class="status-label">${data.status}</div>
-            <div class="status-reason">${data.statusReason}</div>
+            <div class="status-gauge">
+                <div class="status-gauge-labels">
+                    <span>0 CFS</span>
+                    <span>150+ CFS</span>
+                </div>
+                <div class="status-gauge-track">
+                    <div class="status-gauge-seg status-gauge-green"></div>
+                    <div class="status-gauge-seg status-gauge-yellow"></div>
+                    <div class="status-gauge-seg status-gauge-red"></div>
+                    <div class="status-gauge-marker" style="left:${markerPct}%"></div>
+                </div>
+                <div class="status-gauge-value">
+                    <span class="status-gauge-cfs">${Math.round(cfs)} CFS</span>
+                    <span class="status-gauge-desc">${data.statusReason.split("—").slice(1).join("—").trim() || data.statusReason}</span>
+                </div>
+            </div>
+            <div class="status-stats">
+                <div class="status-stat">
+                    <div class="status-stat-value">${gaugeHeight} ft</div>
+                    <div class="status-stat-label">Gauge Height</div>
+                </div>
+                <div class="status-stat">
+                    <div class="status-stat-value">${trendArrow} ${trendLabel}</div>
+                    <div class="status-stat-label">Trend</div>
+                </div>
+                <div class="status-stat">
+                    <div class="status-stat-value">${temp}</div>
+                    <div class="status-stat-label">Temperature</div>
+                </div>
+            </div>
         </div>
     `;
 }
