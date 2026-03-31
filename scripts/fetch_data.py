@@ -751,7 +751,32 @@ def main():
     if closure_risk:
         result["closureRisk"] = closure_risk
 
+    # Accumulate closure risk history snapshots
     output_path = os.path.abspath(OUTPUT_PATH)
+    existing_history = []
+    if os.path.exists(output_path):
+        try:
+            with open(output_path) as f:
+                existing_data = json.load(f)
+            existing_history = existing_data.get("closureRiskHistory", [])
+        except (json.JSONDecodeError, OSError):
+            existing_history = []
+
+    if closure_risk and "summary" in closure_risk:
+        now_utc = datetime.now(timezone.utc)
+        new_snapshot = {
+            "timestamp": now_utc.isoformat(),
+            "peakEnsemble": closure_risk["summary"]["next10DayMax"],
+            "label": closure_risk["summary"]["label"],
+        }
+        existing_history.append(new_snapshot)
+        cutoff = now_utc - timedelta(days=7)
+        existing_history = [
+            s for s in existing_history
+            if datetime.fromisoformat(s["timestamp"]) >= cutoff
+        ]
+
+    result["closureRiskHistory"] = existing_history
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w") as f:
         json.dump(result, f, indent=2)
