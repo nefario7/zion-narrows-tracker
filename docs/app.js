@@ -163,7 +163,7 @@ function renderClosureRisk(closureRisk) {
 
     return `
         <div class="card closure-risk-card">
-            <h2>10-Day Closure Risk</h2>
+            <h2>10-Day Closure Risk${renderClosureRiskHistory(window.__closureRiskHistory)}</h2>
             <div class="risk-summary">
                 <div class="risk-headline" style="color:${color}">${Math.round(maxProb)}%</div>
                 <div class="risk-label" style="color:${color}">${label} Risk</div>
@@ -190,6 +190,84 @@ function renderClosureRisk(closureRisk) {
             </details>
         </div>
     `;
+}
+
+function renderClosureRiskHistory(history) {
+    if (!history || history.length < 2) return "";
+
+    function riskColorHistory(val) {
+        if (val == null) return "#64748b";
+        if (val < 15) return "#22c55e";
+        if (val < 40) return "#eab308";
+        if (val < 65) return "#f97316";
+        return "#ef4444";
+    }
+
+    const rows = [...history].reverse().map(entry => {
+        const d = new Date(entry.timestamp);
+        const dateStr = d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+        const color = riskColorHistory(entry.peakEnsemble);
+        const pct = Math.round(entry.peakEnsemble);
+        return `<div class="history-row"><span class="history-date">${dateStr}</span><span class="history-value" style="color:${color}">${pct}% ${entry.label}</span></div>`;
+    }).join("");
+
+    return `
+        <div class="risk-history-trigger">
+            <span class="risk-history-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+            </span>
+            <div class="risk-history-dialog">
+                <div class="history-title">Probability History</div>
+                <canvas class="history-sparkline" width="248" height="50"></canvas>
+                <div class="history-list">${rows}</div>
+            </div>
+        </div>
+    `;
+}
+
+function drawHistorySparkline() {
+    const canvas = document.querySelector(".history-sparkline");
+    const history = window.__closureRiskHistory;
+    if (!canvas || !history || history.length < 2) return;
+
+    const ctx = canvas.getContext("2d");
+    const W = canvas.width;
+    const H = canvas.height;
+    const padTop = 8, padBottom = 8, padLeft = 4, padRight = 4;
+
+    ctx.clearRect(0, 0, W, H);
+
+    const values = history.map(e => e.peakEnsemble);
+    const n = values.length;
+
+    function xPos(i) {
+        return padLeft + (i / (n - 1)) * (W - padLeft - padRight);
+    }
+    function yPos(v) {
+        return padTop + (1 - v / 100) * (H - padTop - padBottom);
+    }
+
+    ctx.strokeStyle = "#c4956a";
+    ctx.lineWidth = 2;
+    ctx.lineJoin = "round";
+    ctx.beginPath();
+    values.forEach((v, i) => {
+        const x = xPos(i);
+        const y = yPos(v);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    ctx.fillStyle = "#c4956a";
+    values.forEach((v, i) => {
+        ctx.beginPath();
+        ctx.arc(xPos(i), yPos(v), 3, 0, Math.PI * 2);
+        ctx.fill();
+    });
 }
 
 function renderHikeForecast(hikeForecast) {
@@ -620,6 +698,8 @@ async function init() {
         const forecast = data.forecast ? data.forecast.daily : [];
         const historical = data.historical || null;
 
+        window.__closureRiskHistory = data.closureRiskHistory;
+
         app.innerHTML = [
             renderStatus(data),
             renderClosureRisk(data.closureRisk),
@@ -635,6 +715,30 @@ async function init() {
                 `</div>`,
             `</div>`,
         ].join("");
+
+        drawHistorySparkline();
+
+        // Redraw sparkline when history dialog becomes visible
+        document.addEventListener("mouseenter", function(e) {
+            if (e.target.closest && e.target.closest(".risk-history-trigger")) {
+                setTimeout(drawHistorySparkline, 10);
+            }
+        }, true);
+
+        // Mobile: tap to toggle history dialog
+        document.addEventListener("click", function(e) {
+            const trigger = e.target.closest(".risk-history-trigger");
+            const dialog = document.querySelector(".risk-history-dialog");
+            if (!dialog) return;
+            if (trigger) {
+                const isVisible = dialog.style.display === "block";
+                dialog.style.display = isVisible ? "none" : "block";
+                if (!isVisible) setTimeout(drawHistorySparkline, 10);
+                e.stopPropagation();
+            } else if (!e.target.closest(".risk-history-dialog")) {
+                dialog.style.display = "";
+            }
+        });
 
         // Defer chart creation until canvas scrolls into view
         const chartCanvas = document.getElementById("flow-chart");
