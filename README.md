@@ -2,6 +2,10 @@
 
 A mobile-friendly dashboard that tracks whether the Narrows hike in Zion National Park is open, based on real-time river flow, weather, and NPS alerts. Updated twice daily.
 
+**[View the live dashboard](https://nefario7.github.io/zion-narrows-tracker/)**
+
+[![Dashboard screenshot](docs/dashboard-screenshot.png)](https://nefario7.github.io/zion-narrows-tracker/)
+
 ## How to Read the Dashboard
 
 ### Status Indicator
