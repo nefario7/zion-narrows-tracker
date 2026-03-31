@@ -773,7 +773,7 @@ def main():
         cutoff = now_utc - timedelta(days=7)
         existing_history = [
             s for s in existing_history
-            if datetime.fromisoformat(s["timestamp"]) >= cutoff
+            if datetime.fromisoformat(s["timestamp"].replace("Z", "+00:00")) >= cutoff
         ]
 
     result["closureRiskHistory"] = existing_history
