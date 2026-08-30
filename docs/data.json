@@ -1,40 +1,12 @@
 {
   "status": "great",
-  "statusReason": "River flow is 36 CFS \u2014 Ideal conditions \u2014 easy rock-hopping, calm water",
-  "lastUpdated": "2026-08-30T11:07:15.725354+00:00",
+  "statusReason": "River flow is 34 CFS \u2014 Ideal conditions \u2014 easy rock-hopping, calm water",
+  "lastUpdated": "2026-08-30T20:26:41.655250+00:00",
   "river": {
-    "currentCfs": 35.6,
-    "gaugeHeight": 7.12,
+    "currentCfs": 33.6,
+    "gaugeHeight": 7.09,
     "trend": "stable",
     "history": [
-      {
-        "timestamp": "2026-08-23T05:10:00.000-06:00",
-        "cfs": 33.0
-      },
-      {
-        "timestamp": "2026-08-23T06:30:00.000-06:00",
-        "cfs": 33.0
-      },
-      {
-        "timestamp": "2026-08-23T07:50:00.000-06:00",
-        "cfs": 33.0
-      },
-      {
-        "timestamp": "2026-08-23T09:10:00.000-06:00",
-        "cfs": 32.3
-      },
-      {
-        "timestamp": "2026-08-23T10:30:00.000-06:00",
-        "cfs": 34.2
-      },
-      {
-        "timestamp": "2026-08-23T11:50:00.000-06:00",
-        "cfs": 33.0
-      },
-      {
-        "timestamp": "2026-08-23T13:10:00.000-06:00",
-        "cfs": 32.3
-      },
       {
         "timestamp": "2026-08-23T14:30:00.000-06:00",
         "cfs": 32.3
@@ -512,97 +484,125 @@
         "cfs": 35.6
       },
       {
-        "timestamp": "2026-08-30T04:50:00.000-06:00",
+        "timestamp": "2026-08-30T05:10:00.000-06:00",
         "cfs": 35.6
+      },
+      {
+        "timestamp": "2026-08-30T06:30:00.000-06:00",
+        "cfs": 35.6
+      },
+      {
+        "timestamp": "2026-08-30T07:50:00.000-06:00",
+        "cfs": 34.3
+      },
+      {
+        "timestamp": "2026-08-30T09:10:00.000-06:00",
+        "cfs": 34.9
+      },
+      {
+        "timestamp": "2026-08-30T10:30:00.000-06:00",
+        "cfs": 34.3
+      },
+      {
+        "timestamp": "2026-08-30T11:50:00.000-06:00",
+        "cfs": 34.3
+      },
+      {
+        "timestamp": "2026-08-30T13:10:00.000-06:00",
+        "cfs": 33.6
+      },
+      {
+        "timestamp": "2026-08-30T14:05:00.000-06:00",
+        "cfs": 33.6
       }
     ]
   },
   "weather": {
-    "currentTemp": 59.5,
+    "currentTemp": 77.4,
     "weatherCode": 0,
     "forecast": [
       {
         "date": "2026-08-31",
-        "high": 64.3,
-        "low": 54.4,
-        "precipChance": 78,
-        "precipSum": 16.25
+        "high": 64.4,
+        "low": 52.4,
+        "precipChance": 46,
+        "precipSum": 18.7
       },
       {
         "date": "2026-09-01",
-        "high": 75.9,
-        "low": 54.6,
-        "precipChance": 41,
-        "precipSum": 0.0
+        "high": 74.8,
+        "low": 52.1,
+        "precipChance": 26,
+        "precipSum": 0.13
       },
       {
         "date": "2026-09-02",
         "high": 74.5,
-        "low": 56.1,
-        "precipChance": 24,
+        "low": 56.3,
+        "precipChance": 21,
         "precipSum": 0.0
       }
     ],
     "extendedForecast": [
       {
         "date": "2026-08-31",
-        "high": 64.3,
-        "low": 54.4,
-        "precipChance": 78
+        "high": 64.4,
+        "low": 52.4,
+        "precipChance": 46
       },
       {
         "date": "2026-09-01",
-        "high": 75.9,
-        "low": 54.6,
-        "precipChance": 41
+        "high": 74.8,
+        "low": 52.1,
+        "precipChance": 26
       },
       {
         "date": "2026-09-02",
         "high": 74.5,
-        "low": 56.1,
-        "precipChance": 24
+        "low": 56.3,
+        "precipChance": 21
       },
       {
         "date": "2026-09-03",
-        "high": 77.4,
-        "low": 56.3,
-        "precipChance": 14
+        "high": 76.5,
+        "low": 55.4,
+        "precipChance": 5
       },
       {
         "date": "2026-09-04",
-        "high": 74.8,
-        "low": 58.0,
-        "precipChance": 25
+        "high": 74.5,
+        "low": 57.6,
+        "precipChance": 15
       },
       {
         "date": "2026-09-05",
-        "high": 76.6,
-        "low": 56.5,
-        "precipChance": 30
+        "high": 69.6,
+        "low": 55.4,
+        "precipChance": 35
       },
       {
         "date": "2026-09-06",
-        "high": 78.3,
-        "low": 61.5,
+        "high": 74.5,
+        "low": 57.9,
         "precipChance": 31
       },
       {
         "date": "2026-09-07",
-        "high": 83.2,
-        "low": 63.5,
-        "precipChance": 28
+        "high": 73.5,
+        "low": 59.4,
+        "precipChance": 25
       },
       {
         "date": "2026-09-08",
-        "high": 84.1,
-        "low": 66.7,
-        "precipChance": 18
+        "high": 77.9,
+        "low": 60.7,
+        "precipChance": 16
       },
       {
         "date": "2026-09-09",
-        "high": 84.0,
-        "low": 62.8,
-        "precipChance": 13
+        "high": 79.2,
+        "low": 62.2,
+        "precipChance": 10
       }
     ]
   },
@@ -647,38 +647,43 @@
     "daily": [
       {
         "date": "2026-08-30",
-        "predictedCfs": 33.1,
+        "predictedCfs": 30.2,
         "status": "great"
       },
       {
         "date": "2026-08-31",
-        "predictedCfs": 53.7,
+        "predictedCfs": 54.2,
         "status": "good"
       },
       {
         "date": "2026-09-01",
-        "predictedCfs": 49.8,
-        "status": "great"
+        "predictedCfs": 65.0,
+        "status": "good"
       },
       {
         "date": "2026-09-02",
-        "predictedCfs": 39.3,
+        "predictedCfs": 30.5,
         "status": "great"
       },
       {
         "date": "2026-09-03",
-        "predictedCfs": 30.6,
+        "predictedCfs": 30.2,
         "status": "great"
       },
       {
         "date": "2026-09-04",
-        "predictedCfs": 30.6,
+        "predictedCfs": 35.4,
         "status": "great"
       },
       {
         "date": "2026-09-05",
-        "predictedCfs": 33.1,
-        "status": "great"
+        "predictedCfs": 88.6,
+        "status": "fair"
+      },
+      {
+        "date": "2026-09-06",
+        "predictedCfs": 141.9,
+        "status": "poor"
       }
     ]
   },
@@ -686,82 +691,82 @@
     {
       "date": "2026-08-30",
       "rating": "good",
-      "predictedCfs": 33.1,
+      "predictedCfs": 30.2,
       "high": null,
       "low": null,
       "precipChance": null
     },
     {
       "date": "2026-08-31",
-      "rating": "poor",
-      "predictedCfs": 53.7,
+      "rating": "fair",
+      "predictedCfs": 54.2,
       "high": 64,
-      "low": 54,
-      "precipChance": 78
+      "low": 52,
+      "precipChance": 46
     },
     {
       "date": "2026-09-01",
-      "rating": "fair",
-      "predictedCfs": 49.8,
-      "high": 76,
-      "low": 55,
-      "precipChance": 41
+      "rating": "good",
+      "predictedCfs": 65.0,
+      "high": 75,
+      "low": 52,
+      "precipChance": 26
     },
     {
       "date": "2026-09-02",
       "rating": "good",
-      "predictedCfs": 39.3,
+      "predictedCfs": 30.5,
       "high": 74,
       "low": 56,
-      "precipChance": 24
+      "precipChance": 21
     },
     {
       "date": "2026-09-03",
       "rating": "great",
-      "predictedCfs": 30.6,
-      "high": 77,
-      "low": 56,
-      "precipChance": 14
+      "predictedCfs": 30.2,
+      "high": 76,
+      "low": 55,
+      "precipChance": 5
     },
     {
       "date": "2026-09-04",
-      "rating": "good",
-      "predictedCfs": 30.6,
-      "high": 75,
+      "rating": "great",
+      "predictedCfs": 35.4,
+      "high": 74,
       "low": 58,
-      "precipChance": 25
+      "precipChance": 15
     },
     {
       "date": "2026-09-05",
-      "rating": "good",
-      "predictedCfs": 33.1,
-      "high": 77,
-      "low": 56,
-      "precipChance": 30
+      "rating": "fair",
+      "predictedCfs": 88.6,
+      "high": 70,
+      "low": 55,
+      "precipChance": 35
     },
     {
       "date": "2026-09-06",
-      "rating": "good",
-      "predictedCfs": null,
-      "high": 78,
-      "low": 62,
+      "rating": "poor",
+      "predictedCfs": 141.9,
+      "high": 74,
+      "low": 58,
       "precipChance": 31
     },
     {
       "date": "2026-09-07",
       "rating": "good",
       "predictedCfs": null,
-      "high": 83,
-      "low": 64,
-      "precipChance": 28
+      "high": 74,
+      "low": 59,
+      "precipChance": 25
     },
     {
       "date": "2026-09-08",
       "rating": "good",
       "predictedCfs": null,
-      "high": 84,
-      "low": 67,
-      "precipChance": 18
+      "high": 78,
+      "low": 61,
+      "precipChance": 16
     }
   ],
   "historical": {
@@ -1137,88 +1142,83 @@
   },
   "closureRisk": {
     "summary": {
-      "next10DayMax": 21.7,
+      "next10DayMax": 22.0,
       "label": "Moderate"
     },
     "daily": [
       {
         "date": "2026-08-31",
         "historical": 0.0,
-        "logistic": 52.0,
+        "logistic": 53.2,
         "gbm": 0.2,
-        "ensemble": 15.7
+        "ensemble": 16.1
       },
       {
         "date": "2026-09-01",
-        "historical": 8.6,
-        "logistic": 51.5,
+        "historical": 8.1,
+        "logistic": 52.6,
         "gbm": 0.2,
-        "ensemble": 17.3
+        "ensemble": 17.5
       },
       {
         "date": "2026-09-02",
-        "historical": 8.6,
-        "logistic": 50.9,
+        "historical": 8.1,
+        "logistic": 52.1,
         "gbm": 9.5,
-        "ensemble": 21.7
+        "ensemble": 22.0
       },
       {
         "date": "2026-09-03",
         "historical": 0.0,
-        "logistic": 50.4,
+        "logistic": 51.6,
         "gbm": 9.5,
-        "ensemble": 19.9
+        "ensemble": 20.2
       },
       {
         "date": "2026-09-04",
         "historical": 0.0,
-        "logistic": 49.8,
+        "logistic": 51.0,
         "gbm": 0.2,
-        "ensemble": 15.0
+        "ensemble": 15.4
       },
       {
         "date": "2026-09-05",
         "historical": 0.0,
-        "logistic": 49.3,
+        "logistic": 50.5,
         "gbm": 0.2,
-        "ensemble": 14.9
+        "ensemble": 15.2
       },
       {
         "date": "2026-09-06",
         "historical": 0.0,
-        "logistic": 48.7,
+        "logistic": 49.9,
         "gbm": 0.2,
-        "ensemble": 14.7
+        "ensemble": 15.1
       },
       {
         "date": "2026-09-07",
         "historical": 0.0,
-        "logistic": 48.2,
+        "logistic": 49.4,
         "gbm": 0.2,
-        "ensemble": 14.6
+        "ensemble": 14.9
       },
       {
         "date": "2026-09-08",
         "historical": 0.0,
-        "logistic": 47.7,
+        "logistic": 48.8,
         "gbm": 0.2,
-        "ensemble": 14.4
+        "ensemble": 14.7
       },
       {
         "date": "2026-09-09",
         "historical": 0.0,
-        "logistic": 47.1,
+        "logistic": 48.3,
         "gbm": 0.2,
-        "ensemble": 14.2
+        "ensemble": 14.6
       }
     ]
   },
   "closureRiskHistory": [
-    {
-      "timestamp": "2026-08-23T18:21:15.789586+00:00",
-      "peakEnsemble": 20.0,
-      "label": "Moderate"
-    },
     {
       "timestamp": "2026-08-24T06:47:24.106962+00:00",
       "peakEnsemble": 20.4,
@@ -1277,6 +1277,11 @@
     {
       "timestamp": "2026-08-30T11:07:15.725794+00:00",
       "peakEnsemble": 21.7,
+      "label": "Moderate"
+    },
+    {
+      "timestamp": "2026-08-30T20:26:41.655710+00:00",
+      "peakEnsemble": 22.0,
       "label": "Moderate"
     }
   ]
