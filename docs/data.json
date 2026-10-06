@@ -1,392 +1,416 @@
 {
   "status": "great",
-  "statusReason": "River flow is 40 CFS \u2014 Ideal conditions \u2014 easy rock-hopping, calm water",
-  "lastUpdated": "2026-10-06T12:39:00.431741+00:00",
+  "statusReason": "River flow is 38 CFS \u2014 Ideal conditions \u2014 easy rock-hopping, calm water",
+  "lastUpdated": "2026-10-06T22:13:39.452937+00:00",
   "river": {
-    "currentCfs": 39.7,
-    "gaugeHeight": 7.14,
+    "currentCfs": 38.3,
+    "gaugeHeight": 7.12,
     "trend": "stable",
     "history": [
       {
-        "timestamp": "2026-09-29T06:40:00.000-06:00",
-        "cfs": 65.5
+        "timestamp": "2026-09-29T18:00:00.000-06:00",
+        "cfs": 53.3
       },
       {
-        "timestamp": "2026-09-29T08:00:00.000-06:00",
-        "cfs": 61.5
-      },
-      {
-        "timestamp": "2026-09-30T16:00:00.000-06:00",
-        "cfs": 44.4
-      },
-      {
-        "timestamp": "2026-10-01T13:05:00.000-06:00",
+        "timestamp": "2026-10-01T02:00:00.000-06:00",
         "cfs": 42.7
       },
       {
-        "timestamp": "2026-10-01T14:25:00.000-06:00",
+        "timestamp": "2026-10-01T13:30:00.000-06:00",
         "cfs": 42.7
       },
       {
-        "timestamp": "2026-10-01T15:45:00.000-06:00",
+        "timestamp": "2026-10-01T14:50:00.000-06:00",
         "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-01T17:05:00.000-06:00",
+        "timestamp": "2026-10-01T16:10:00.000-06:00",
         "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-01T18:25:00.000-06:00",
+        "timestamp": "2026-10-01T17:30:00.000-06:00",
         "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-01T19:45:00.000-06:00",
+        "timestamp": "2026-10-01T18:50:00.000-06:00",
         "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-01T21:05:00.000-06:00",
+        "timestamp": "2026-10-01T20:10:00.000-06:00",
         "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-01T22:25:00.000-06:00",
+        "timestamp": "2026-10-01T21:30:00.000-06:00",
         "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-01T23:45:00.000-06:00",
+        "timestamp": "2026-10-01T22:50:00.000-06:00",
         "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-02T01:05:00.000-06:00",
+        "timestamp": "2026-10-02T00:10:00.000-06:00",
         "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-02T02:25:00.000-06:00",
-        "cfs": 41.2
-      },
-      {
-        "timestamp": "2026-10-02T03:45:00.000-06:00",
+        "timestamp": "2026-10-02T01:30:00.000-06:00",
         "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-02T05:05:00.000-06:00",
-        "cfs": 41.2
+        "timestamp": "2026-10-02T02:50:00.000-06:00",
+        "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-02T06:25:00.000-06:00",
-        "cfs": 41.2
+        "timestamp": "2026-10-02T04:10:00.000-06:00",
+        "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-02T07:45:00.000-06:00",
+        "timestamp": "2026-10-02T05:30:00.000-06:00",
+        "cfs": 41.9
+      },
+      {
+        "timestamp": "2026-10-02T06:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-02T09:05:00.000-06:00",
+        "timestamp": "2026-10-02T08:10:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-02T10:25:00.000-06:00",
+        "timestamp": "2026-10-02T09:30:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-02T11:45:00.000-06:00",
+        "timestamp": "2026-10-02T10:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-02T13:05:00.000-06:00",
+        "timestamp": "2026-10-02T12:10:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-02T14:25:00.000-06:00",
+        "timestamp": "2026-10-02T13:30:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-02T15:45:00.000-06:00",
+        "timestamp": "2026-10-02T14:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-02T17:05:00.000-06:00",
+        "timestamp": "2026-10-02T16:10:00.000-06:00",
+        "cfs": 39.7
+      },
+      {
+        "timestamp": "2026-10-02T17:30:00.000-06:00",
         "cfs": 39.0
       },
       {
-        "timestamp": "2026-10-02T18:25:00.000-06:00",
+        "timestamp": "2026-10-02T18:50:00.000-06:00",
         "cfs": 39.0
       },
       {
-        "timestamp": "2026-10-02T19:45:00.000-06:00",
+        "timestamp": "2026-10-02T20:10:00.000-06:00",
         "cfs": 39.0
       },
       {
-        "timestamp": "2026-10-02T21:05:00.000-06:00",
+        "timestamp": "2026-10-02T21:30:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-02T22:25:00.000-06:00",
+        "timestamp": "2026-10-02T22:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-02T23:45:00.000-06:00",
+        "timestamp": "2026-10-03T00:10:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-03T01:05:00.000-06:00",
+        "timestamp": "2026-10-03T01:30:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-03T02:25:00.000-06:00",
+        "timestamp": "2026-10-03T02:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-03T03:45:00.000-06:00",
+        "timestamp": "2026-10-03T04:10:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-03T05:05:00.000-06:00",
-        "cfs": 39.7
-      },
-      {
-        "timestamp": "2026-10-03T06:25:00.000-06:00",
-        "cfs": 39.7
-      },
-      {
-        "timestamp": "2026-10-03T07:45:00.000-06:00",
+        "timestamp": "2026-10-03T05:30:00.000-06:00",
         "cfs": 39.0
       },
       {
-        "timestamp": "2026-10-03T09:05:00.000-06:00",
+        "timestamp": "2026-10-03T06:50:00.000-06:00",
+        "cfs": 39.0
+      },
+      {
+        "timestamp": "2026-10-03T08:10:00.000-06:00",
+        "cfs": 39.7
+      },
+      {
+        "timestamp": "2026-10-03T09:30:00.000-06:00",
         "cfs": 41.2
       },
       {
-        "timestamp": "2026-10-03T10:25:00.000-06:00",
+        "timestamp": "2026-10-03T10:50:00.000-06:00",
         "cfs": 41.2
       },
       {
-        "timestamp": "2026-10-03T11:45:00.000-06:00",
+        "timestamp": "2026-10-03T12:10:00.000-06:00",
         "cfs": 41.2
       },
       {
-        "timestamp": "2026-10-03T13:05:00.000-06:00",
+        "timestamp": "2026-10-03T13:30:00.000-06:00",
         "cfs": 41.9
       },
       {
-        "timestamp": "2026-10-03T14:25:00.000-06:00",
-        "cfs": 41.9
-      },
-      {
-        "timestamp": "2026-10-03T15:45:00.000-06:00",
+        "timestamp": "2026-10-03T14:50:00.000-06:00",
         "cfs": 41.2
       },
       {
-        "timestamp": "2026-10-03T17:05:00.000-06:00",
+        "timestamp": "2026-10-03T16:10:00.000-06:00",
+        "cfs": 40.5
+      },
+      {
+        "timestamp": "2026-10-03T17:30:00.000-06:00",
         "cfs": 41.2
       },
       {
-        "timestamp": "2026-10-03T18:25:00.000-06:00",
+        "timestamp": "2026-10-03T18:50:00.000-06:00",
         "cfs": 40.5
       },
       {
-        "timestamp": "2026-10-03T19:45:00.000-06:00",
+        "timestamp": "2026-10-03T20:10:00.000-06:00",
+        "cfs": 40.5
+      },
+      {
+        "timestamp": "2026-10-03T21:30:00.000-06:00",
+        "cfs": 40.5
+      },
+      {
+        "timestamp": "2026-10-03T22:50:00.000-06:00",
         "cfs": 41.2
       },
       {
-        "timestamp": "2026-10-03T21:05:00.000-06:00",
+        "timestamp": "2026-10-04T00:10:00.000-06:00",
         "cfs": 40.5
       },
       {
-        "timestamp": "2026-10-03T22:25:00.000-06:00",
-        "cfs": 41.2
-      },
-      {
-        "timestamp": "2026-10-03T23:45:00.000-06:00",
+        "timestamp": "2026-10-04T01:30:00.000-06:00",
         "cfs": 40.5
       },
       {
-        "timestamp": "2026-10-04T01:05:00.000-06:00",
+        "timestamp": "2026-10-04T02:50:00.000-06:00",
         "cfs": 40.5
       },
       {
-        "timestamp": "2026-10-04T02:25:00.000-06:00",
+        "timestamp": "2026-10-04T04:10:00.000-06:00",
         "cfs": 40.5
       },
       {
-        "timestamp": "2026-10-04T03:45:00.000-06:00",
-        "cfs": 40.5
-      },
-      {
-        "timestamp": "2026-10-04T05:05:00.000-06:00",
-        "cfs": 40.5
-      },
-      {
-        "timestamp": "2026-10-04T06:25:00.000-06:00",
-        "cfs": 40.5
-      },
-      {
-        "timestamp": "2026-10-04T07:45:00.000-06:00",
-        "cfs": 40.5
-      },
-      {
-        "timestamp": "2026-10-04T09:05:00.000-06:00",
+        "timestamp": "2026-10-04T05:30:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-04T10:25:00.000-06:00",
+        "timestamp": "2026-10-04T06:50:00.000-06:00",
+        "cfs": 40.5
+      },
+      {
+        "timestamp": "2026-10-04T08:10:00.000-06:00",
+        "cfs": 40.5
+      },
+      {
+        "timestamp": "2026-10-04T09:30:00.000-06:00",
         "cfs": 38.3
       },
       {
-        "timestamp": "2026-10-04T11:45:00.000-06:00",
+        "timestamp": "2026-10-04T10:50:00.000-06:00",
         "cfs": 38.3
       },
       {
-        "timestamp": "2026-10-04T13:05:00.000-06:00",
+        "timestamp": "2026-10-04T12:10:00.000-06:00",
         "cfs": 38.3
       },
       {
-        "timestamp": "2026-10-04T14:25:00.000-06:00",
+        "timestamp": "2026-10-04T13:30:00.000-06:00",
         "cfs": 38.3
       },
       {
-        "timestamp": "2026-10-04T15:45:00.000-06:00",
+        "timestamp": "2026-10-04T14:50:00.000-06:00",
         "cfs": 38.3
       },
       {
-        "timestamp": "2026-10-04T17:05:00.000-06:00",
+        "timestamp": "2026-10-04T16:10:00.000-06:00",
         "cfs": 38.3
       },
       {
-        "timestamp": "2026-10-04T18:25:00.000-06:00",
+        "timestamp": "2026-10-04T17:30:00.000-06:00",
+        "cfs": 38.3
+      },
+      {
+        "timestamp": "2026-10-04T18:50:00.000-06:00",
         "cfs": 40.5
       },
       {
-        "timestamp": "2026-10-04T19:45:00.000-06:00",
+        "timestamp": "2026-10-04T20:10:00.000-06:00",
         "cfs": 40.5
       },
       {
-        "timestamp": "2026-10-04T21:05:00.000-06:00",
+        "timestamp": "2026-10-04T21:30:00.000-06:00",
         "cfs": 40.5
       },
       {
-        "timestamp": "2026-10-04T22:25:00.000-06:00",
+        "timestamp": "2026-10-04T22:50:00.000-06:00",
         "cfs": 40.5
       },
       {
-        "timestamp": "2026-10-04T23:45:00.000-06:00",
+        "timestamp": "2026-10-05T00:10:00.000-06:00",
         "cfs": 40.5
       },
       {
-        "timestamp": "2026-10-05T01:05:00.000-06:00",
+        "timestamp": "2026-10-05T01:30:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T02:25:00.000-06:00",
+        "timestamp": "2026-10-05T02:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T03:45:00.000-06:00",
+        "timestamp": "2026-10-05T04:10:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T05:05:00.000-06:00",
+        "timestamp": "2026-10-05T05:30:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T06:25:00.000-06:00",
+        "timestamp": "2026-10-05T06:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T07:45:00.000-06:00",
+        "timestamp": "2026-10-05T08:10:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T09:05:00.000-06:00",
+        "timestamp": "2026-10-05T09:30:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T10:25:00.000-06:00",
+        "timestamp": "2026-10-05T10:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T11:45:00.000-06:00",
+        "timestamp": "2026-10-05T12:10:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T13:05:00.000-06:00",
+        "timestamp": "2026-10-05T13:30:00.000-06:00",
+        "cfs": 38.3
+      },
+      {
+        "timestamp": "2026-10-05T14:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T14:25:00.000-06:00",
+        "timestamp": "2026-10-05T16:10:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T15:45:00.000-06:00",
+        "timestamp": "2026-10-05T17:30:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T17:05:00.000-06:00",
-        "cfs": 39.7
-      },
-      {
-        "timestamp": "2026-10-05T18:25:00.000-06:00",
+        "timestamp": "2026-10-05T18:50:00.000-06:00",
         "cfs": 39.0
       },
       {
-        "timestamp": "2026-10-05T19:45:00.000-06:00",
+        "timestamp": "2026-10-05T20:10:00.000-06:00",
         "cfs": 39.0
       },
       {
-        "timestamp": "2026-10-05T21:05:00.000-06:00",
+        "timestamp": "2026-10-05T21:30:00.000-06:00",
         "cfs": 39.0
       },
       {
-        "timestamp": "2026-10-05T22:25:00.000-06:00",
+        "timestamp": "2026-10-05T22:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-05T23:45:00.000-06:00",
+        "timestamp": "2026-10-06T00:10:00.000-06:00",
         "cfs": 39.0
       },
       {
-        "timestamp": "2026-10-06T01:05:00.000-06:00",
+        "timestamp": "2026-10-06T01:30:00.000-06:00",
+        "cfs": 39.0
+      },
+      {
+        "timestamp": "2026-10-06T02:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-06T02:25:00.000-06:00",
+        "timestamp": "2026-10-06T04:10:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-06T03:45:00.000-06:00",
+        "timestamp": "2026-10-06T05:30:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-06T05:05:00.000-06:00",
+        "timestamp": "2026-10-06T06:50:00.000-06:00",
         "cfs": 39.7
       },
       {
-        "timestamp": "2026-10-06T06:20:00.000-06:00",
-        "cfs": 39.7
+        "timestamp": "2026-10-06T08:10:00.000-06:00",
+        "cfs": 38.3
+      },
+      {
+        "timestamp": "2026-10-06T09:30:00.000-06:00",
+        "cfs": 37.6
+      },
+      {
+        "timestamp": "2026-10-06T10:50:00.000-06:00",
+        "cfs": 37.6
+      },
+      {
+        "timestamp": "2026-10-06T12:10:00.000-06:00",
+        "cfs": 38.3
+      },
+      {
+        "timestamp": "2026-10-06T13:30:00.000-06:00",
+        "cfs": 38.3
+      },
+      {
+        "timestamp": "2026-10-06T14:50:00.000-06:00",
+        "cfs": 38.3
+      },
+      {
+        "timestamp": "2026-10-06T15:50:00.000-06:00",
+        "cfs": 38.3
       }
     ]
   },
   "weather": {
-    "currentTemp": 53.5,
-    "weatherCode": 3,
+    "currentTemp": 73.8,
+    "weatherCode": 2,
     "forecast": [
       {
         "date": "2026-10-07",
-        "high": 74.6,
-        "low": 54.1,
+        "high": 75.7,
+        "low": 55.5,
         "precipChance": 4,
         "precipSum": 0.0
       },
       {
         "date": "2026-10-08",
         "high": 74.1,
-        "low": 57.7,
+        "low": 57.4,
         "precipChance": 1,
         "precipSum": 0.0
       },
       {
         "date": "2026-10-09",
-        "high": 73.2,
-        "low": 57.6,
+        "high": 72.9,
+        "low": 57.2,
         "precipChance": 1,
         "precipSum": 0.0
       }
@@ -394,80 +418,73 @@
     "extendedForecast": [
       {
         "date": "2026-10-07",
-        "high": 74.6,
-        "low": 54.1,
+        "high": 75.7,
+        "low": 55.5,
         "precipChance": 4
       },
       {
         "date": "2026-10-08",
         "high": 74.1,
-        "low": 57.7,
+        "low": 57.4,
         "precipChance": 1
       },
       {
         "date": "2026-10-09",
-        "high": 73.2,
-        "low": 57.6,
+        "high": 72.9,
+        "low": 57.2,
         "precipChance": 1
       },
       {
         "date": "2026-10-10",
-        "high": 68.7,
-        "low": 55.0,
-        "precipChance": 45
+        "high": 70.2,
+        "low": 55.4,
+        "precipChance": 54
       },
       {
         "date": "2026-10-11",
-        "high": 58.7,
-        "low": 49.4,
-        "precipChance": 55
+        "high": 61.3,
+        "low": 49.6,
+        "precipChance": 74
       },
       {
         "date": "2026-10-12",
-        "high": 61.2,
-        "low": 49.0,
-        "precipChance": 59
+        "high": 55.4,
+        "low": 48.2,
+        "precipChance": 69
       },
       {
         "date": "2026-10-13",
-        "high": 61.6,
-        "low": 51.8,
-        "precipChance": 33
+        "high": 57.8,
+        "low": 44.8,
+        "precipChance": 47
       },
       {
         "date": "2026-10-14",
-        "high": 62.9,
-        "low": 52.2,
-        "precipChance": 11
+        "high": 46.8,
+        "low": 39.3,
+        "precipChance": 24
       },
       {
         "date": "2026-10-15",
-        "high": 61.7,
-        "low": 43.6,
-        "precipChance": 5
+        "high": 54.6,
+        "low": 35.5,
+        "precipChance": 7
       },
       {
         "date": "2026-10-16",
-        "high": 58.4,
-        "low": 40.0,
-        "precipChance": 4
+        "high": 51.6,
+        "low": 32.9,
+        "precipChance": 9
       }
     ]
   },
   "alerts": [
     {
-      "title": "Zion-Mt. Carmel Highway closed from Canyon Junction to East Entrance",
-      "description": "The Zion-Mt. Carmel Highway is currently closed from Canyon Junction to the East Entrance. There will be no through traffic until further notice. Zion Canyon Scenic Drive remains open to shuttles and lodge guests.",
-      "category": "Park Closure",
-      "url": "",
-      "date": "Oct 05, 2026"
-    },
-    {
       "title": "Zion-Mt. Carmel Highway closed from Canyon Junction to Great Arch Pullout",
-      "description": "The Zion-Mt. Carmel Highway is currently closed from Canyon Junction to Great Arch Pullout to all pedestrian, bicycle, and vehicle traffic. Zion -Mt. Carmel Highway is open from East Entrance to Great Arch Pullout. There will be no through traffic until further notice.",
+      "description": "The Zion-Mt. Carmel Highway is currently closed from Canyon Junction to Great Arch Pullout to all pedestrian, bicycle, and vehicle traffic. Zion-Mt. Carmel Highway is open from East Entrance to Great Arch Pullout. There will be no through traffic until further notice.",
       "category": "Park Closure",
       "url": "",
-      "date": "Oct 05, 2026"
+      "date": "Oct 06, 2026"
     },
     {
       "title": "Watchman Trail closed",
@@ -509,38 +526,43 @@
     "daily": [
       {
         "date": "2026-10-06",
-        "predictedCfs": 38.0,
+        "predictedCfs": 37.3,
         "status": "great"
       },
       {
         "date": "2026-10-07",
-        "predictedCfs": 37.4,
+        "predictedCfs": 37.3,
         "status": "great"
       },
       {
         "date": "2026-10-08",
-        "predictedCfs": 37.3,
+        "predictedCfs": 36.7,
         "status": "great"
       },
       {
         "date": "2026-10-09",
-        "predictedCfs": 37.3,
+        "predictedCfs": 36.6,
         "status": "great"
       },
       {
         "date": "2026-10-10",
-        "predictedCfs": 36.9,
+        "predictedCfs": 37.9,
         "status": "great"
       },
       {
         "date": "2026-10-11",
-        "predictedCfs": 54.4,
-        "status": "good"
+        "predictedCfs": 123.5,
+        "status": "poor"
       },
       {
         "date": "2026-10-12",
-        "predictedCfs": 124.4,
-        "status": "poor"
+        "predictedCfs": 294.5,
+        "status": "closed"
+      },
+      {
+        "date": "2026-10-13",
+        "predictedCfs": 301.5,
+        "status": "closed"
       }
     ]
   },
@@ -548,7 +570,7 @@
     {
       "date": "2026-10-06",
       "rating": "good",
-      "predictedCfs": 38.0,
+      "predictedCfs": 37.3,
       "high": null,
       "low": null,
       "precipChance": null
@@ -556,74 +578,74 @@
     {
       "date": "2026-10-07",
       "rating": "great",
-      "predictedCfs": 37.4,
-      "high": 75,
-      "low": 54,
+      "predictedCfs": 37.3,
+      "high": 76,
+      "low": 56,
       "precipChance": 4
     },
     {
       "date": "2026-10-08",
       "rating": "great",
-      "predictedCfs": 37.3,
+      "predictedCfs": 36.7,
       "high": 74,
-      "low": 58,
+      "low": 57,
       "precipChance": 1
     },
     {
       "date": "2026-10-09",
       "rating": "great",
-      "predictedCfs": 37.3,
+      "predictedCfs": 36.6,
       "high": 73,
-      "low": 58,
+      "low": 57,
       "precipChance": 1
     },
     {
       "date": "2026-10-10",
       "rating": "fair",
-      "predictedCfs": 36.9,
-      "high": 69,
+      "predictedCfs": 37.9,
+      "high": 70,
       "low": 55,
-      "precipChance": 45
+      "precipChance": 54
     },
     {
       "date": "2026-10-11",
-      "rating": "fair",
-      "predictedCfs": 54.4,
-      "high": 59,
-      "low": 49,
-      "precipChance": 55
+      "rating": "poor",
+      "predictedCfs": 123.5,
+      "high": 61,
+      "low": 50,
+      "precipChance": 74
     },
     {
       "date": "2026-10-12",
-      "rating": "poor",
-      "predictedCfs": 124.4,
-      "high": 61,
-      "low": 49,
-      "precipChance": 59
+      "rating": "closed",
+      "predictedCfs": 294.5,
+      "high": 55,
+      "low": 48,
+      "precipChance": 69
     },
     {
       "date": "2026-10-13",
-      "rating": "good",
-      "predictedCfs": null,
-      "high": 62,
-      "low": 52,
-      "precipChance": 33
+      "rating": "closed",
+      "predictedCfs": 301.5,
+      "high": 58,
+      "low": 45,
+      "precipChance": 47
     },
     {
       "date": "2026-10-14",
       "rating": "good",
       "predictedCfs": null,
-      "high": 63,
-      "low": 52,
-      "precipChance": 11
+      "high": 47,
+      "low": 39,
+      "precipChance": 24
     },
     {
       "date": "2026-10-15",
       "rating": "good",
       "predictedCfs": null,
-      "high": 62,
-      "low": 44,
-      "precipChance": 5
+      "high": 55,
+      "low": 36,
+      "precipChance": 7
     }
   ],
   "historical": {
@@ -999,88 +1021,83 @@
   },
   "closureRisk": {
     "summary": {
-      "next10DayMax": 15.6,
+      "next10DayMax": 15.3,
       "label": "Moderate"
     },
     "daily": [
       {
         "date": "2026-10-07",
         "historical": 0.0,
-        "logistic": 33.8,
+        "logistic": 33.1,
         "gbm": 0.1,
-        "ensemble": 10.2
+        "ensemble": 10.0
       },
       {
         "date": "2026-10-08",
-        "historical": 9.3,
-        "logistic": 34.3,
+        "historical": 9.0,
+        "logistic": 33.6,
         "gbm": 0.1,
-        "ensemble": 12.2
+        "ensemble": 11.9
       },
       {
         "date": "2026-10-09",
         "historical": 0.0,
-        "logistic": 34.7,
+        "logistic": 34.0,
         "gbm": 9.3,
-        "ensemble": 15.1
+        "ensemble": 14.8
       },
       {
         "date": "2026-10-10",
         "historical": 0.0,
-        "logistic": 35.1,
+        "logistic": 34.5,
         "gbm": 0.2,
-        "ensemble": 10.6
+        "ensemble": 10.4
       },
       {
         "date": "2026-10-11",
-        "historical": 9.3,
-        "logistic": 35.6,
+        "historical": 9.0,
+        "logistic": 34.9,
         "gbm": 0.2,
-        "ensemble": 12.6
+        "ensemble": 12.4
       },
       {
         "date": "2026-10-12",
         "historical": 0.0,
-        "logistic": 36.0,
+        "logistic": 35.3,
         "gbm": 9.5,
-        "ensemble": 15.6
+        "ensemble": 15.3
       },
       {
         "date": "2026-10-13",
         "historical": 0.0,
-        "logistic": 36.5,
+        "logistic": 35.8,
         "gbm": 0.1,
-        "ensemble": 11.0
+        "ensemble": 10.8
       },
       {
         "date": "2026-10-14",
         "historical": 0.0,
-        "logistic": 36.9,
+        "logistic": 36.2,
         "gbm": 0.1,
-        "ensemble": 11.1
+        "ensemble": 10.9
       },
       {
         "date": "2026-10-15",
         "historical": 0.0,
-        "logistic": 37.4,
+        "logistic": 36.7,
         "gbm": 0.1,
-        "ensemble": 11.3
+        "ensemble": 11.1
       },
       {
         "date": "2026-10-16",
         "historical": 0.0,
-        "logistic": 37.8,
+        "logistic": 37.1,
         "gbm": 0.1,
-        "ensemble": 11.4
+        "ensemble": 11.2
       }
     ]
   },
   "closureRiskHistory": [
-    {
-      "timestamp": "2026-09-29T21:47:07.257856+00:00",
-      "peakEnsemble": 22.7,
-      "label": "Moderate"
-    },
     {
       "timestamp": "2026-09-30T11:49:26.901476+00:00",
       "peakEnsemble": 13.7,
@@ -1144,6 +1161,11 @@
     {
       "timestamp": "2026-10-06T12:39:00.432157+00:00",
       "peakEnsemble": 15.6,
+      "label": "Moderate"
+    },
+    {
+      "timestamp": "2026-10-06T22:13:39.453373+00:00",
+      "peakEnsemble": 15.3,
       "label": "Moderate"
     }
   ]
