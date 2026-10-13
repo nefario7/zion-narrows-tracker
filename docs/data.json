@@ -1,52 +1,12 @@
 {
   "status": "closed",
-  "statusReason": "River flow is 276 CFS \u2014 River flow too high \u2014 Narrows closed",
-  "lastUpdated": "2026-10-13T00:04:30.646569+00:00",
+  "statusReason": "River flow is 150 CFS \u2014 River flow too high \u2014 Narrows closed",
+  "lastUpdated": "2026-10-13T13:25:00.021207+00:00",
   "river": {
-    "currentCfs": 276.0,
-    "gaugeHeight": 8.67,
+    "currentCfs": 150.0,
+    "gaugeHeight": 8.06,
     "trend": "falling",
     "history": [
-      {
-        "timestamp": "2026-10-05T18:05:00.000-06:00",
-        "cfs": 39.7
-      },
-      {
-        "timestamp": "2026-10-05T19:25:00.000-06:00",
-        "cfs": 39.0
-      },
-      {
-        "timestamp": "2026-10-05T20:45:00.000-06:00",
-        "cfs": 39.0
-      },
-      {
-        "timestamp": "2026-10-05T22:05:00.000-06:00",
-        "cfs": 39.0
-      },
-      {
-        "timestamp": "2026-10-05T23:25:00.000-06:00",
-        "cfs": 39.7
-      },
-      {
-        "timestamp": "2026-10-06T00:45:00.000-06:00",
-        "cfs": 39.0
-      },
-      {
-        "timestamp": "2026-10-06T02:05:00.000-06:00",
-        "cfs": 39.7
-      },
-      {
-        "timestamp": "2026-10-06T03:25:00.000-06:00",
-        "cfs": 39.7
-      },
-      {
-        "timestamp": "2026-10-06T04:45:00.000-06:00",
-        "cfs": 39.7
-      },
-      {
-        "timestamp": "2026-10-06T06:05:00.000-06:00",
-        "cfs": 39.7
-      },
       {
         "timestamp": "2026-10-06T07:25:00.000-06:00",
         "cfs": 38.3
@@ -512,97 +472,137 @@
         "cfs": 384.0
       },
       {
-        "timestamp": "2026-10-12T17:50:00.000-06:00",
-        "cfs": 276.0
+        "timestamp": "2026-10-12T18:05:00.000-06:00",
+        "cfs": 261.0
+      },
+      {
+        "timestamp": "2026-10-12T19:25:00.000-06:00",
+        "cfs": 251.0
+      },
+      {
+        "timestamp": "2026-10-12T20:45:00.000-06:00",
+        "cfs": 188.0
+      },
+      {
+        "timestamp": "2026-10-12T22:05:00.000-06:00",
+        "cfs": 205.0
+      },
+      {
+        "timestamp": "2026-10-12T23:25:00.000-06:00",
+        "cfs": 239.0
+      },
+      {
+        "timestamp": "2026-10-13T00:45:00.000-06:00",
+        "cfs": 185.0
+      },
+      {
+        "timestamp": "2026-10-13T02:05:00.000-06:00",
+        "cfs": 183.0
+      },
+      {
+        "timestamp": "2026-10-13T03:25:00.000-06:00",
+        "cfs": 183.0
+      },
+      {
+        "timestamp": "2026-10-13T04:45:00.000-06:00",
+        "cfs": 168.0
+      },
+      {
+        "timestamp": "2026-10-13T06:05:00.000-06:00",
+        "cfs": 161.0
+      },
+      {
+        "timestamp": "2026-10-13T07:05:00.000-06:00",
+        "cfs": 150.0
       }
     ]
   },
   "weather": {
-    "currentTemp": 42.5,
-    "weatherCode": 63,
+    "currentTemp": 36.8,
+    "weatherCode": 2,
     "forecast": [
       {
-        "date": "2026-10-13",
-        "high": 40.1,
-        "low": 29.7,
-        "precipChance": 51,
-        "precipSum": 10.73
-      },
-      {
         "date": "2026-10-14",
-        "high": 52.2,
-        "low": 31.6,
-        "precipChance": 7,
+        "high": 45.4,
+        "low": 31.0,
+        "precipChance": 3,
         "precipSum": 0.0
       },
       {
         "date": "2026-10-15",
-        "high": 60.3,
-        "low": 39.4,
-        "precipChance": 2,
+        "high": 58.5,
+        "low": 39.2,
+        "precipChance": 0,
+        "precipSum": 0.0
+      },
+      {
+        "date": "2026-10-16",
+        "high": 58.5,
+        "low": 44.5,
+        "precipChance": 1,
         "precipSum": 0.0
       }
     ],
     "extendedForecast": [
       {
-        "date": "2026-10-13",
-        "high": 40.1,
-        "low": 29.7,
-        "precipChance": 51
-      },
-      {
         "date": "2026-10-14",
-        "high": 52.2,
-        "low": 31.6,
-        "precipChance": 7
+        "high": 45.4,
+        "low": 31.0,
+        "precipChance": 3
       },
       {
         "date": "2026-10-15",
-        "high": 60.3,
-        "low": 39.4,
-        "precipChance": 2
+        "high": 58.5,
+        "low": 39.2,
+        "precipChance": 0
       },
       {
         "date": "2026-10-16",
-        "high": 58.8,
+        "high": 58.5,
         "low": 44.5,
-        "precipChance": 5
+        "precipChance": 1
       },
       {
         "date": "2026-10-17",
-        "high": 59.5,
-        "low": 44.1,
-        "precipChance": 11
+        "high": 59.7,
+        "low": 43.9,
+        "precipChance": 2
       },
       {
         "date": "2026-10-18",
         "high": 59.4,
-        "low": 44.2,
+        "low": 42.8,
         "precipChance": 2
       },
       {
         "date": "2026-10-19",
-        "high": 61.0,
-        "low": 43.6,
-        "precipChance": 10
+        "high": 60.1,
+        "low": 43.2,
+        "precipChance": 7
       },
       {
         "date": "2026-10-20",
-        "high": 57.6,
-        "low": 43.7,
-        "precipChance": 34
+        "high": 50.4,
+        "low": 41.4,
+        "precipChance": 43
       },
       {
         "date": "2026-10-21",
-        "high": 45.1,
-        "low": 30.6,
-        "precipChance": 38
+        "high": 39.9,
+        "low": 31.5,
+        "precipChance": 47
       },
       {
         "date": "2026-10-22",
-        "high": 44.4,
-        "low": 27.2,
-        "precipChance": 21
+        "high": 45.1,
+        "low": 29.3,
+        "precipChance": 24
+      },
+      {
+        "date": "2026-10-23",
+        "high": 48.4,
+        "low": 32.1,
+        "precipChance": 8
       }
     ]
   },
@@ -654,7 +654,7 @@
     "daily": [
       {
         "date": "2026-10-13",
-        "predictedCfs": 352.3,
+        "predictedCfs": 177.7,
         "status": "closed"
       },
       {
@@ -693,34 +693,34 @@
     {
       "date": "2026-10-13",
       "rating": "closed",
-      "predictedCfs": 352.3,
-      "high": 40,
-      "low": 30,
-      "precipChance": 51
+      "predictedCfs": 177.7,
+      "high": null,
+      "low": null,
+      "precipChance": null
     },
     {
       "date": "2026-10-14",
       "rating": "good",
       "predictedCfs": 79.2,
-      "high": 52,
-      "low": 32,
-      "precipChance": 7
+      "high": 45,
+      "low": 31,
+      "precipChance": 3
     },
     {
       "date": "2026-10-15",
       "rating": "good",
       "predictedCfs": 69.0,
-      "high": 60,
+      "high": 58,
       "low": 39,
-      "precipChance": 2
+      "precipChance": 0
     },
     {
       "date": "2026-10-16",
       "rating": "good",
       "predictedCfs": 75.7,
-      "high": 59,
+      "high": 58,
       "low": 44,
-      "precipChance": 5
+      "precipChance": 1
     },
     {
       "date": "2026-10-17",
@@ -728,47 +728,47 @@
       "predictedCfs": 65.7,
       "high": 60,
       "low": 44,
-      "precipChance": 11
+      "precipChance": 2
     },
     {
       "date": "2026-10-18",
       "rating": "good",
       "predictedCfs": 58.0,
       "high": 59,
-      "low": 44,
+      "low": 43,
       "precipChance": 2
     },
     {
       "date": "2026-10-19",
       "rating": "good",
       "predictedCfs": 55.4,
-      "high": 61,
-      "low": 44,
-      "precipChance": 10
+      "high": 60,
+      "low": 43,
+      "precipChance": 7
     },
     {
       "date": "2026-10-20",
-      "rating": "good",
+      "rating": "fair",
       "predictedCfs": null,
-      "high": 58,
-      "low": 44,
-      "precipChance": 34
+      "high": 50,
+      "low": 41,
+      "precipChance": 43
     },
     {
       "date": "2026-10-21",
-      "rating": "good",
+      "rating": "fair",
       "predictedCfs": null,
-      "high": 45,
-      "low": 31,
-      "precipChance": 38
+      "high": 40,
+      "low": 32,
+      "precipChance": 47
     },
     {
       "date": "2026-10-22",
       "rating": "good",
       "predictedCfs": null,
-      "high": 44,
-      "low": 27,
-      "precipChance": 21
+      "high": 45,
+      "low": 29,
+      "precipChance": 24
     }
   ],
   "historical": {
@@ -842,9 +842,9 @@
       },
       {
         "monthDay": "10-12",
-        "medianCfs": 44.9,
+        "medianCfs": 45.3,
         "p25Cfs": 41.5,
-        "p75Cfs": 74.1
+        "p75Cfs": 81.9
       },
       {
         "monthDay": "10-13",
@@ -1144,88 +1144,83 @@
   },
   "closureRisk": {
     "summary": {
-      "next10DayMax": 29.8,
+      "next10DayMax": 29.2,
       "label": "Moderate"
     },
     "daily": [
       {
         "date": "2026-10-14",
         "historical": 0.0,
-        "logistic": 84.9,
+        "logistic": 83.5,
         "gbm": 0.1,
-        "ensemble": 25.5
+        "ensemble": 25.1
       },
       {
         "date": "2026-10-15",
         "historical": 0.0,
-        "logistic": 85.1,
+        "logistic": 83.5,
         "gbm": 0.1,
-        "ensemble": 25.6
+        "ensemble": 25.1
       },
       {
         "date": "2026-10-16",
         "historical": 0.0,
-        "logistic": 85.2,
+        "logistic": 83.6,
         "gbm": 0.1,
-        "ensemble": 25.6
+        "ensemble": 25.1
       },
       {
         "date": "2026-10-17",
         "historical": 0.0,
-        "logistic": 85.3,
+        "logistic": 83.7,
         "gbm": 0.1,
-        "ensemble": 25.6
+        "ensemble": 25.2
       },
       {
         "date": "2026-10-18",
         "historical": 0.0,
-        "logistic": 85.4,
+        "logistic": 83.7,
         "gbm": 0.1,
-        "ensemble": 25.7
+        "ensemble": 25.2
       },
       {
         "date": "2026-10-19",
         "historical": 0.0,
-        "logistic": 85.6,
+        "logistic": 83.8,
         "gbm": 0.1,
-        "ensemble": 25.7
+        "ensemble": 25.2
       },
       {
         "date": "2026-10-20",
         "historical": 0.0,
-        "logistic": 85.7,
+        "logistic": 83.8,
         "gbm": 0.1,
-        "ensemble": 25.8
+        "ensemble": 25.2
       },
       {
         "date": "2026-10-21",
         "historical": 0.0,
-        "logistic": 85.8,
+        "logistic": 83.9,
         "gbm": 0.1,
-        "ensemble": 25.8
+        "ensemble": 25.2
       },
       {
         "date": "2026-10-22",
         "historical": 0.0,
-        "logistic": 85.9,
+        "logistic": 84.0,
         "gbm": 0.1,
-        "ensemble": 25.8
+        "ensemble": 25.2
       },
       {
         "date": "2026-10-23",
         "historical": 20.0,
-        "logistic": 86.0,
+        "logistic": 84.0,
         "gbm": 0.1,
-        "ensemble": 29.8
+        "ensemble": 29.2
       }
     ]
   },
   "closureRiskHistory": [
-    {
-      "timestamp": "2026-10-06T12:39:00.432157+00:00",
-      "peakEnsemble": 15.6,
-      "label": "Moderate"
-    },
     {
       "timestamp": "2026-10-06T22:13:39.453373+00:00",
       "peakEnsemble": 15.3,
@@ -1289,6 +1284,11 @@
     {
       "timestamp": "2026-10-13T00:04:30.647004+00:00",
       "peakEnsemble": 29.8,
+      "label": "Moderate"
+    },
+    {
+      "timestamp": "2026-10-13T13:25:00.021599+00:00",
+      "peakEnsemble": 29.2,
       "label": "Moderate"
     }
   ]
