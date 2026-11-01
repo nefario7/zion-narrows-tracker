@@ -1,56 +1,12 @@
 {
-  "status": "poor",
-  "statusReason": "River flow is 144 CFS \u2014 Strong current, chest-deep water possible \u2014 experience required",
-  "lastUpdated": "2026-10-31T20:54:45.540395+00:00",
+  "status": "closed",
+  "statusReason": "River flow is 928 CFS \u2014 River flow too high \u2014 Narrows closed",
+  "lastUpdated": "2026-11-01T12:34:10.218912+00:00",
   "river": {
-    "currentCfs": 144.0,
-    "gaugeHeight": 8.02,
-    "trend": "falling",
+    "currentCfs": 928.0,
+    "gaugeHeight": 10.53,
+    "trend": "rising",
     "history": [
-      {
-        "timestamp": "2026-10-24T14:55:00.000-06:00",
-        "cfs": 72.8
-      },
-      {
-        "timestamp": "2026-10-24T16:15:00.000-06:00",
-        "cfs": 71.7
-      },
-      {
-        "timestamp": "2026-10-24T17:35:00.000-06:00",
-        "cfs": 71.7
-      },
-      {
-        "timestamp": "2026-10-24T18:55:00.000-06:00",
-        "cfs": 70.7
-      },
-      {
-        "timestamp": "2026-10-24T20:15:00.000-06:00",
-        "cfs": 69.6
-      },
-      {
-        "timestamp": "2026-10-24T21:35:00.000-06:00",
-        "cfs": 69.6
-      },
-      {
-        "timestamp": "2026-10-24T22:55:00.000-06:00",
-        "cfs": 69.6
-      },
-      {
-        "timestamp": "2026-10-25T00:15:00.000-06:00",
-        "cfs": 75.0
-      },
-      {
-        "timestamp": "2026-10-25T01:35:00.000-06:00",
-        "cfs": 75.0
-      },
-      {
-        "timestamp": "2026-10-25T02:55:00.000-06:00",
-        "cfs": 72.8
-      },
-      {
-        "timestamp": "2026-10-25T04:15:00.000-06:00",
-        "cfs": 69.6
-      },
       {
         "timestamp": "2026-10-25T05:35:00.000-06:00",
         "cfs": 69.6
@@ -512,108 +468,149 @@
         "cfs": 152.0
       },
       {
-        "timestamp": "2026-10-31T14:35:00.000-06:00",
-        "cfs": 144.0
+        "timestamp": "2026-10-31T14:55:00.000-06:00",
+        "cfs": 141.0
+      },
+      {
+        "timestamp": "2026-10-31T16:15:00.000-06:00",
+        "cfs": 141.0
+      },
+      {
+        "timestamp": "2026-10-31T17:35:00.000-06:00",
+        "cfs": 137.0
+      },
+      {
+        "timestamp": "2026-10-31T18:55:00.000-06:00",
+        "cfs": 129.0
+      },
+      {
+        "timestamp": "2026-10-31T20:15:00.000-06:00",
+        "cfs": 126.0
+      },
+      {
+        "timestamp": "2026-10-31T21:35:00.000-06:00",
+        "cfs": 141.0
+      },
+      {
+        "timestamp": "2026-10-31T22:55:00.000-06:00",
+        "cfs": 271.0
+      },
+      {
+        "timestamp": "2026-11-01T00:15:00.000-06:00",
+        "cfs": 209.0
+      },
+      {
+        "timestamp": "2026-11-01T01:35:00.000-06:00",
+        "cfs": 289.0
+      },
+      {
+        "timestamp": "2026-11-01T01:55:00.000-07:00",
+        "cfs": 375.0
+      },
+      {
+        "timestamp": "2026-11-01T03:15:00.000-07:00",
+        "cfs": 406.0
+      },
+      {
+        "timestamp": "2026-11-01T04:35:00.000-07:00",
+        "cfs": 807.0
+      },
+      {
+        "timestamp": "2026-11-01T05:20:00.000-07:00",
+        "cfs": 928.0
       }
     ]
   },
   "weather": {
-    "currentTemp": 47.7,
-    "weatherCode": 3,
+    "currentTemp": 43.2,
+    "weatherCode": 63,
     "forecast": [
       {
-        "date": "2026-11-01",
-        "high": 44.2,
-        "low": 36.0,
-        "precipChance": 94,
-        "precipSum": 68.2
-      },
-      {
         "date": "2026-11-02",
-        "high": 46.9,
-        "low": 34.3,
-        "precipChance": 39,
-        "precipSum": 6.8
+        "high": 46.6,
+        "low": 32.7,
+        "precipChance": 37,
+        "precipSum": 2.6
       },
       {
         "date": "2026-11-03",
-        "high": 51.7,
-        "low": 38.1,
+        "high": 51.3,
+        "low": 37.2,
+        "precipChance": 1,
+        "precipSum": 0.0
+      },
+      {
+        "date": "2026-11-04",
+        "high": 48.8,
+        "low": 33.8,
         "precipChance": 4,
         "precipSum": 0.0
       }
     ],
     "extendedForecast": [
       {
-        "date": "2026-11-01",
-        "high": 44.2,
-        "low": 36.0,
-        "precipChance": 94
-      },
-      {
         "date": "2026-11-02",
-        "high": 46.9,
-        "low": 34.3,
-        "precipChance": 39
+        "high": 46.6,
+        "low": 32.7,
+        "precipChance": 37
       },
       {
         "date": "2026-11-03",
-        "high": 51.7,
-        "low": 38.1,
-        "precipChance": 4
-      },
-      {
-        "date": "2026-11-04",
-        "high": 50.1,
-        "low": 35.6,
-        "precipChance": 6
-      },
-      {
-        "date": "2026-11-05",
-        "high": 49.5,
-        "low": 37.0,
+        "high": 51.3,
+        "low": 37.2,
         "precipChance": 1
       },
       {
+        "date": "2026-11-04",
+        "high": 48.8,
+        "low": 33.8,
+        "precipChance": 4
+      },
+      {
+        "date": "2026-11-05",
+        "high": 50.8,
+        "low": 37.0,
+        "precipChance": 0
+      },
+      {
         "date": "2026-11-06",
-        "high": 52.7,
-        "low": 38.5,
-        "precipChance": 6
+        "high": 53.4,
+        "low": 38.7,
+        "precipChance": 3
       },
       {
         "date": "2026-11-07",
         "high": 56.8,
-        "low": 40.6,
-        "precipChance": 4
+        "low": 40.0,
+        "precipChance": 2
       },
       {
         "date": "2026-11-08",
-        "high": 57.8,
-        "low": 41.7,
-        "precipChance": 0
-      },
-      {
-        "date": "2026-11-09",
-        "high": 55.4,
-        "low": 43.1,
+        "high": 55.5,
+        "low": 40.7,
         "precipChance": 1
       },
       {
+        "date": "2026-11-09",
+        "high": 54.4,
+        "low": 43.6,
+        "precipChance": 2
+      },
+      {
         "date": "2026-11-10",
-        "high": 52.3,
-        "low": 41.4,
-        "precipChance": 5
+        "high": 54.4,
+        "low": 41.9,
+        "precipChance": 6
+      },
+      {
+        "date": "2026-11-11",
+        "high": 57.3,
+        "low": 43.0,
+        "precipChance": 21
       }
     ]
   },
   "alerts": [
-    {
-      "title": "Narrows and All Slot Canyons in Zion National Park Closed",
-      "description": "The Narrows and all canyons in Zion National Park are CLOSED until further notice as a Public Safety Closure due to forecasted hazardous weather conditions about to impact the park.",
-      "category": "Park Closure",
-      "url": "",
-      "date": "Oct 30, 2026"
-    },
     {
       "title": "Watchman Trail closed",
       "description": "The Watchman Trail is closed pending repairs.",
@@ -653,13 +650,8 @@
   "forecast": {
     "daily": [
       {
-        "date": "2026-10-31",
-        "predictedCfs": 148.0,
-        "status": "poor"
-      },
-      {
         "date": "2026-11-01",
-        "predictedCfs": 558.8,
+        "predictedCfs": 1027.7,
         "status": "closed"
       },
       {
@@ -696,275 +688,89 @@
   },
   "hikeForecast": [
     {
-      "date": "2026-10-31",
-      "rating": "poor",
-      "predictedCfs": 148.0,
+      "date": "2026-11-01",
+      "rating": "closed",
+      "predictedCfs": 1027.7,
       "high": null,
       "low": null,
       "precipChance": null
-    },
-    {
-      "date": "2026-11-01",
-      "rating": "closed",
-      "predictedCfs": 558.8,
-      "high": 44,
-      "low": 36,
-      "precipChance": 94
     },
     {
       "date": "2026-11-02",
       "rating": "closed",
       "predictedCfs": 629.1,
       "high": 47,
-      "low": 34,
-      "precipChance": 39
+      "low": 33,
+      "precipChance": 37
     },
     {
       "date": "2026-11-03",
       "rating": "poor",
       "predictedCfs": 122.9,
-      "high": 52,
-      "low": 38,
-      "precipChance": 4
+      "high": 51,
+      "low": 37,
+      "precipChance": 1
     },
     {
       "date": "2026-11-04",
       "rating": "fair",
       "predictedCfs": 116.0,
-      "high": 50,
-      "low": 36,
-      "precipChance": 6
+      "high": 49,
+      "low": 34,
+      "precipChance": 4
     },
     {
       "date": "2026-11-05",
       "rating": "fair",
       "predictedCfs": 105.4,
-      "high": 50,
+      "high": 51,
       "low": 37,
-      "precipChance": 1
+      "precipChance": 0
     },
     {
       "date": "2026-11-06",
       "rating": "fair",
       "predictedCfs": 97.5,
       "high": 53,
-      "low": 38,
-      "precipChance": 6
+      "low": 39,
+      "precipChance": 3
     },
     {
       "date": "2026-11-07",
       "rating": "fair",
       "predictedCfs": 92.9,
       "high": 57,
-      "low": 41,
-      "precipChance": 4
+      "low": 40,
+      "precipChance": 2
     },
     {
       "date": "2026-11-08",
       "rating": "good",
       "predictedCfs": null,
-      "high": 58,
-      "low": 42,
-      "precipChance": 0
+      "high": 56,
+      "low": 41,
+      "precipChance": 1
     },
     {
       "date": "2026-11-09",
       "rating": "good",
       "predictedCfs": null,
-      "high": 55,
-      "low": 43,
-      "precipChance": 1
+      "high": 54,
+      "low": 44,
+      "precipChance": 2
+    },
+    {
+      "date": "2026-11-10",
+      "rating": "good",
+      "predictedCfs": null,
+      "high": 54,
+      "low": 42,
+      "precipChance": 6
     }
   ],
   "historical": {
-    "seasonalContext": "November typically sees 43-64 CFS due to spring snowmelt",
+    "seasonalContext": "December typically sees 57-69 CFS due to spring snowmelt",
     "dailyStats": [
-      {
-        "monthDay": "10-01",
-        "medianCfs": 44.8,
-        "p25Cfs": 36.6,
-        "p75Cfs": 51.4
-      },
-      {
-        "monthDay": "10-02",
-        "medianCfs": 45.2,
-        "p25Cfs": 36.2,
-        "p75Cfs": 50.8
-      },
-      {
-        "monthDay": "10-03",
-        "medianCfs": 44.9,
-        "p25Cfs": 37.1,
-        "p75Cfs": 66.1
-      },
-      {
-        "monthDay": "10-04",
-        "medianCfs": 41.6,
-        "p25Cfs": 36.3,
-        "p75Cfs": 52.1
-      },
-      {
-        "monthDay": "10-05",
-        "medianCfs": 43.2,
-        "p25Cfs": 36.4,
-        "p75Cfs": 48.7
-      },
-      {
-        "monthDay": "10-06",
-        "medianCfs": 40.6,
-        "p25Cfs": 37.0,
-        "p75Cfs": 47.2
-      },
-      {
-        "monthDay": "10-07",
-        "medianCfs": 41.3,
-        "p25Cfs": 36.1,
-        "p75Cfs": 47.5
-      },
-      {
-        "monthDay": "10-08",
-        "medianCfs": 43.7,
-        "p25Cfs": 36.8,
-        "p75Cfs": 48.6
-      },
-      {
-        "monthDay": "10-09",
-        "medianCfs": 45.1,
-        "p25Cfs": 41.0,
-        "p75Cfs": 60.1
-      },
-      {
-        "monthDay": "10-10",
-        "medianCfs": 45.7,
-        "p25Cfs": 42.6,
-        "p75Cfs": 50.7
-      },
-      {
-        "monthDay": "10-11",
-        "medianCfs": 45.8,
-        "p25Cfs": 42.0,
-        "p75Cfs": 72.8
-      },
-      {
-        "monthDay": "10-12",
-        "medianCfs": 45.3,
-        "p25Cfs": 41.5,
-        "p75Cfs": 81.9
-      },
-      {
-        "monthDay": "10-13",
-        "medianCfs": 43.4,
-        "p25Cfs": 40.3,
-        "p75Cfs": 48.8
-      },
-      {
-        "monthDay": "10-14",
-        "medianCfs": 43.0,
-        "p25Cfs": 38.3,
-        "p75Cfs": 48.4
-      },
-      {
-        "monthDay": "10-15",
-        "medianCfs": 42.3,
-        "p25Cfs": 37.7,
-        "p75Cfs": 56.3
-      },
-      {
-        "monthDay": "10-16",
-        "medianCfs": 44.3,
-        "p25Cfs": 38.6,
-        "p75Cfs": 51.3
-      },
-      {
-        "monthDay": "10-17",
-        "medianCfs": 44.2,
-        "p25Cfs": 38.8,
-        "p75Cfs": 46.4
-      },
-      {
-        "monthDay": "10-18",
-        "medianCfs": 43.9,
-        "p25Cfs": 41.2,
-        "p75Cfs": 50.1
-      },
-      {
-        "monthDay": "10-19",
-        "medianCfs": 42.3,
-        "p25Cfs": 40.2,
-        "p75Cfs": 45.8
-      },
-      {
-        "monthDay": "10-20",
-        "medianCfs": 42.2,
-        "p25Cfs": 40.4,
-        "p75Cfs": 46.0
-      },
-      {
-        "monthDay": "10-21",
-        "medianCfs": 42.8,
-        "p25Cfs": 40.7,
-        "p75Cfs": 51.5
-      },
-      {
-        "monthDay": "10-22",
-        "medianCfs": 45.1,
-        "p25Cfs": 39.3,
-        "p75Cfs": 51.7
-      },
-      {
-        "monthDay": "10-23",
-        "medianCfs": 43.0,
-        "p25Cfs": 40.5,
-        "p75Cfs": 74.9
-      },
-      {
-        "monthDay": "10-24",
-        "medianCfs": 42.1,
-        "p25Cfs": 41.2,
-        "p75Cfs": 53.7
-      },
-      {
-        "monthDay": "10-25",
-        "medianCfs": 49.9,
-        "p25Cfs": 38.7,
-        "p75Cfs": 55.5
-      },
-      {
-        "monthDay": "10-26",
-        "medianCfs": 45.2,
-        "p25Cfs": 39.4,
-        "p75Cfs": 61.4
-      },
-      {
-        "monthDay": "10-27",
-        "medianCfs": 43.1,
-        "p25Cfs": 39.5,
-        "p75Cfs": 49.4
-      },
-      {
-        "monthDay": "10-28",
-        "medianCfs": 45.2,
-        "p25Cfs": 39.3,
-        "p75Cfs": 56.0
-      },
-      {
-        "monthDay": "10-29",
-        "medianCfs": 44.6,
-        "p25Cfs": 40.7,
-        "p75Cfs": 53.6
-      },
-      {
-        "monthDay": "10-30",
-        "medianCfs": 44.6,
-        "p25Cfs": 41.6,
-        "p75Cfs": 64.4
-      },
-      {
-        "monthDay": "10-31",
-        "medianCfs": 43.6,
-        "p25Cfs": 41.4,
-        "p75Cfs": 51.9
-      },
       {
         "monthDay": "11-01",
         "medianCfs": 43.8,
@@ -1144,93 +950,274 @@
         "medianCfs": 60.5,
         "p25Cfs": 49.2,
         "p75Cfs": 64.6
+      },
+      {
+        "monthDay": "12-01",
+        "medianCfs": 60.7,
+        "p25Cfs": 52.4,
+        "p75Cfs": 62.9
+      },
+      {
+        "monthDay": "12-02",
+        "medianCfs": 61.8,
+        "p25Cfs": 48.3,
+        "p75Cfs": 68.1
+      },
+      {
+        "monthDay": "12-03",
+        "medianCfs": 60.3,
+        "p25Cfs": 45.2,
+        "p75Cfs": 67.4
+      },
+      {
+        "monthDay": "12-04",
+        "medianCfs": 61.3,
+        "p25Cfs": 43.2,
+        "p75Cfs": 67.2
+      },
+      {
+        "monthDay": "12-05",
+        "medianCfs": 60.0,
+        "p25Cfs": 44.3,
+        "p75Cfs": 65.9
+      },
+      {
+        "monthDay": "12-06",
+        "medianCfs": 60.7,
+        "p25Cfs": 47.3,
+        "p75Cfs": 67.1
+      },
+      {
+        "monthDay": "12-07",
+        "medianCfs": 60.2,
+        "p25Cfs": 47.9,
+        "p75Cfs": 65.7
+      },
+      {
+        "monthDay": "12-08",
+        "medianCfs": 59.8,
+        "p25Cfs": 45.7,
+        "p75Cfs": 63.4
+      },
+      {
+        "monthDay": "12-09",
+        "medianCfs": 60.4,
+        "p25Cfs": 52.4,
+        "p75Cfs": 63.9
+      },
+      {
+        "monthDay": "12-10",
+        "medianCfs": 57.1,
+        "p25Cfs": 52.0,
+        "p75Cfs": 64.2
+      },
+      {
+        "monthDay": "12-11",
+        "medianCfs": 58.0,
+        "p25Cfs": 45.2,
+        "p75Cfs": 68.0
+      },
+      {
+        "monthDay": "12-12",
+        "medianCfs": 57.5,
+        "p25Cfs": 43.3,
+        "p75Cfs": 64.8
+      },
+      {
+        "monthDay": "12-13",
+        "medianCfs": 59.2,
+        "p25Cfs": 42.9,
+        "p75Cfs": 64.1
+      },
+      {
+        "monthDay": "12-14",
+        "medianCfs": 57.5,
+        "p25Cfs": 52.1,
+        "p75Cfs": 59.8
+      },
+      {
+        "monthDay": "12-15",
+        "medianCfs": 60.2,
+        "p25Cfs": 52.5,
+        "p75Cfs": 66.1
+      },
+      {
+        "monthDay": "12-16",
+        "medianCfs": 57.5,
+        "p25Cfs": 44.2,
+        "p75Cfs": 64.6
+      },
+      {
+        "monthDay": "12-17",
+        "medianCfs": 58.2,
+        "p25Cfs": 45.2,
+        "p75Cfs": 70.0
+      },
+      {
+        "monthDay": "12-18",
+        "medianCfs": 59.7,
+        "p25Cfs": 44.5,
+        "p75Cfs": 64.3
+      },
+      {
+        "monthDay": "12-19",
+        "medianCfs": 59.3,
+        "p25Cfs": 44.6,
+        "p75Cfs": 60.1
+      },
+      {
+        "monthDay": "12-20",
+        "medianCfs": 60.0,
+        "p25Cfs": 43.2,
+        "p75Cfs": 62.3
+      },
+      {
+        "monthDay": "12-21",
+        "medianCfs": 60.0,
+        "p25Cfs": 44.5,
+        "p75Cfs": 66.0
+      },
+      {
+        "monthDay": "12-22",
+        "medianCfs": 60.4,
+        "p25Cfs": 45.7,
+        "p75Cfs": 64.2
+      },
+      {
+        "monthDay": "12-23",
+        "medianCfs": 62.5,
+        "p25Cfs": 60.2,
+        "p75Cfs": 83.6
+      },
+      {
+        "monthDay": "12-24",
+        "medianCfs": 67.1,
+        "p25Cfs": 58.4,
+        "p75Cfs": 103.0
+      },
+      {
+        "monthDay": "12-25",
+        "medianCfs": 68.7,
+        "p25Cfs": 52.9,
+        "p75Cfs": 94.2
+      },
+      {
+        "monthDay": "12-26",
+        "medianCfs": 68.2,
+        "p25Cfs": 54.6,
+        "p75Cfs": 71.8
+      },
+      {
+        "monthDay": "12-27",
+        "medianCfs": 63.0,
+        "p25Cfs": 56.4,
+        "p75Cfs": 69.3
+      },
+      {
+        "monthDay": "12-28",
+        "medianCfs": 63.5,
+        "p25Cfs": 59.5,
+        "p75Cfs": 74.3
+      },
+      {
+        "monthDay": "12-29",
+        "medianCfs": 59.8,
+        "p25Cfs": 57.3,
+        "p75Cfs": 65.9
+      },
+      {
+        "monthDay": "12-30",
+        "medianCfs": 59.0,
+        "p25Cfs": 52.8,
+        "p75Cfs": 67.6
+      },
+      {
+        "monthDay": "12-31",
+        "medianCfs": 62.4,
+        "p25Cfs": 53.2,
+        "p75Cfs": 84.5
       }
     ]
   },
   "closureRisk": {
     "summary": {
-      "next10DayMax": 18.7,
+      "next10DayMax": 34.7,
       "label": "Moderate"
     },
     "daily": [
       {
-        "date": "2026-11-01",
-        "historical": 0.0,
-        "logistic": 47.4,
-        "gbm": 0.2,
-        "ensemble": 14.3
-      },
-      {
         "date": "2026-11-02",
         "historical": 0.0,
-        "logistic": 47.5,
-        "gbm": 0.2,
-        "ensemble": 14.4
+        "logistic": 100.0,
+        "gbm": 0.1,
+        "ensemble": 30.0
       },
       {
         "date": "2026-11-03",
         "historical": 0.0,
-        "logistic": 47.6,
-        "gbm": 0.2,
-        "ensemble": 14.4
+        "logistic": 100.0,
+        "gbm": 0.1,
+        "ensemble": 30.0
       },
       {
         "date": "2026-11-04",
         "historical": 0.0,
-        "logistic": 47.7,
-        "gbm": 0.2,
-        "ensemble": 14.4
+        "logistic": 100.0,
+        "gbm": 0.1,
+        "ensemble": 30.0
       },
       {
         "date": "2026-11-05",
         "historical": 0.0,
-        "logistic": 47.8,
-        "gbm": 0.2,
-        "ensemble": 14.4
+        "logistic": 100.0,
+        "gbm": 0.1,
+        "ensemble": 30.0
       },
       {
         "date": "2026-11-06",
         "historical": 0.0,
-        "logistic": 47.9,
-        "gbm": 0.2,
-        "ensemble": 14.5
+        "logistic": 100.0,
+        "gbm": 0.1,
+        "ensemble": 30.0
       },
       {
         "date": "2026-11-07",
         "historical": 0.0,
-        "logistic": 48.0,
-        "gbm": 0.2,
-        "ensemble": 14.5
+        "logistic": 100.0,
+        "gbm": 0.1,
+        "ensemble": 30.0
       },
       {
         "date": "2026-11-08",
         "historical": 0.0,
-        "logistic": 48.1,
-        "gbm": 0.2,
-        "ensemble": 14.5
+        "logistic": 100.0,
+        "gbm": 0.1,
+        "ensemble": 30.0
       },
       {
         "date": "2026-11-09",
         "historical": 20.0,
-        "logistic": 48.2,
-        "gbm": 0.2,
-        "ensemble": 18.6
+        "logistic": 100.0,
+        "gbm": 0.1,
+        "ensemble": 34.0
       },
       {
         "date": "2026-11-10",
         "historical": 0.0,
-        "logistic": 48.3,
-        "gbm": 8.5,
-        "ensemble": 18.7
+        "logistic": 100.0,
+        "gbm": 9.4,
+        "ensemble": 34.7
+      },
+      {
+        "date": "2026-11-11",
+        "historical": 0.0,
+        "logistic": 100.0,
+        "gbm": 0.1,
+        "ensemble": 30.0
       }
     ]
   },
   "closureRiskHistory": [
-    {
-      "timestamp": "2026-10-25T10:35:31.267816+00:00",
-      "peakEnsemble": 16.8,
-      "label": "Moderate"
-    },
     {
       "timestamp": "2026-10-25T20:18:36.253257+00:00",
       "peakEnsemble": 16.7,
@@ -1294,6 +1281,11 @@
     {
       "timestamp": "2026-10-31T20:54:45.540814+00:00",
       "peakEnsemble": 18.7,
+      "label": "Moderate"
+    },
+    {
+      "timestamp": "2026-11-01T12:34:10.219349+00:00",
+      "peakEnsemble": 34.7,
       "label": "Moderate"
     }
   ]
