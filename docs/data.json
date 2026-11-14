@@ -1,653 +1,533 @@
 {
-  "status": "fair",
-  "statusReason": "River flow is 84 CFS \u2014 Waist-deep sections, moderate current \u2014 use a walking stick",
-  "lastUpdated": "2026-11-13T23:10:11.200616+00:00",
+  "status": "closed",
+  "statusReason": "River flow is 642 CFS \u2014 River flow too high \u2014 Narrows closed",
+  "lastUpdated": "2026-11-14T12:54:19.441638+00:00",
   "river": {
-    "currentCfs": 84.3,
-    "gaugeHeight": 7.61,
+    "currentCfs": 642.0,
+    "gaugeHeight": 9.89,
     "trend": "stable",
     "history": [
       {
-        "timestamp": "2026-11-06T16:15:00.000-07:00",
-        "cfs": 136.0
-      },
-      {
-        "timestamp": "2026-11-06T17:35:00.000-07:00",
-        "cfs": 132.0
-      },
-      {
-        "timestamp": "2026-11-06T18:55:00.000-07:00",
-        "cfs": 134.0
-      },
-      {
-        "timestamp": "2026-11-06T20:15:00.000-07:00",
-        "cfs": 132.0
-      },
-      {
-        "timestamp": "2026-11-06T21:35:00.000-07:00",
-        "cfs": 131.0
-      },
-      {
-        "timestamp": "2026-11-06T22:55:00.000-07:00",
-        "cfs": 131.0
-      },
-      {
-        "timestamp": "2026-11-07T00:15:00.000-07:00",
-        "cfs": 129.0
-      },
-      {
-        "timestamp": "2026-11-07T01:35:00.000-07:00",
-        "cfs": 129.0
-      },
-      {
-        "timestamp": "2026-11-07T02:55:00.000-07:00",
-        "cfs": 127.0
-      },
-      {
-        "timestamp": "2026-11-07T04:15:00.000-07:00",
-        "cfs": 126.0
-      },
-      {
-        "timestamp": "2026-11-07T05:35:00.000-07:00",
+        "timestamp": "2026-11-07T05:55:00.000-07:00",
         "cfs": 124.0
       },
       {
-        "timestamp": "2026-11-07T06:55:00.000-07:00",
+        "timestamp": "2026-11-07T07:15:00.000-07:00",
         "cfs": 124.0
       },
       {
-        "timestamp": "2026-11-07T08:15:00.000-07:00",
+        "timestamp": "2026-11-07T08:35:00.000-07:00",
         "cfs": 124.0
       },
       {
-        "timestamp": "2026-11-07T09:35:00.000-07:00",
-        "cfs": 121.0
-      },
-      {
-        "timestamp": "2026-11-07T10:55:00.000-07:00",
+        "timestamp": "2026-11-07T09:55:00.000-07:00",
         "cfs": 120.0
       },
       {
-        "timestamp": "2026-11-07T12:15:00.000-07:00",
+        "timestamp": "2026-11-07T11:15:00.000-07:00",
         "cfs": 120.0
       },
       {
-        "timestamp": "2026-11-07T13:35:00.000-07:00",
+        "timestamp": "2026-11-07T12:35:00.000-07:00",
+        "cfs": 120.0
+      },
+      {
+        "timestamp": "2026-11-07T13:55:00.000-07:00",
         "cfs": 118.0
       },
       {
-        "timestamp": "2026-11-07T14:55:00.000-07:00",
+        "timestamp": "2026-11-07T15:15:00.000-07:00",
         "cfs": 118.0
       },
       {
-        "timestamp": "2026-11-07T16:15:00.000-07:00",
+        "timestamp": "2026-11-07T16:35:00.000-07:00",
         "cfs": 117.0
       },
       {
-        "timestamp": "2026-11-07T17:35:00.000-07:00",
+        "timestamp": "2026-11-07T17:55:00.000-07:00",
         "cfs": 117.0
       },
       {
-        "timestamp": "2026-11-07T18:55:00.000-07:00",
+        "timestamp": "2026-11-07T19:15:00.000-07:00",
         "cfs": 117.0
       },
       {
-        "timestamp": "2026-11-07T20:15:00.000-07:00",
+        "timestamp": "2026-11-07T20:35:00.000-07:00",
         "cfs": 115.0
       },
       {
-        "timestamp": "2026-11-07T21:35:00.000-07:00",
-        "cfs": 115.0
-      },
-      {
-        "timestamp": "2026-11-07T22:55:00.000-07:00",
+        "timestamp": "2026-11-07T21:55:00.000-07:00",
         "cfs": 114.0
       },
       {
-        "timestamp": "2026-11-08T00:15:00.000-07:00",
+        "timestamp": "2026-11-07T23:15:00.000-07:00",
+        "cfs": 114.0
+      },
+      {
+        "timestamp": "2026-11-08T00:35:00.000-07:00",
         "cfs": 112.0
       },
       {
-        "timestamp": "2026-11-08T01:35:00.000-07:00",
+        "timestamp": "2026-11-08T01:55:00.000-07:00",
         "cfs": 112.0
       },
       {
-        "timestamp": "2026-11-08T02:55:00.000-07:00",
-        "cfs": 111.0
-      },
-      {
-        "timestamp": "2026-11-08T04:15:00.000-07:00",
+        "timestamp": "2026-11-08T03:15:00.000-07:00",
         "cfs": 112.0
       },
       {
-        "timestamp": "2026-11-08T05:35:00.000-07:00",
+        "timestamp": "2026-11-08T04:35:00.000-07:00",
         "cfs": 111.0
       },
       {
-        "timestamp": "2026-11-08T06:55:00.000-07:00",
+        "timestamp": "2026-11-08T05:55:00.000-07:00",
+        "cfs": 111.0
+      },
+      {
+        "timestamp": "2026-11-08T07:15:00.000-07:00",
         "cfs": 112.0
       },
       {
-        "timestamp": "2026-11-08T08:15:00.000-07:00",
+        "timestamp": "2026-11-08T08:35:00.000-07:00",
+        "cfs": 112.0
+      },
+      {
+        "timestamp": "2026-11-08T09:55:00.000-07:00",
         "cfs": 111.0
       },
       {
-        "timestamp": "2026-11-08T09:35:00.000-07:00",
+        "timestamp": "2026-11-08T11:15:00.000-07:00",
         "cfs": 111.0
       },
       {
-        "timestamp": "2026-11-08T10:55:00.000-07:00",
+        "timestamp": "2026-11-08T12:35:00.000-07:00",
         "cfs": 111.0
       },
       {
-        "timestamp": "2026-11-08T12:15:00.000-07:00",
+        "timestamp": "2026-11-08T13:55:00.000-07:00",
         "cfs": 111.0
       },
       {
-        "timestamp": "2026-11-08T13:35:00.000-07:00",
+        "timestamp": "2026-11-08T15:15:00.000-07:00",
         "cfs": 111.0
       },
       {
-        "timestamp": "2026-11-08T14:55:00.000-07:00",
-        "cfs": 111.0
-      },
-      {
-        "timestamp": "2026-11-08T16:15:00.000-07:00",
+        "timestamp": "2026-11-08T16:35:00.000-07:00",
         "cfs": 109.0
       },
       {
-        "timestamp": "2026-11-08T17:35:00.000-07:00",
+        "timestamp": "2026-11-08T17:55:00.000-07:00",
         "cfs": 109.0
       },
       {
-        "timestamp": "2026-11-08T18:55:00.000-07:00",
-        "cfs": 109.0
-      },
-      {
-        "timestamp": "2026-11-08T20:15:00.000-07:00",
+        "timestamp": "2026-11-08T19:15:00.000-07:00",
         "cfs": 108.0
       },
       {
-        "timestamp": "2026-11-08T21:35:00.000-07:00",
+        "timestamp": "2026-11-08T20:35:00.000-07:00",
         "cfs": 108.0
       },
       {
-        "timestamp": "2026-11-08T22:55:00.000-07:00",
+        "timestamp": "2026-11-08T21:55:00.000-07:00",
         "cfs": 106.0
       },
       {
-        "timestamp": "2026-11-09T00:15:00.000-07:00",
-        "cfs": 105.0
-      },
-      {
-        "timestamp": "2026-11-09T01:35:00.000-07:00",
+        "timestamp": "2026-11-08T23:15:00.000-07:00",
         "cfs": 106.0
       },
       {
-        "timestamp": "2026-11-09T02:55:00.000-07:00",
+        "timestamp": "2026-11-09T00:35:00.000-07:00",
         "cfs": 106.0
       },
       {
-        "timestamp": "2026-11-09T04:15:00.000-07:00",
+        "timestamp": "2026-11-09T01:55:00.000-07:00",
         "cfs": 105.0
       },
       {
-        "timestamp": "2026-11-09T05:35:00.000-07:00",
+        "timestamp": "2026-11-09T03:15:00.000-07:00",
+        "cfs": 106.0
+      },
+      {
+        "timestamp": "2026-11-09T04:35:00.000-07:00",
         "cfs": 105.0
       },
       {
-        "timestamp": "2026-11-09T06:55:00.000-07:00",
+        "timestamp": "2026-11-09T05:55:00.000-07:00",
         "cfs": 105.0
       },
       {
-        "timestamp": "2026-11-09T08:15:00.000-07:00",
+        "timestamp": "2026-11-09T07:15:00.000-07:00",
         "cfs": 104.0
       },
       {
-        "timestamp": "2026-11-09T09:35:00.000-07:00",
+        "timestamp": "2026-11-09T08:35:00.000-07:00",
+        "cfs": 105.0
+      },
+      {
+        "timestamp": "2026-11-09T09:55:00.000-07:00",
         "cfs": 104.0
       },
       {
-        "timestamp": "2026-11-09T10:55:00.000-07:00",
+        "timestamp": "2026-11-09T11:15:00.000-07:00",
         "cfs": 104.0
       },
       {
-        "timestamp": "2026-11-09T12:15:00.000-07:00",
+        "timestamp": "2026-11-09T12:35:00.000-07:00",
         "cfs": 104.0
       },
       {
-        "timestamp": "2026-11-09T13:35:00.000-07:00",
+        "timestamp": "2026-11-09T13:55:00.000-07:00",
         "cfs": 104.0
       },
       {
-        "timestamp": "2026-11-09T14:55:00.000-07:00",
+        "timestamp": "2026-11-09T15:15:00.000-07:00",
+        "cfs": 104.0
+      },
+      {
+        "timestamp": "2026-11-09T16:35:00.000-07:00",
         "cfs": 102.0
       },
       {
-        "timestamp": "2026-11-09T16:15:00.000-07:00",
-        "cfs": 104.0
-      },
-      {
-        "timestamp": "2026-11-09T17:35:00.000-07:00",
-        "cfs": 102.0
-      },
-      {
-        "timestamp": "2026-11-09T18:55:00.000-07:00",
-        "cfs": 102.0
-      },
-      {
-        "timestamp": "2026-11-09T20:15:00.000-07:00",
-        "cfs": 102.0
-      },
-      {
-        "timestamp": "2026-11-09T21:35:00.000-07:00",
+        "timestamp": "2026-11-09T17:55:00.000-07:00",
         "cfs": 101.0
       },
       {
-        "timestamp": "2026-11-09T22:55:00.000-07:00",
+        "timestamp": "2026-11-09T19:15:00.000-07:00",
+        "cfs": 102.0
+      },
+      {
+        "timestamp": "2026-11-09T20:35:00.000-07:00",
         "cfs": 101.0
       },
       {
-        "timestamp": "2026-11-10T00:15:00.000-07:00",
+        "timestamp": "2026-11-09T21:55:00.000-07:00",
         "cfs": 101.0
       },
       {
-        "timestamp": "2026-11-10T01:35:00.000-07:00",
+        "timestamp": "2026-11-09T23:15:00.000-07:00",
+        "cfs": 101.0
+      },
+      {
+        "timestamp": "2026-11-10T00:35:00.000-07:00",
         "cfs": 99.5
       },
       {
-        "timestamp": "2026-11-10T02:55:00.000-07:00",
+        "timestamp": "2026-11-10T01:55:00.000-07:00",
         "cfs": 99.5
       },
       {
-        "timestamp": "2026-11-10T04:15:00.000-07:00",
+        "timestamp": "2026-11-10T03:15:00.000-07:00",
         "cfs": 98.2
       },
       {
-        "timestamp": "2026-11-10T05:35:00.000-07:00",
+        "timestamp": "2026-11-10T04:35:00.000-07:00",
+        "cfs": 99.5
+      },
+      {
+        "timestamp": "2026-11-10T05:55:00.000-07:00",
         "cfs": 98.2
       },
       {
-        "timestamp": "2026-11-10T06:55:00.000-07:00",
+        "timestamp": "2026-11-10T07:15:00.000-07:00",
         "cfs": 95.5
       },
       {
-        "timestamp": "2026-11-10T08:15:00.000-07:00",
+        "timestamp": "2026-11-10T08:35:00.000-07:00",
         "cfs": 95.5
       },
       {
-        "timestamp": "2026-11-10T09:35:00.000-07:00",
+        "timestamp": "2026-11-10T09:55:00.000-07:00",
         "cfs": 94.2
       },
       {
-        "timestamp": "2026-11-10T10:55:00.000-07:00",
+        "timestamp": "2026-11-10T11:15:00.000-07:00",
         "cfs": 94.2
       },
       {
-        "timestamp": "2026-11-10T12:15:00.000-07:00",
+        "timestamp": "2026-11-10T12:35:00.000-07:00",
         "cfs": 94.2
       },
       {
-        "timestamp": "2026-11-10T13:35:00.000-07:00",
+        "timestamp": "2026-11-10T13:55:00.000-07:00",
         "cfs": 94.2
       },
       {
-        "timestamp": "2026-11-10T14:55:00.000-07:00",
-        "cfs": 94.2
-      },
-      {
-        "timestamp": "2026-11-10T16:15:00.000-07:00",
+        "timestamp": "2026-11-10T15:15:00.000-07:00",
         "cfs": 93.0
       },
       {
-        "timestamp": "2026-11-10T17:35:00.000-07:00",
+        "timestamp": "2026-11-10T16:35:00.000-07:00",
         "cfs": 93.0
       },
       {
-        "timestamp": "2026-11-10T18:55:00.000-07:00",
+        "timestamp": "2026-11-10T17:55:00.000-07:00",
         "cfs": 93.0
       },
       {
-        "timestamp": "2026-11-10T20:15:00.000-07:00",
+        "timestamp": "2026-11-10T19:15:00.000-07:00",
         "cfs": 93.0
       },
       {
-        "timestamp": "2026-11-10T21:35:00.000-07:00",
-        "cfs": 94.2
-      },
-      {
-        "timestamp": "2026-11-10T22:55:00.000-07:00",
-        "cfs": 94.2
-      },
-      {
-        "timestamp": "2026-11-11T00:15:00.000-07:00",
-        "cfs": 93.0
-      },
-      {
-        "timestamp": "2026-11-11T01:35:00.000-07:00",
-        "cfs": 93.0
-      },
-      {
-        "timestamp": "2026-11-11T02:55:00.000-07:00",
+        "timestamp": "2026-11-10T20:35:00.000-07:00",
         "cfs": 91.7
       },
       {
-        "timestamp": "2026-11-11T04:15:00.000-07:00",
+        "timestamp": "2026-11-10T21:55:00.000-07:00",
+        "cfs": 94.2
+      },
+      {
+        "timestamp": "2026-11-10T23:15:00.000-07:00",
+        "cfs": 93.0
+      },
+      {
+        "timestamp": "2026-11-11T00:35:00.000-07:00",
+        "cfs": 93.0
+      },
+      {
+        "timestamp": "2026-11-11T01:55:00.000-07:00",
+        "cfs": 93.0
+      },
+      {
+        "timestamp": "2026-11-11T03:15:00.000-07:00",
+        "cfs": 93.0
+      },
+      {
+        "timestamp": "2026-11-11T04:35:00.000-07:00",
         "cfs": 91.7
       },
       {
-        "timestamp": "2026-11-11T05:35:00.000-07:00",
+        "timestamp": "2026-11-11T05:55:00.000-07:00",
         "cfs": 91.7
       },
       {
-        "timestamp": "2026-11-11T06:55:00.000-07:00",
+        "timestamp": "2026-11-11T07:15:00.000-07:00",
         "cfs": 91.7
       },
       {
-        "timestamp": "2026-11-11T08:15:00.000-07:00",
+        "timestamp": "2026-11-11T08:35:00.000-07:00",
         "cfs": 91.7
       },
       {
-        "timestamp": "2026-11-11T09:35:00.000-07:00",
+        "timestamp": "2026-11-11T09:55:00.000-07:00",
         "cfs": 90.4
       },
       {
-        "timestamp": "2026-11-11T10:55:00.000-07:00",
+        "timestamp": "2026-11-11T11:15:00.000-07:00",
         "cfs": 90.4
       },
       {
-        "timestamp": "2026-11-11T12:15:00.000-07:00",
+        "timestamp": "2026-11-11T12:35:00.000-07:00",
         "cfs": 91.7
       },
       {
-        "timestamp": "2026-11-11T13:35:00.000-07:00",
+        "timestamp": "2026-11-11T13:55:00.000-07:00",
         "cfs": 90.4
       },
       {
-        "timestamp": "2026-11-11T14:55:00.000-07:00",
+        "timestamp": "2026-11-11T15:15:00.000-07:00",
         "cfs": 90.4
       },
       {
-        "timestamp": "2026-11-11T16:15:00.000-07:00",
+        "timestamp": "2026-11-11T16:35:00.000-07:00",
+        "cfs": 90.4
+      },
+      {
+        "timestamp": "2026-11-11T17:55:00.000-07:00",
+        "cfs": 90.4
+      },
+      {
+        "timestamp": "2026-11-11T19:15:00.000-07:00",
+        "cfs": 90.4
+      },
+      {
+        "timestamp": "2026-11-11T20:35:00.000-07:00",
         "cfs": 89.2
       },
       {
-        "timestamp": "2026-11-11T17:35:00.000-07:00",
-        "cfs": 90.4
-      },
-      {
-        "timestamp": "2026-11-11T18:55:00.000-07:00",
-        "cfs": 90.4
-      },
-      {
-        "timestamp": "2026-11-11T20:15:00.000-07:00",
+        "timestamp": "2026-11-11T21:55:00.000-07:00",
         "cfs": 89.2
       },
       {
-        "timestamp": "2026-11-11T21:35:00.000-07:00",
+        "timestamp": "2026-11-11T23:15:00.000-07:00",
         "cfs": 89.2
       },
       {
-        "timestamp": "2026-11-11T22:55:00.000-07:00",
-        "cfs": 89.2
-      },
-      {
-        "timestamp": "2026-11-12T00:15:00.000-07:00",
+        "timestamp": "2026-11-12T00:35:00.000-07:00",
         "cfs": 87.9
       },
       {
-        "timestamp": "2026-11-12T01:35:00.000-07:00",
+        "timestamp": "2026-11-12T01:55:00.000-07:00",
         "cfs": 87.9
       },
       {
-        "timestamp": "2026-11-12T02:55:00.000-07:00",
+        "timestamp": "2026-11-12T03:15:00.000-07:00",
         "cfs": 87.9
       },
       {
-        "timestamp": "2026-11-12T04:15:00.000-07:00",
+        "timestamp": "2026-11-12T04:35:00.000-07:00",
         "cfs": 87.9
       },
       {
-        "timestamp": "2026-11-12T05:35:00.000-07:00",
-        "cfs": 86.7
-      },
-      {
-        "timestamp": "2026-11-12T06:55:00.000-07:00",
+        "timestamp": "2026-11-12T05:55:00.000-07:00",
         "cfs": 87.9
       },
       {
-        "timestamp": "2026-11-12T08:15:00.000-07:00",
+        "timestamp": "2026-11-12T07:15:00.000-07:00",
         "cfs": 86.7
       },
       {
-        "timestamp": "2026-11-12T09:35:00.000-07:00",
-        "cfs": 87.9
-      },
-      {
-        "timestamp": "2026-11-12T10:55:00.000-07:00",
+        "timestamp": "2026-11-12T08:35:00.000-07:00",
         "cfs": 86.7
       },
       {
-        "timestamp": "2026-11-12T12:15:00.000-07:00",
+        "timestamp": "2026-11-12T09:55:00.000-07:00",
         "cfs": 86.7
       },
       {
-        "timestamp": "2026-11-12T13:35:00.000-07:00",
+        "timestamp": "2026-11-12T11:15:00.000-07:00",
         "cfs": 86.7
       },
       {
-        "timestamp": "2026-11-12T14:55:00.000-07:00",
+        "timestamp": "2026-11-12T12:35:00.000-07:00",
         "cfs": 86.7
       },
       {
-        "timestamp": "2026-11-12T16:15:00.000-07:00",
+        "timestamp": "2026-11-12T13:55:00.000-07:00",
         "cfs": 86.7
       },
       {
-        "timestamp": "2026-11-12T17:35:00.000-07:00",
+        "timestamp": "2026-11-12T15:15:00.000-07:00",
         "cfs": 86.7
       },
       {
-        "timestamp": "2026-11-12T18:55:00.000-07:00",
+        "timestamp": "2026-11-12T16:35:00.000-07:00",
         "cfs": 86.7
       },
       {
-        "timestamp": "2026-11-12T20:15:00.000-07:00",
+        "timestamp": "2026-11-12T17:55:00.000-07:00",
         "cfs": 86.7
       },
       {
-        "timestamp": "2026-11-12T21:35:00.000-07:00",
+        "timestamp": "2026-11-12T19:15:00.000-07:00",
         "cfs": 86.7
       },
       {
-        "timestamp": "2026-11-12T22:55:00.000-07:00",
+        "timestamp": "2026-11-12T20:35:00.000-07:00",
         "cfs": 86.7
       },
       {
-        "timestamp": "2026-11-13T00:15:00.000-07:00",
+        "timestamp": "2026-11-12T21:55:00.000-07:00",
+        "cfs": 86.7
+      },
+      {
+        "timestamp": "2026-11-12T23:15:00.000-07:00",
         "cfs": 85.5
       },
       {
-        "timestamp": "2026-11-13T01:35:00.000-07:00",
+        "timestamp": "2026-11-13T00:35:00.000-07:00",
+        "cfs": 86.7
+      },
+      {
+        "timestamp": "2026-11-13T01:55:00.000-07:00",
         "cfs": 85.5
       },
       {
-        "timestamp": "2026-11-13T02:55:00.000-07:00",
+        "timestamp": "2026-11-13T03:15:00.000-07:00",
         "cfs": 85.5
       },
       {
-        "timestamp": "2026-11-13T04:15:00.000-07:00",
-        "cfs": 85.5
-      },
-      {
-        "timestamp": "2026-11-13T05:35:00.000-07:00",
+        "timestamp": "2026-11-13T04:35:00.000-07:00",
         "cfs": 83.1
       },
       {
-        "timestamp": "2026-11-13T06:55:00.000-07:00",
+        "timestamp": "2026-11-13T05:55:00.000-07:00",
         "cfs": 84.3
       },
       {
-        "timestamp": "2026-11-13T08:15:00.000-07:00",
+        "timestamp": "2026-11-13T07:15:00.000-07:00",
         "cfs": 83.1
       },
       {
-        "timestamp": "2026-11-13T09:35:00.000-07:00",
+        "timestamp": "2026-11-13T08:35:00.000-07:00",
+        "cfs": 83.1
+      },
+      {
+        "timestamp": "2026-11-13T09:55:00.000-07:00",
         "cfs": 81.9
       },
       {
-        "timestamp": "2026-11-13T10:55:00.000-07:00",
+        "timestamp": "2026-11-13T11:15:00.000-07:00",
         "cfs": 84.3
       },
       {
-        "timestamp": "2026-11-13T12:15:00.000-07:00",
+        "timestamp": "2026-11-13T12:35:00.000-07:00",
         "cfs": 84.3
       },
       {
-        "timestamp": "2026-11-13T13:35:00.000-07:00",
+        "timestamp": "2026-11-13T13:55:00.000-07:00",
+        "cfs": 85.5
+      },
+      {
+        "timestamp": "2026-11-13T15:15:00.000-07:00",
         "cfs": 84.3
       },
       {
-        "timestamp": "2026-11-13T14:55:00.000-07:00",
-        "cfs": 84.3
+        "timestamp": "2026-11-13T16:35:00.000-07:00",
+        "cfs": 85.5
       },
       {
-        "timestamp": "2026-11-13T15:50:00.000-07:00",
-        "cfs": 84.3
+        "timestamp": "2026-11-13T17:55:00.000-07:00",
+        "cfs": 102.0
+      },
+      {
+        "timestamp": "2026-11-13T19:15:00.000-07:00",
+        "cfs": 91.7
+      },
+      {
+        "timestamp": "2026-11-13T20:35:00.000-07:00",
+        "cfs": 87.9
+      },
+      {
+        "timestamp": "2026-11-13T21:55:00.000-07:00",
+        "cfs": 90.4
+      },
+      {
+        "timestamp": "2026-11-13T23:15:00.000-07:00",
+        "cfs": 121.0
+      },
+      {
+        "timestamp": "2026-11-14T00:35:00.000-07:00",
+        "cfs": 441.0
+      },
+      {
+        "timestamp": "2026-11-14T01:55:00.000-07:00",
+        "cfs": 303.0
+      },
+      {
+        "timestamp": "2026-11-14T03:15:00.000-07:00",
+        "cfs": 585.0
+      },
+      {
+        "timestamp": "2026-11-14T04:35:00.000-07:00",
+        "cfs": 626.0
+      },
+      {
+        "timestamp": "2026-11-14T05:35:00.000-07:00",
+        "cfs": 642.0
       }
     ]
   },
   "weather": {
-    "currentTemp": 48.2,
-    "weatherCode": 1,
-    "forecast": [
-      {
-        "date": "2026-11-14",
-        "high": 38.8,
-        "low": 31.3,
-        "precipChance": 91,
-        "precipSum": 45.12
-      },
-      {
-        "date": "2026-11-15",
-        "high": 43.7,
-        "low": 30.9,
-        "precipChance": 0,
-        "precipSum": 0.0
-      },
-      {
-        "date": "2026-11-16",
-        "high": 47.4,
-        "low": 34.3,
-        "precipChance": 29,
-        "precipSum": 0.0
-      }
-    ],
-    "extendedForecast": [
-      {
-        "date": "2026-11-14",
-        "high": 38.8,
-        "low": 31.3,
-        "precipChance": 91
-      },
-      {
-        "date": "2026-11-15",
-        "high": 43.7,
-        "low": 30.9,
-        "precipChance": 0
-      },
-      {
-        "date": "2026-11-16",
-        "high": 47.4,
-        "low": 34.3,
-        "precipChance": 29
-      },
-      {
-        "date": "2026-11-17",
-        "high": 40.5,
-        "low": 31.9,
-        "precipChance": 87
-      },
-      {
-        "date": "2026-11-18",
-        "high": 39.6,
-        "low": 29.1,
-        "precipChance": 41
-      },
-      {
-        "date": "2026-11-19",
-        "high": 44.6,
-        "low": 32.0,
-        "precipChance": 64
-      },
-      {
-        "date": "2026-11-20",
-        "high": 39.3,
-        "low": 30.0,
-        "precipChance": 58
-      },
-      {
-        "date": "2026-11-21",
-        "high": 44.6,
-        "low": 30.1,
-        "precipChance": 12
-      },
-      {
-        "date": "2026-11-22",
-        "high": 48.2,
-        "low": 34.4,
-        "precipChance": 8
-      },
-      {
-        "date": "2026-11-23",
-        "high": 48.6,
-        "low": 36.0,
-        "precipChance": 10
-      }
-    ]
+    "currentTemp": null,
+    "weatherCode": null,
+    "forecast": []
   },
-  "alerts": [
-    {
-      "title": "Watchman Trail closed",
-      "description": "The Watchman Trail is closed pending repairs.",
-      "category": "Park Closure",
-      "url": "",
-      "date": "Sep 29, 2026"
-    },
-    {
-      "title": "Large vehicle restrictions on Zion-Mt. Carmel Highway",
-      "description": "Vehicles that exceed length, width, height, or weight limits cannot travel between Canyon Junction and the park's East Entrance. See the current limits on the page linked below.",
-      "category": "Caution",
-      "url": "https://www.nps.gov/zion/planyourvisit/large-vehicles.htm",
-      "date": "Sep 16, 2026"
-    },
-    {
-      "title": "Toxic cyanobacteria in rivers, streams, and pools",
-      "description": "Do not submerge your head in or drink instream water in Zion National Park.",
-      "category": "Caution",
-      "url": "https://www.nps.gov/zion/planyourvisit/toxic-cyanobacteria-bloom-in-the-virgin-river-and-the-streams-of-zion-national-park.htm",
-      "date": "Sep 16, 2026"
-    },
-    {
-      "title": "Angels Landing Pilot Permit Program",
-      "description": "All hikers need a permit to hike Angels Landing. Learn why you need a permit and how to get one using the link below.",
-      "category": "Information",
-      "url": "https://www.nps.gov/zion/planyourvisit/angels-landing-hiking-permits.htm",
-      "date": "Sep 16, 2026"
-    },
-    {
-      "title": "Please park legally and responsibly",
-      "description": "Zion has limited parking. Once parking spaces in Zion are full, visitors should park in Springdale. Please park only in designated spaces. Vehicles parked outside of designated spaces are subject to citation and towing.",
-      "category": "Information",
-      "url": "https://www.nps.gov/zion/planyourvisit/traffic.htm#parking",
-      "date": "Sep 16, 2026"
-    }
-  ],
+  "alerts": [],
   "forecast": {
     "daily": [
       {
         "date": "2026-11-14",
-        "predictedCfs": 228.9,
+        "predictedCfs": 318.6,
         "status": "closed"
       },
       {
@@ -686,82 +566,58 @@
     {
       "date": "2026-11-14",
       "rating": "closed",
-      "predictedCfs": 228.9,
-      "high": 39,
-      "low": 31,
-      "precipChance": 91
+      "predictedCfs": 318.6,
+      "high": null,
+      "low": null,
+      "precipChance": null
     },
     {
       "date": "2026-11-15",
       "rating": "fair",
       "predictedCfs": 86.2,
-      "high": 44,
-      "low": 31,
-      "precipChance": 0
+      "high": null,
+      "low": null,
+      "precipChance": null
     },
     {
       "date": "2026-11-16",
       "rating": "good",
       "predictedCfs": 73.2,
-      "high": 47,
-      "low": 34,
-      "precipChance": 29
+      "high": null,
+      "low": null,
+      "precipChance": null
     },
     {
       "date": "2026-11-17",
       "rating": "closed",
       "predictedCfs": 255.8,
-      "high": 40,
-      "low": 32,
-      "precipChance": 87
+      "high": null,
+      "low": null,
+      "precipChance": null
     },
     {
       "date": "2026-11-18",
       "rating": "closed",
       "predictedCfs": 328.6,
-      "high": 40,
-      "low": 29,
-      "precipChance": 41
+      "high": null,
+      "low": null,
+      "precipChance": null
     },
     {
       "date": "2026-11-19",
-      "rating": "poor",
+      "rating": "fair",
       "predictedCfs": 87.1,
-      "high": 45,
-      "low": 32,
-      "precipChance": 64
+      "high": null,
+      "low": null,
+      "precipChance": null
     },
     {
       "date": "2026-11-20",
       "rating": "poor",
       "predictedCfs": 144.8,
-      "high": 39,
-      "low": 30,
-      "precipChance": 58
-    },
-    {
-      "date": "2026-11-21",
-      "rating": "good",
-      "predictedCfs": null,
-      "high": 45,
-      "low": 30,
-      "precipChance": 12
-    },
-    {
-      "date": "2026-11-22",
-      "rating": "good",
-      "predictedCfs": null,
-      "high": 48,
-      "low": 34,
-      "precipChance": 8
-    },
-    {
-      "date": "2026-11-23",
-      "rating": "good",
-      "predictedCfs": null,
-      "high": 49,
-      "low": 36,
-      "precipChance": 10
+      "high": null,
+      "low": null,
+      "precipChance": null
     }
   ],
   "historical": {
@@ -841,9 +697,9 @@
       },
       {
         "monthDay": "11-13",
-        "medianCfs": 55.9,
+        "medianCfs": 58.2,
         "p25Cfs": 43.1,
-        "p75Cfs": 67.3
+        "p75Cfs": 69.3
       },
       {
         "monthDay": "11-14",
@@ -1137,88 +993,83 @@
   },
   "closureRisk": {
     "summary": {
-      "next10DayMax": 28.4,
+      "next10DayMax": 38.8,
       "label": "Moderate"
     },
     "daily": [
       {
-        "date": "2026-11-14",
-        "historical": 0.0,
-        "logistic": 71.4,
-        "gbm": 0.3,
-        "ensemble": 21.6
-      },
-      {
         "date": "2026-11-15",
         "historical": 0.0,
-        "logistic": 70.7,
+        "logistic": 100.0,
         "gbm": 0.3,
-        "ensemble": 21.4
+        "ensemble": 30.2
       },
       {
         "date": "2026-11-16",
-        "historical": 15.1,
-        "logistic": 70.0,
+        "historical": 20.0,
+        "logistic": 100.0,
         "gbm": 0.3,
-        "ensemble": 24.2
+        "ensemble": 34.2
       },
       {
         "date": "2026-11-17",
-        "historical": 15.1,
-        "logistic": 69.3,
+        "historical": 20.0,
+        "logistic": 100.0,
         "gbm": 9.2,
-        "ensemble": 28.4
+        "ensemble": 38.6
       },
       {
         "date": "2026-11-18",
         "historical": 0.0,
-        "logistic": 68.6,
+        "logistic": 100.0,
         "gbm": 9.2,
-        "ensemble": 25.2
+        "ensemble": 34.6
       },
       {
         "date": "2026-11-19",
-        "historical": 15.1,
-        "logistic": 67.8,
-        "gbm": 1.8,
-        "ensemble": 24.3
+        "historical": 20.0,
+        "logistic": 100.0,
+        "gbm": 1.9,
+        "ensemble": 35.0
       },
       {
         "date": "2026-11-20",
-        "historical": 15.1,
-        "logistic": 67.1,
+        "historical": 20.0,
+        "logistic": 100.0,
         "gbm": 9.5,
-        "ensemble": 27.9
+        "ensemble": 38.8
       },
       {
         "date": "2026-11-21",
-        "historical": 15.1,
-        "logistic": 66.3,
+        "historical": 20.0,
+        "logistic": 100.0,
         "gbm": 9.5,
-        "ensemble": 27.7
+        "ensemble": 38.8
       },
       {
         "date": "2026-11-22",
         "historical": 0.0,
-        "logistic": 65.6,
+        "logistic": 100.0,
         "gbm": 9.5,
-        "ensemble": 24.4
+        "ensemble": 34.8
       },
       {
         "date": "2026-11-23",
         "historical": 0.0,
-        "logistic": 64.8,
+        "logistic": 100.0,
         "gbm": 0.1,
-        "ensemble": 19.5
+        "ensemble": 30.0
+      },
+      {
+        "date": "2026-11-24",
+        "historical": 0.0,
+        "logistic": 100.0,
+        "gbm": 0.1,
+        "ensemble": 30.0
       }
     ]
   },
   "closureRiskHistory": [
-    {
-      "timestamp": "2026-11-07T12:20:06.693979+00:00",
-      "peakEnsemble": 33.2,
-      "label": "Moderate"
-    },
     {
       "timestamp": "2026-11-07T21:22:03.238870+00:00",
       "peakEnsemble": 32.5,
@@ -1282,6 +1133,11 @@
     {
       "timestamp": "2026-11-13T23:10:11.201061+00:00",
       "peakEnsemble": 28.4,
+      "label": "Moderate"
+    },
+    {
+      "timestamp": "2026-11-14T12:54:19.442114+00:00",
+      "peakEnsemble": 38.8,
       "label": "Moderate"
     }
   ]
